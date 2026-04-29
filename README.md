@@ -14,14 +14,15 @@ The differentiator: Hallmark insists on **structural variety**, not just visual 
 
 ---
 
-## Four verbs
+## Five verbs
 
 | Verb | What it does |
 | --- | --- |
-| *(default)* | Build new UI — passes the design-context gate, picks a structural fingerprint, applies the ruleset, runs the slop test before handing back. |
+| *(default)* | Build new UI — runs the design-context gate (askable, skippable; the skill states what it inferred either way), picks a structural fingerprint, applies the ruleset, runs the slop test before handing back. |
 | `hallmark audit <target>` | Score existing code against the named anti-patterns + structural sameness. Returns a punch list. No edits. |
 | `hallmark refine <target>` | Polish in place. Smallest possible diff. Preserves structure. |
 | `hallmark redesign <target> [--mood <name>]` | Throw out the structure, keep copy + IA + brand, rebuild with a deliberately different structural fingerprint. |
+| `hallmark study <screenshot>` | The user attached a design they admire. Extract the **DNA** — macrostructure, archetypes, type-pairing role, colour anchor — and produce a diagnosis report. Then optionally rebuild *the user's* content using the extracted DNA. **Refuses paid templates and competitor pages. Names font roles, never font IDs. Never copies pixels.** |
 
 ---
 
@@ -39,8 +40,11 @@ The differentiator: Hallmark insists on **structural variety**, not just visual 
 - [`responsive.md`](skill/references/responsive.md) — mobile-first, content-driven breakpoints, `dvh` not `vh`, safe-area-insets
 - [`copy.md`](skill/references/copy.md) — specific verbs, three-part errors, standalone link text, proper typographic punctuation
 - [`anti-patterns.md`](skill/references/anti-patterns.md) — 30+ named tells with severity, why they fail, and the fix
+- [`macrostructures.md`](skill/references/macrostructures.md) — the 21 named whole-page shapes; pick one before writing code, stamp it in the CSS comment
+- [`component-cookbook.md`](skill/references/component-cookbook.md) — 33 component archetypes across 7 categories, each with 2–3 within-archetype variation knobs
+- [`study.md`](skill/references/study.md) — vision-extraction protocol for the `hallmark study` verb: refusal heuristics, the structured-fields schema, type-role vocabulary, theme mapping table, worked example, limits
 
-**Slop test (20 questions)** — every output must answer *no* to all twenty before shipping. Visual (8), structural (2), microinteraction (10).
+**Slop test (29 questions)** — every output must answer *no* to all twenty-nine before shipping. Visual (8), structural (2), microinteraction (10), variety (3), implementation gates (6).
 
 **Site** — [`site/`](site/) is a self-demonstrating landing page. Hand-written HTML + CSS + ES module, no framework, no build step. Uses Together AI's "The Future" typeface plus Google Fonts.
 
@@ -90,7 +94,7 @@ Five skills — [impeccable](https://github.com/pbakaus/impeccable), [kami](http
 
 Distinct choices:
 
-- **One skill, four verbs.** Not eighteen commands. Use the default; reach for `audit`, `refine`, or `redesign` when you need them.
+- **One skill, five verbs.** Not eighteen commands. Use the default; reach for `audit`, `refine`, `redesign`, or `study` when you need them.
 - **Design-context gate.** No audience + use case + tone → no design. The skill asks.
 - **Tone as a first-class decision.** "Clean and modern" is rejected. Pick an extreme: editorial, brutalist, soft, utilitarian, luxury, playful, technical, austere.
 - **Structural fingerprint.** Every page picks one option from each of six axes. Two consecutive outputs in a session should never share the same fingerprint.

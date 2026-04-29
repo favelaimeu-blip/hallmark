@@ -345,13 +345,15 @@
         <article class="step">
           <span class="step__num">III</span>
           <div>
-            <h3 class="step__head">Ship, audit, refine, redesign</h3>
-            <p class="step__sub">The default verb builds. <code>hallmark audit</code> scores existing code against the tells. <code>hallmark refine</code> polishes in place. <code>hallmark redesign</code> rethinks the structure.</p>
+            <h3 class="step__head">Five verbs: build, audit, refine, redesign, study</h3>
+            <p class="step__sub">The default verb builds. <code>hallmark audit</code> scores existing code against the tells. <code>hallmark refine</code> polishes in place. <code>hallmark redesign</code> rethinks the structure. <code>hallmark study</code> reads a screenshot you admire and extracts its <em>DNA</em> — macrostructure, archetypes, type-pairing role, colour anchor — never the pixels.</p>
           </div>
           <div class="step__body">
-            <pre class="code code--block">$ claude "hallmark audit ./components/hero.tsx"
-  → 2 critical · 3 major · 1 minor
-  → verdict: reads as AI-generated</pre>
+            <pre class="code code--block">$ claude "hallmark study ./reference.png"
+  → Macrostructure: Split Studio
+  → Hero: H2 Split (6/6, proof column)
+  → Type: italic editorial serif + grotesque
+  → Theme candidate: Studio</pre>
           </div>
         </article>
 

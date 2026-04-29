@@ -1,7 +1,7 @@
 ---
 name: hallmark
-description: Use this skill when the user asks to design, build, redesign, audit, or refine a UI, web page, landing page, dashboard, component, or interface — or when they ask to make something "feel less AI-generated." Hallmark forces intentional design decisions (typography, color, layout, motion, interaction, structure) and refuses to default to the generic AI-UI template. Trigger phrases include "design a", "build a landing page", "make a dashboard", "redesign this site", "redesign the page", "refine this UI", "audit this design", "this looks AI-generated", "fix the design", "polish this", "give this a different look", and any request that will produce HTML / CSS / JSX / Tailwind output.
-version: 0.2.0
+description: Use this skill when the user asks to design, build, redesign, audit, refine, or study a UI, web page, landing page, dashboard, component, or interface — or when they ask to make something "feel less AI-generated." Hallmark forces intentional design decisions (typography, color, layout, motion, interaction, structure) and refuses to default to the generic AI-UI template. Trigger phrases include "design a", "build a landing page", "make a dashboard", "redesign this site", "redesign the page", "refine this UI", "audit this design", "this looks AI-generated", "fix the design", "polish this", "give this a different look", and any request that will produce HTML / CSS / JSX / Tailwind output. **Also trigger when the user attaches a screenshot of a design they admire** — that is the `hallmark study` verb (extracts design DNA, never pixel-clones).
+version: 0.3.0
 ---
 
 # Hallmark
@@ -18,7 +18,7 @@ The differentiator: Hallmark insists on **structural variety**, not just visual 
 
 ## How to use this skill
 
-Hallmark has one default behaviour and three explicit verbs.
+Hallmark has one default behaviour and four explicit verbs.
 
 | Invocation | What it does |
 | --- | --- |
@@ -26,8 +26,9 @@ Hallmark has one default behaviour and three explicit verbs.
 | `hallmark audit <target>` | Read the target, score it against the anti-pattern list, return a ranked punch list. **Do not edit.** |
 | `hallmark refine <target>` | Apply the ruleset to polish the target in place. Preserve layout structure. **Smallest possible diff.** No redesign. |
 | `hallmark redesign <target> [--mood <name>]` | Take the target's content and intent, throw out the structure, and **rebuild it from scratch with a deliberately different structural fingerprint.** New section rhythm, new heading placement, new component voice. Preserve copy, brand, and information architecture; replace everything else. |
+| `hallmark study <screenshot>` | The user pasted or attached an image of a design they admire. Extract the **DNA** — macrostructure, archetypes, type-pairing role, colour anchor — and produce a diagnosis report, then optionally rebuild the user's content using the extracted DNA. **Never copies pixels. Never claims to identify exact fonts. Refuses obvious template-marketplace or competitor-page screenshots.** Load [`references/study.md`](references/study.md) before this verb runs. |
 
-If the user types anything that does not clearly map to `audit`, `refine`, or `redesign`, treat it as default.
+If the user types anything that does not clearly map to `audit`, `refine`, `redesign`, or `study`, treat it as default. If the user attaches an image without a verb prefix, ask: *"Should I `study` this (extract the DNA), or should I treat it as a reference for a fresh build?"*
 
 ---
 
@@ -35,15 +36,24 @@ If the user types anything that does not clearly map to `audit`, `refine`, or `r
 
 ### 1. Design-context gate
 
-Before writing a single line of code, confirm you have all three:
+Hallmark works best when you know three things before writing code:
 
 1. **Audience.** Who will use this? What do they already know?
 2. **Use case.** What single job does this interface do? What is the one action the user should be able to take?
-3. **Tone.** Pick an extreme — *editorial, brutalist, soft, utilitarian, luxury, playful, technical, austere*. "Clean and modern" is not a tone and is not acceptable.
+3. **Tone.** Pick an extreme — *editorial, brutalist, soft, utilitarian, luxury, playful, technical, austere*. "Clean and modern" is not a tone.
 
-If any of the three is missing, ask for it in one short message. Ask for all missing items at once, not one at a time. Do not guess. Do not infer from the filename, the framework, or surrounding code.
+**Ask once, then commit.** If any of the three is missing, ask for all missing items in **one** short message — not one at a time, not in a follow-up. Offer the user an opt-out at the end of that message: *"or say 'go ahead' and I'll infer from the brief — I'll tell you what I picked."*
 
-Once you have the three, restate them in one sentence and proceed.
+**If the user opts out** (says "go ahead", "you pick", "skip", "just build it", "don't ask", or simply doesn't engage with the question after one prompt):
+
+- Infer audience, use case, and tone from the brief, the domain, and any visible context (filename, framework, surrounding code is fair game *now* — only because the user delegated).
+- **State the inferences in one sentence at the top of your reply** — *"Going with: audience = X · use = Y · tone = Z. If any of those is wrong, tell me and I'll redirect."*
+- Stamp them in the CSS comment alongside the macrostructure (Step 4 below). The stamp is now the durable record.
+- Pick a **non-default** macrostructure — Specimen-fall-through is still banned, even on inferred briefs.
+
+**Do not skip the inference disclosure.** The opt-out is a courtesy to lazy users, not an excuse for the skill to be opaque. If the user can't see what was inferred, they can't redirect when it's wrong.
+
+Once the three are settled (asked or inferred), restate them in one sentence and proceed.
 
 ### 2. Pick a macrostructure FIRST
 
@@ -77,6 +87,7 @@ The non-negotiables live in [`references/`](references/). Read only what you nee
 - [`responsive.md`](references/responsive.md) — mobile-first, content-driven breakpoints, safe areas
 - [`copy.md`](references/copy.md) — verbs, labels, error structure, link text
 - [`anti-patterns.md`](references/anti-patterns.md) — the named tells you must not emit
+- [`study.md`](references/study.md) — vision-extraction protocol for the `hallmark study` verb (load only when that verb runs)
 
 For most design work you need `macrostructures`, `component-cookbook`, `typography`, `color`, `layout-and-space`, and `anti-patterns`. **Load `microinteractions` whenever the output has *any* interactive element** — buttons, links, inputs, forms, modals, tabs, dropdowns, toasts, drag handles, command palettes, copy buttons, anything with hover/focus/active states. That is most pages.
 
@@ -205,6 +216,50 @@ Return the redesigned code, plus a short note explaining:
 - The structural fingerprint you picked, axis by axis.
 - Why this combination fits the brief better than the original.
 - One thing you removed and why.
+
+---
+
+## `hallmark study`
+
+The user has attached or pasted a screenshot of a design they admire. They want to learn from it — its shape, its type, its rhythm — and apply that *DNA* to their own content. They do not want a pixel-faithful copy.
+
+**Critical position:** `study` extracts structure, not pixels. It names the macrostructure, the archetypes, the type-pairing role, the colour anchor, the rhythm. It produces a *diagnosis report* before any code, then offers to rebuild the user's content using the extracted DNA. Pixel-cloning is not a feature.
+
+**Always read [`references/study.md`](references/study.md) before invoking this verb.** That file contains the vision-extraction protocol, the structured-fields schema, the refusal heuristics, and the type-role vocabulary. Do not work from intuition.
+
+### Pipeline
+
+1. **Refuse-or-proceed check.** Before extracting anything, run the refusal heuristics from `study.md`. If the screenshot is clearly a paid template marketplace listing, a competitor's live marketing page, or someone's published portfolio, ask: *"Is this your own work, a public reference for inspiration, or someone else's live site?"* Educational use of public references is fine; copying a competitor's live page is not.
+
+2. **Vision pass.** Read the image into the structured-fields schema in `study.md`. Output ten fields: macrostructure name, hero archetype + variation knobs, pitch archetype + knobs, footer archetype, display family role (never a guessed font name), body family role, surface lightness band (paper L%), accent hue band + chroma, density verdict, type-pairing role.
+
+3. **Diagnosis report.** Return a one-page "this is what you're looking at": names the macrostructure, names the archetypes, points at the type pairing, identifies one or two anti-patterns the screenshot has that the user should *not* carry over. The diagnosis is the deliverable for users who only want to learn.
+
+4. **Confirmation question.** Ask: *"Adopt this DNA wholesale, or change one axis? For example, I could keep the macrostructure but pick a theme that better matches your tone."* Wait for the user's answer before building.
+
+5. **Build.** Pick the closest matching theme from the canon. Stamp the comment with the inferred macrostructure + archetypes + theme. The user's content goes in; the screenshot's content does not.
+
+### Output contract for `study`
+
+When `study` produces code, the macrostructure stamp must include a `studied: yes` flag and the theme picked, e.g.:
+
+```css
+/* Hallmark · macrostructure: Marquee Hero · H1 hero knobs: size=xxl, alignment=left-bias
+ * theme: Studio · accent: forest-green ~3% · studied: yes · DNA-source: user reference
+ */
+```
+
+The stamp signals to future Hallmark runs that this page's structure was extracted, not invented. That matters for the audit verb: a `studied: yes` page should be audited *more* leniently for "Specimen fall-through" (the user explicitly chose this DNA) but *more* strictly for "did you actually use the extracted DNA, or did you drift back to defaults?"
+
+### Limits to spell out to the user
+
+When you return the diagnosis, name the limits explicitly:
+
+- **Fonts:** the skill names a *role* (e.g., "italic editorial serif", "heavy condensed sans", "monospace dev"), not a font ID. It proposes one or two real candidates from the canon and asks the user to confirm. Visual font identification is unreliable; do not pretend otherwise.
+- **Imagery:** the skill never copies the screenshot's photography. It generates structurally-equivalent placeholders or asks for the user's own assets.
+- **Theme drift is allowed.** If the screenshot is a Specimen and the user's content is a SaaS landing page, the skill picks a different theme. The DNA is the macrostructure + archetype + colour-anchor + type-pairing — not the dress.
+
+If `references/study.md` cannot be loaded for any reason, refuse the verb politely and direct the user to `hallmark redesign` with a written description of what they want from the screenshot.
 
 ---
 
