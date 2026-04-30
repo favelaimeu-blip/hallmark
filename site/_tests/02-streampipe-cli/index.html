@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>streampipe — a small CLI for stream parsing</title>
+  <meta name="description" content="Parse log and event streams from stdin. Filter, transform, route. Open source. Single binary." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="wordmark">streampipe</span>
+    <div class="nav__links">
+      <a href="#docs">docs</a>
+      <a href="#install">install</a>
+      <a href="https://github.com/example/streampipe">github</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1 class="hero__headline"><span class="prompt">$</span> streampipe<br>--help</h1>
+      <p class="hero__lede">A small, fast, single-binary CLI for parsing log and event streams from stdin. Filter, transform, route. Composes with anything that emits lines.</p>
+      <div class="hero__cta">
+        <span class="hero__cta-label">// install</span>
+        <pre class="cmd"><span class="prompt">$</span><span>brew install streampipe</span></pre>
+        <pre class="cmd"><span class="prompt">$</span><span>npm i -g @streampipe/cli</span></pre>
+        <pre class="cmd"><span class="prompt">$</span><span>curl -sSL streampipe.dev/install.sh | sh</span></pre>
+      </div>
+    </div>
+
+    <pre class="term" aria-label="Example terminal session">
+<span class="ln"><span class="prompt">$</span> streampipe parse access.log <span class="flag">--filter</span> status=5xx <span class="flag">--out</span> ndjson</span>
+<span class="ln"><span class="meta">opening access.log (62 MB)…</span></span>
+<span class="ln"><span class="meta">scanning 412,309 lines…</span></span>
+<span class="ln"><span class="meta">match: status ∈ {500, 502, 503, 504}</span></span>
+<span class="ln">{"ts":"2026-04-30T10:14:22Z","status":<span class="num">503</span>,"path":"/api/v2/jobs"}</span>
+<span class="ln">{"ts":"2026-04-30T10:14:24Z","status":<span class="num">502</span>,"path":"/api/v2/users/49"}</span>
+<span class="ln">{"ts":"2026-04-30T10:14:31Z","status":<span class="num">500</span>,"path":"/api/v2/uploads"}</span>
+<span class="ln">{"ts":"2026-04-30T10:14:33Z","status":<span class="num">503</span>,"path":"/api/v2/jobs"}</span>
+<span class="ln"><span class="meta">… 1,184 more</span></span>
+<span class="ln"><span class="meta">duration: 0.42s · throughput: 982k lines/s</span></span>
+<span class="ln"><span class="prompt">$</span> <span class="caret"></span></span></pre>
+  </section>
+
+  <section class="section">
+    <span class="section__num"><span>1.0</span> /  parse</span>
+    <div>
+      <h2 class="section__title">Read anything that emits lines.</h2>
+      <p class="section__body">Files, pipes, sockets, kubectl logs. Streampipe reads from stdin by default; <code>--from</code> takes a path or URL. Detects format on the first 100 lines (json, ndjson, syslog, common, custom regex).</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section__num"><span>2.0</span> /  filter</span>
+    <div>
+      <h2 class="section__title">Express filters in a small language, not in regex.</h2>
+      <p class="section__body">Filters compile to a typed predicate AST: <code>status &gt;= 500</code>, <code>duration_ms &gt; 200 and path ~ "/api/"</code>, <code>host in {a, b, c}</code>. No quoting hell, no shell-specific escaping.</p>
+      <dl class="spec">
+        <dt>--filter</dt><dd>predicate expression</dd><dd class="meta">repeatable</dd>
+        <dt>--from</dt><dd>file path, URL, or `-` for stdin</dd><dd class="meta">default: stdin</dd>
+        <dt>--out</dt><dd>ndjson · csv · text · table</dd><dd class="meta">default: ndjson</dd>
+        <dt>--at</dt><dd>truncate after N records</dd><dd class="meta">optional</dd>
+        <dt>--debug</dt><dd>show parse stats</dd><dd class="meta">optional</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section__num"><span>3.0</span> /  route</span>
+    <div>
+      <h2 class="section__title">Compose with anything that takes lines.</h2>
+      <p class="section__body">Streampipe is line-oriented all the way through. Pipe its output into <code>jq</code>, <code>gron</code>, <code>vmctl</code>, <code>kafkacat</code>, or your own thing. No daemon, no agent, no config file unless you want one.</p>
+    </div>
+  </section>
+
+  <footer>
+<span class="ink"># streampipe · v0.4.2 · 2026-04-30 · MIT</span>
+# repo:   <a href="https://github.com/example/streampipe">github.com/example/streampipe</a>
+# docs:   <a href="https://streampipe.dev/docs">streampipe.dev/docs</a>
+# issues: <a href="https://github.com/example/streampipe/issues">github.com/example/streampipe/issues</a>
+#
+# built by a small group of backend folks who got tired of writing
+# the same awk + jq pipeline at every job.
+  </footer>
+
+</body>
+</html>

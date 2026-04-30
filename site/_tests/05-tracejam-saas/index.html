@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tracejam — distributed tracing that explains itself</title>
+  <meta name="description" content="A tracing and observability platform for SREs. Open the trace, find the span, fix the regression. No glossary required." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="wordmark">Tracejam</span>
+    <div class="nav__links">
+      <a href="#docs">Docs</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#pricing">Pricing</a>
+      <a class="btn" href="#sign-up">Sign in</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero__copy">
+      <p class="hero__eyebrow">Tracejam · v0.4 · for SREs</p>
+      <h1 class="hero__title">Distributed tracing that <em>explains itself.</em></h1>
+      <p class="hero__lede">Open the trace, find the span that regressed, and read why — in plain text — without a glossary, a YAML diff, or a status-page hunt.</p>
+      <div class="hero__cta">
+        <a class="btn--primary" href="#try">Try it free</a>
+        <a class="btn--ghost"   href="#sales">Talk to sales</a>
+      </div>
+    </div>
+
+    <figure class="mock" aria-hidden="true">
+      <header class="mock__chrome">
+        <span class="mock__dot"></span>
+        <span class="mock__dot"></span>
+        <span class="mock__dot"></span>
+        <span class="mock__url">app.tracejam.io / traces / 7f8e9a</span>
+      </header>
+      <div class="mock__body">
+        <aside class="mock__rail">
+          <span class="mock__rail-item is-active"></span>
+          <span class="mock__rail-item"></span>
+          <span class="mock__rail-item"></span>
+          <span class="mock__rail-item"></span>
+          <span class="mock__rail-item"></span>
+        </aside>
+        <main class="mock__main">
+          <header class="mock__head">
+            <span class="mock__breadcrumb">production / api-edge / <b>POST /v2/checkout</b></span>
+            <span class="mock__pill">trace 7f8e9a</span>
+          </header>
+          <p class="mock__title">Span tree · <span class="meta">23 spans · 4 services · 482 ms</span></p>
+
+          <div class="trace" role="img" aria-label="Flame chart of a checkout request fanning into 12 spans across 4 services">
+            <div class="trace__row"><span class="trace__label"><b>api-edge</b> · POST /v2/checkout</span>
+              <span class="trace__lane"><span class="trace__bar" style="left:0%; width:96%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">↳ auth.verify</span>
+              <span class="trace__lane"><span class="trace__bar b" style="left:2%; width:8%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">↳ rate-limit.check</span>
+              <span class="trace__lane"><span class="trace__bar b" style="left:11%; width:4%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">↳ <b>orders.create</b></span>
+              <span class="trace__lane"><span class="trace__bar" style="left:16%; width:62%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">  ↳ inventory.reserve</span>
+              <span class="trace__lane"><span class="trace__bar c" style="left:19%; width:14%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">  ↳ pricing.compute</span>
+              <span class="trace__lane"><span class="trace__bar c" style="left:34%; width:9%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">  ↳ <b>payments.charge</b></span>
+              <span class="trace__lane"><span class="trace__bar d" style="left:44%; width:30%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">    ↳ stripe.tokenize</span>
+              <span class="trace__lane"><span class="trace__bar d" style="left:46%; width:6%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">    ↳ stripe.charge ⚠</span>
+              <span class="trace__lane"><span class="trace__bar d" style="left:53%; width:20%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">↳ notify.email</span>
+              <span class="trace__lane"><span class="trace__bar b" style="left:79%; width:8%;"></span></span></div>
+            <div class="trace__row"><span class="trace__label">↳ analytics.write</span>
+              <span class="trace__lane"><span class="trace__bar b" style="left:88%; width:7%;"></span></span></div>
+          </div>
+        </main>
+      </div>
+    </figure>
+  </section>
+
+  <section class="bento" aria-label="What Tracejam does">
+
+    <article class="tile tile-stat">
+      <span class="label">Cold-start</span>
+      <h3>Open a regressed trace in <em>under 4 seconds</em></h3>
+      <span class="stat-num"><span class="accent">4</span>s</span>
+      <p>From the alert link to the slow span, no clicks. Tracejam pre-renders the flame chart for every alert.</p>
+    </article>
+
+    <article class="tile tile-spark">
+      <span class="label">Latency drift</span>
+      <h3>p95 over 24 h, by service.</h3>
+      <div class="spark" aria-hidden="true">
+        <span style="height:30%"></span>
+        <span style="height:42%"></span>
+        <span style="height:38%"></span>
+        <span style="height:55%"></span>
+        <span style="height:48%"></span>
+        <span style="height:60%"></span>
+        <span style="height:72%"></span>
+        <span style="height:64%"></span>
+        <span style="height:80%"></span>
+        <span style="height:55%"></span>
+        <span style="height:46%"></span>
+        <span style="height:40%"></span>
+      </div>
+    </article>
+
+    <article class="tile tile-quote">
+      <p class="quote">It told me the span that regressed, the deploy that caused it, and the engineer to ask. We rolled back in eight minutes.</p>
+      <span class="attribution">— Staff SRE · large fintech · 2026</span>
+    </article>
+
+    <article class="tile tile-code">
+      <span class="label">Drop-in OTLP</span>
+      <pre class="code-mini"><span class="k">export</span> OTEL_EXPORTER_OTLP_ENDPOINT=<span class="s">https://otlp.tracejam.io</span>
+<span class="k">export</span> OTEL_EXPORTER_OTLP_HEADERS=<span class="s">"x-tracejam-key=tj_…"</span></pre>
+    </article>
+
+    <article class="tile tile-integrations">
+      <span class="label">Connects to</span>
+      <h3>OpenTelemetry-native. No agent, no sidecar.</h3>
+      <div class="integrations">
+        <span>OTLP / gRPC</span>
+        <span>OTLP / HTTP</span>
+        <span>Datadog ingest</span>
+        <span>Honeycomb ingest</span>
+        <span>Prometheus</span>
+        <span>kubectl events</span>
+        <span>PagerDuty</span>
+        <span>Slack</span>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    <div class="col brand">
+      <h4>Tracejam</h4>
+      <p>Distributed tracing that explains itself. Built by SREs who got tired of unscrambling stack traces from alerts.</p>
+      <p class="colophon">© 2026 · MIT-licensed agent · SOC 2 Type II</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Tracing</a></li>
+        <li><a href="#">Metrics</a></li>
+        <li><a href="#">Alerts</a></li>
+        <li><a href="#">Logs</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>Developers</h4>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Open-source agent</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

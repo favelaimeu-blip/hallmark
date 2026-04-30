@@ -1,0 +1,185 @@
+/* Hallmark · macrostructure: Manifesto · H1 hero knobs: size=xxl, alignment=left-bias, underlay=none
+ * theme: Manifesto · accent: red ~5% (used as bleed dividers, not flood)
+ * enrichment: none (typography only — voice is the design)
+ * studied: no · context: partial, inferred (audience + use)
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --paper:   oklch(10%  0.005 60);
+  --paper-2: oklch(14%  0.006 60);
+  --rule:    oklch(28%  0.008 60);
+  --muted:   oklch(58%  0.010 60);
+  --ink-2:   oklch(85%  0.005 60);
+  --ink:     oklch(98%  0.003 90);
+  --accent:  oklch(60%  0.22 27);
+
+  --display: "Inter Tight", "Söhne Breit", system-ui, sans-serif;
+  --label:   "JetBrains Mono", ui-monospace, monospace;
+
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 8rem;
+  --space-4xl: 12rem;
+
+  --rule-fine: 2px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--display);
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-lg) clamp(1.5rem, 6vw, 4rem);
+  border-block-end: var(--rule-fine) solid var(--ink);
+  font-family: var(--label);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.masthead .name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+.masthead .meta { color: var(--muted); }
+.masthead .meta .accent { color: var(--accent); }
+
+.title {
+  padding: var(--space-3xl) clamp(1.5rem, 6vw, 4rem) var(--space-2xl);
+  border-block-end: var(--rule-fine) solid var(--ink);
+}
+
+.title h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw + 1rem, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--ink);
+  max-width: 18ch;
+}
+
+.title h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.title .subtitle {
+  font-family: var(--label);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-block-start: var(--space-xl);
+}
+
+.declaration {
+  display: grid;
+  grid-template-columns: clamp(4rem, 10vw, 8rem) 1fr;
+  gap: var(--space-xl);
+  padding: var(--space-3xl) clamp(1.5rem, 6vw, 4rem);
+  border-block-end: var(--rule-fine) solid var(--ink);
+  align-items: baseline;
+}
+
+.declaration__num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  line-height: 0.9;
+}
+
+.declaration__body {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.625rem);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  max-width: 28ch;
+  text-transform: uppercase;
+}
+
+.declaration__body strong {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 0 0.18em;
+  font-weight: 700;
+}
+
+/* Bleed-colour ornament between III and IV */
+.bleed {
+  background: var(--accent);
+  padding: var(--space-2xl) clamp(1.5rem, 6vw, 4rem);
+  border-block-end: var(--rule-fine) solid var(--ink);
+}
+
+.bleed p {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  text-transform: uppercase;
+  max-width: 38ch;
+}
+
+.colophon {
+  padding: var(--space-3xl) clamp(1.5rem, 6vw, 4rem);
+  display: grid;
+  gap: var(--space-md);
+  font-family: var(--label);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.colophon h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-block-end: var(--space-sm);
+}
+
+.colophon .signed {
+  display: grid;
+  gap: 0.4em;
+  color: var(--ink-2);
+  margin-block-start: var(--space-md);
+}
+
+.colophon .signed strong {
+  color: var(--ink);
+  font-weight: 500;
+}
