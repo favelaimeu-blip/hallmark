@@ -78,6 +78,28 @@ Layout is where "AI-generated" gets caught. Equal columns, everything centred, e
 - **`z-index: 9999`** and other ad-hoc z values. Use the scale.
 - **Shadow-on-dark accidental glow.** A drop shadow on a dark card creates a glow; that's wrong.
 
+## Page-edge clipping
+
+The clipped-edge enrichment archetype (E1) — and any other deliberately overflowing element (full-bleed marquee, oversized headline that exceeds the viewport on small screens, a tilted figure that pushes past a column) — needs a parent that *visually* shows the overflow without letting the document scroll horizontally.
+
+The default is unsafe: a `width: calc(100% + 12vw)` figure inside a section with `overflow: visible` makes the document scroll horizontally on every viewport. The page feels broken on touch devices. Slop-test gate 36 fails on this.
+
+**Always pair clipped-edge with a global clip.** At the top of the stylesheet:
+
+```css
+html { overflow-x: clip; }
+body { overflow-x: clip; }   /* fallback for older Safari */
+```
+
+Use `overflow-x: clip` rather than `overflow-x: hidden`:
+
+- `clip` preserves `position: sticky` and `position: fixed` on descendants.
+- `hidden` creates a new scroll container, which breaks sticky and can trap focus on overflowing inputs.
+
+The clipped-edge mockup keeps its visual extension; the page no longer scrolls horizontally. Same pattern works for full-bleed marquees, oversized headlines, and any deliberately-decorative overflow.
+
+The hero or section that *contains* the overflowing element keeps `overflow: visible` (so the figure renders past the parent edge); the global clip on `html` and `body` is the only safety net needed.
+
 ## When in doubt
 
 If the layout looks fine but flat, do one of these before shipping:

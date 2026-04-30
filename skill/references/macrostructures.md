@@ -613,6 +613,34 @@ Reference: shadcn/ui, Tailwind UI, Once UI, MUI demos, Framer Motion examples.
 
 ---
 
+## SaaS page sequence
+
+When the macrostructure is **Bento Grid · Stat-Led · Workbench · Marquee Hero** and the brief is a B2B SaaS marketing page, ship these sections in roughly this order. None are mandatory — but skipping more than two reads as "the page is incomplete":
+
+1. **Hero** — macrostructure-specific (Bento, Stat, Workbench, Marquee). Two CTAs (primary action + secondary "Talk to sales").
+2. **Social proof / logo wall** — 6–8 customer logos in monochrome. (See [`assets.md` § Logo walls](assets.md).)
+3. **Features** — 3–6 feature cards, varies by macrostructure (Bento has them inline; Stat-Led usually puts them after the supporting-stats grid).
+4. **Testimonials** — 2–4 quote cards. Pull-quote + name + role + company. Photo optional. Avoid "We use [product] every day" language; the quote should be specific to a use case ("Foundry got us SOC2 in five weeks. We wrote zero policies ourselves.").
+5. **Pricing** — 2–3 tiers in a comparison table. Feature checklist per tier. Recommended-tier badge on the middle tier. Show the actual price; "Contact sales for pricing" on every tier is a tell that the brand doesn't trust the buyer.
+6. **FAQ** — 5–10 questions. Conversational FAQ archetype works here (see Macrostructure 9).
+7. **Final CTA strip** — single button + one-sentence prompt.
+8. **Footer** — index-style or tabular, theme-appropriate.
+
+Each section transition uses theme-appropriate vertical spacing — `--space-3xl` minimum between major sections. Don't subdivide sections into "rows" with sub-rules — the section break is the visual rhythm.
+
+**Voice rules for SaaS sections:**
+
+- **Pricing:** show the actual price. Sales-led pricing on every tier ("Contact us") signals the brand doesn't trust the buyer.
+- **Testimonials:** include the quoted person's role *and* company. Abstract "Engineering Manager" testimonials are slop. If the brief is a real product, use real names. If the brief is a placeholder, use plausible names — never "Jane Doe" / "John Smith" (gate 20).
+- **FAQ:** answer like a person, not a sales doc. "Yes — Stripe and Adyen are both supported out of the box" beats "Our platform integrates with leading payment providers."
+- **CTA strip:** one button. Not two. The repetition is the call to action.
+
+This sequence is **not** a template you stamp out — it's a recipe of *what should be present*. The macrostructure determines *how* each section looks. A Bento Grid page interleaves features and proof inside the grid; a Stat-Led page sequences them top-to-bottom; a Marquee Hero page lets the marquee do the social-proof work.
+
+For non-SaaS work (Editorial, Manifesto, Letter, Long Document, Quote-Led), this sequence does **not** apply. A bakery does not need a pricing tier comparison.
+
+---
+
 ## How to pick
 
 1. **Read the brief.** Note any words that strongly signal one macrostructure ("data heavy", "tell a story", "a list of links", "many small features", "personal note").

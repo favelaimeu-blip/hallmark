@@ -13,6 +13,45 @@ A microinteraction is one event with four parts: trigger → rules → feedback 
 - **Reduced motion is a first-class state, not an afterthought.** Every interaction defines its reduced-motion behaviour explicitly. Default is: collapse spatial motion to opacity crossfade, keep duration ≤ 150ms, preserve functional state changes.
 - **Keyboard first, hover second.** Every hover affordance has a focus equivalent. No interaction is hover-only.
 
+## When to ship motion by default
+
+The skill biases toward motion-cut. But certain archetypes feel **broken without** motion — they're so visually busy (or so number-led) that complete stillness reads as a screenshot rather than an interface. For these archetypes, ship 2–3 small purposeful microinteractions automatically, without waiting for the user to ask.
+
+**Default-on archetypes:** Bento Grid · Stat-Led · Workbench · Marquee Hero · Conversational FAQ
+
+**Default-off archetypes:** Editorial · Manifesto · Letter · Quote-Led · Type Specimen · Long Document · Index-First · Letter
+
+For default-on, pick **two or three** from this menu (never more than three primitives per page):
+
+| Microinteraction | When to ship | Recipe |
+| --- | --- | --- |
+| **Number reveal** | Stat-Led hero, headline numbers anywhere | IntersectionObserver fires on viewport entry; `requestAnimationFrame` counts from 0 to target over 1.2–1.6 s with `--ease-out`. Reduced-motion: skip animation, render final value. |
+| **Pricing card lift** | Pricing tier cards | `translateY(-3px)` + shadow upgrade on `:hover`, 180 ms `--ease-out`. Active state: drop back to `translateY(0)` over 60 ms (the press). |
+| **CTA hover lift** | Primary CTA buttons | `translateY(-1.5px)` + background-fade. 200 ms `--ease-out`. Active state at 60 ms. |
+| **Marquee scroll** | Marquee Hero, customer-logo strip | `@keyframes marquee` `translateX(-100%)` over 40–60 s, infinite. Pauses on hover. Reduced-motion: stops the scroll, shows the first three items. |
+| **Stagger reveal** | Testimonials, feature cards, gallery | IntersectionObserver fires on each card; 100 ms stagger; opacity 0 → 1 + `translateY(8px → 0)`; `--ease-out` 400 ms. **One-shot only — never re-fires on scroll.** |
+| **Recommended-tier pulse** | The middle pricing tier | One-shot `@keyframes pulse-border` 2 s, runs once on viewport entry. Subtle: opacity 0.4 → 1 → 0.4 on the border. Don't loop. |
+| **Caret blink** | Terminal hero, code mockup | `@keyframes blink` 1 s steps(2) infinite on a 1ch-wide block. Reduced-motion: solid block, no blink. |
+| **Number tick on data update** | Dashboard live values | See *Number tick* recipe below. |
+
+### Hard rules for default-on motion
+
+1. Every animation respects `prefers-reduced-motion: reduce` — either skip entirely or run at 0.01 s.
+2. **No more than three distinct animation primitives per page.** A counter + a hover-lift + a marquee = three. Don't add a fourth. The temptation to layer "just one more" is the slop pull.
+3. No scroll-linked animations on viewports below 40 rem (existing mobile rule, [`component-cookbook.md` § Mobile collapse](component-cookbook.md)).
+4. No animation longer than 2 s except continuous loops (marquee, ambient breathing, caret blink).
+5. The "if I removed this animation, would anyone notice?" test still applies — but for the default-on set, the answer is "yes, the page would feel screenshot-stiff and the brand would feel thin."
+
+### What never gets default motion
+
+- Body text reveals on scroll. Reading is not a cinematic experience.
+- Background gradient shifts. Distracting.
+- Cursor followers. Always slop.
+- Section-by-section fade-up-stagger. Pick one orchestrated entrance, not twelve.
+- Tab content sliding sideways. Crossfade only (see Tab change recipe below).
+
+When the page is default-off (Editorial, Manifesto, etc.), motion is *opt-in* — the user must ask. Stillness is the brand on those pages.
+
 ## The timing canon
 
 Pick from these durations. Do not invent new ones.

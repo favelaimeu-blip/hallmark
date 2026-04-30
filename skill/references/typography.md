@@ -45,6 +45,39 @@ Each tone gets two rows: a **free baseline** (everything Google-Fonts-or-similar
 
 **The discipline.** Default to the free pairings. They're not consolation prizes; Fraunces, Geist, Bricolage Grotesque, and JetBrains Mono are first-rate faces in 2026. The paid upgrades exist for two cases: (a) the user has explicitly confirmed they're licensed, or (b) the user is asking for a specific named foundry voice (e.g., "make it look like Klim", "I want Söhne"). Reach for Tier 2 only then; otherwise the free row is the right answer. Treat the free row as canon, the paid row as a *cited* alternative.
 
+## Wordmark / logo typography
+
+The wordmark in the navbar and footer **may use a different display face than the body**. On tone-rich themes (Editorial, Salon, Atelier, Linen, Quiet) it **should** — collapsing the wordmark into the body family flattens the visual hierarchy and the page reads as un-branded.
+
+```css
+:root {
+  --display:       "Geist", system-ui, sans-serif;     /* body + display */
+  --font-wordmark: "Fraunces", Georgia, serif;         /* logo only */
+}
+.wordmark {
+  font-family: var(--font-wordmark);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+```
+
+Recommended pairings (free baseline first):
+
+- **Geist body → Fraunces wordmark, IBM Plex Mono wordmark, or Bricolage Grotesque (heavy) wordmark**
+- **Fraunces body → Geist Mono wordmark, Inter Tight wordmark**
+- **System-ui body → JetBrains Mono wordmark, Newsreader wordmark**
+- **Inter Tight body → Fraunces wordmark, EB Garamond wordmark**
+
+When to use the same family for both:
+
+- **Editorial · Letter · Manifesto · Long Document** can collapse to a single family because the body voice carries the brand. The wordmark in these contexts is small, grounded, and earns its weight by being typeset rather than decorated.
+
+When to use a contrasting family:
+
+- **Bento Grid · Stat-Led · Workbench · Marquee Hero** — these archetypes lean visually generic (geometric grids, big numbers, browser-frame mockups) and need the wordmark to do the typographic differentiation work the body can't.
+
+**Avoid the same-family collapse on a SaaS page.** A Geist-only page where the wordmark is also Geist 600 reads as un-designed; the wordmark in Fraunces SemiBold over a Geist body costs nothing and adds the one typographic register that says *this is a brand*.
+
 ## Scale
 
 Pick a ratio. The default for Hallmark work is **1.25** (major third). Build the scale from a 16px body, then clamp display sizes for responsive.

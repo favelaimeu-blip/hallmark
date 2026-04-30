@@ -1,15 +1,17 @@
 # Hallmark — generation tests
 
-Six landing pages produced by exercising the Hallmark skill across contrasting briefs. The point: see what comes out *without* hand-holding the AI on theme, structure, or enrichment. Each test deliberately tests a different scenario.
+Eight landing pages produced by exercising the Hallmark skill across contrasting briefs. The point: see what comes out *without* hand-holding the AI on theme, structure, or enrichment. Each test deliberately tests a different scenario. Tests 01–06 ship with no enrichment or simple Tier-A/B custom-craft; tests 07 and 08 demonstrate the **default-on microinteractions** rule (animated counter, marquee, stagger reveal) and the **SaaS page sequence** (testimonials, pricing, FAQ).
 
 | # | Brief | Context given | Theme requested | What the skill picked |
 | --- | --- | --- | --- | --- |
 | 01 | Indie podcast `Tide`, no detail | **Skipped** ("you pick") | none | Quote-Led + Atelier + no enrichment |
 | 02 | Open-source CLI `Streampipe` for stream parsing | Full (devs / install + docs / technical) | **Terminal** (requested) | Workbench + Terminal + Tier-A CSS-art terminal mockup |
 | 03 | Artisan bakery `Maple Street Bread` | Full (locals / browse + visit / warm hand-set) | none | Long Document + Linen + Tier-B hand-built SVG loaf |
-| 04 | Manifesto for an environmental studio `Meridian` | Partial ("declarative, no flashy stuff") | none (implied) | Manifesto + Manifesto + no enrichment |
+| 04 | Manifesto for an environmental studio `Meridian` | Partial ("declarative, no flashy stuff") | none (implied) | Manifesto + Manifesto + no enrichment · 11 sections (manifesto + principles + practice + reading) |
 | 05 | SaaS observability tool `Tracejam` | Full (SREs / try-or-talk-to-sales / technical) | none | Bento Grid + Pastel + E1 clipped-edge dashboard mockup |
 | 06 | Personal one-pager for `Anya` (software architect) | **Skipped** ("don't ask, just figure it out") | none | Long Document + Studio + no enrichment |
+| 07 | SOC2 / ISO27001 compliance SaaS `Foundry` | Full (founders + CTOs / try-or-talk-to-sales / technical-but-trustworthy) | none | Stat-Led + Newsprint + animated counter + pricing pulse · 9-section SaaS sequence |
+| 08 | Cohort-based courses platform `Cohort` | Full (educators / run-courses / warm-salon-room) | none | Marquee Hero + Salon + continuous marquee + stagger reveal · 8-section SaaS sequence |
 
 Each folder contains:
 
@@ -86,3 +88,52 @@ Hallmark is *good*. The structural variety position holds — six briefs, six di
 The remaining gap is **copy voice** and **theme-pick discipline**. The slop test catches *visual* tells well; it doesn't yet catch *prose* tells (like "Built for the modern team" headlines). And the diversification rules are tight on one axis (no Specimen fall-through) but loose on the rest.
 
 Tier 1 of this list is the next session's work.
+
+---
+
+## v0.5.0 — Tier 1, 2, and most of Tier 3 — DONE
+
+Items 1–11 and 13 from the improvement list above shipped in commit `b61f1ef`. Specifically:
+
+- ✅ **#1 Per-archetype copy fixtures** in `macrostructures.md` — 21 archetypes × 2–3 sample opening lines.
+- ✅ **#2 Sub-domain refinement** of the trio table in `structure.md`.
+- ✅ **#3 Theme-diversification rule** in `SKILL.md` — paper-band, display-style, accent-hue.
+- ✅ **#4 Free-vs-paid font trade-off** in `typography.md` — every tone has both rows.
+- ✅ **#5 Worked examples per enrichment archetype** in `hero-enrichment.md`.
+- ✅ **#6 Different-knobs slop-test gate** (gate 34).
+- ✅ **#7 Four illustration recipes** in `custom-craft.md`.
+- ✅ **#8 Non-LLM voice samples** in `copy.md` — 7 tones × 3 patterns × 5 samples.
+- ✅ **#9 Mobile-collapse discipline** in `component-cookbook.md`.
+- ✅ **#10 aria-label slop-test gate** (gate 35).
+- ✅ **#11 Project memory** `.hallmark/log.json`.
+- ✅ **#13 Example gallery** on the landing page (text-only at the time).
+- 🟡 **#12 study + redesign combined verb** — deferred.
+- 🟡 **#14 auto-generated OG cards** — deferred.
+
+---
+
+## v0.6.0 — Tracejam fixes + SaaS expansion + visual gallery
+
+### What shipped
+
+1. **Tracejam (test 05) defects fixed.** Horizontal scroll suppressed via `html/body { overflow-x: clip }`. Navbar items vertically centered with `align-items: center` and `line-height: 1`. Wordmark switched from Geist (body family) to Fraunces (`--font-wordmark`). Hero highlight raised from baseline to mid-x-height — the band now reads as a highlighter mark, not a fat underline. Browser-frame chrome dots got `aria-hidden="true"`.
+2. **Three new slop-test gates** (now 38 total). Gate 36: no horizontal scroll on any viewport 320–1920 px. Gate 37: decorative effects on text must be visually verified to sit at x-height, not baseline. Gate 38: interactive bars must declare `align-items: center` + `line-height: 1`.
+3. **Default-on microinteractions rule** in `microinteractions.md`. For Bento Grid, Stat-Led, Workbench, Marquee Hero, and Conversational FAQ archetypes, the skill now ships 2–3 small purposeful microinteractions automatically — number reveal on stats, pricing card lift, marquee scroll, stagger reveal — without the user asking. Default-off archetypes (Editorial, Manifesto, Letter, Quote-Led, Long Document) stay still.
+4. **SaaS page sequence** in `macrostructures.md`. Hero → social proof → features → testimonials → pricing → FAQ → CTA → footer — when the macrostructure is SaaS-typical and the brief is B2B SaaS marketing.
+5. **Wordmark guidance** in `typography.md`. The wordmark may (and on Bento / Stat-Led / Workbench / Marquee Hero, *should*) use a different display face than the body. Free pairings listed.
+6. **Page-edge clipping discipline** in `layout-and-space.md`. Always pair clipped-edge enrichment with `html/body { overflow-x: clip }`. Use `clip` not `hidden` to preserve sticky positioning.
+7. **Meridian Manifesto (test 04) extended** from 7 sections to 11. New sections: § What we refuse (anti-list with strikethrough), § Working rules (numbered operational principles), § The practice (3-paragraph narrative with drop-cap), § What we read (annotated bibliography). Voice consistent with the original manifesto; no testimonials, no pricing, no CTA.
+8. **Two new SaaS-focused tests** demonstrating the new rules end-to-end:
+   - **Test 07 — Foundry** (Stat-Led + Newsprint). Hero is one giant number ("847" — animated counter from 0). 9 sections including testimonials, real pricing tiers, FAQ. Pricing card hover-lift + recommended-tier pulse-once.
+   - **Test 08 — Cohort** (Marquee Hero + Salon). Continuous-scroll marquee of course titles. Alternating-side feature rows with hand-built CSS visualisations. Stagger-reveal on testimonials.
+9. **Real visual thumbnails on the example gallery.** `site/_tests/_thumbs/*.png` — eight 1024×640 PNG screenshots, one per test. Gallery cards now show a real preview above the text. Cards inherit theme tokens (radius, rule, shadow) so switching the landing page's theme reskins the card frames around the screenshots.
+10. **README updates.** Slop-test count 35 → 38. New default-on microinteractions and SaaS-recipe bullets in "What's distinct."
+
+### Skipped from this round
+
+- **#12 study + redesign combined verb** — still deferred. Single-shot screenshot-to-rebuilt-page workflow.
+- **#14 auto-generated OG cards** — still deferred. Needs Node + Puppeteer utility.
+
+### What this round means for the skill
+
+The structural variety position holds across **eight** tests now, not six. The skill shipped its first two long-form pages (Foundry and Cohort) with proper SaaS structure — testimonials with role + company, real pricing, conversational FAQ — and they read distinctly per macrostructure, not just look distinct. The microinteractions are appropriate (counter, lift, marquee) and bounded to three primitives per page. The Tracejam regressions are gated against in three new slop-test questions.

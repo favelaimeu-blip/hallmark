@@ -1,7 +1,7 @@
 ---
 name: hallmark
 description: Use this skill when the user asks to design, build, redesign, audit, refine, or study a UI, web page, landing page, dashboard, component, or interface — or when they ask to make something "feel less AI-generated." Hallmark forces intentional design decisions (typography, color, layout, motion, interaction, structure) and refuses to default to the generic AI-UI template. Trigger phrases include "design a", "build a landing page", "make a dashboard", "redesign this site", "redesign the page", "refine this UI", "audit this design", "this looks AI-generated", "fix the design", "polish this", "give this a different look", and any request that will produce HTML / CSS / JSX / Tailwind output. **Also trigger when the user attaches a screenshot of a design they admire** — that is the `hallmark study` verb (extracts design DNA, never pixel-clones).
-version: 0.5.0
+version: 0.6.0
 ---
 
 # Hallmark
@@ -156,7 +156,7 @@ Always:
 
 ### 6. The slop test
 
-Before handing back, run the output through these thirty-five questions. Every answer must be **no**.
+Before handing back, run the output through these thirty-eight questions. Every answer must be **no**.
 
 **Visual:**
 
@@ -213,6 +213,12 @@ Before handing back, run the output through these thirty-five questions. Every a
 
 34. If I used the same archetype as a previous Hallmark output (per `.hallmark/log.json` or the latest macrostructure stamp), did I pick at least one different *variation knob*? Two Bento Grids with `tiles=6, spans=irregular, accent=corner-only` are the same Bento — the within-archetype knobs in [`component-cookbook.md`](references/component-cookbook.md) exist precisely to prevent that. State the knob deltas in the stamp.
 35. Does any visual-only `<svg>`, custom-art `<div>`, `<canvas>`, or decorative figure lack `aria-label` or `aria-hidden="true"`? Hand-built CSS art and SVG illustrations need an accessible name *or* an explicit hide. Skipping this is the new accessibility tell.
+
+**Layout-safety gates** (the page must survive every viewport):
+
+36. Does the page horizontally scroll on any viewport between 320 px and 1920 px? Open the rendered page; drag the dev-tools width slider across that range. If a horizontal scrollbar appears at any width, fail. The fix is `html { overflow-x: clip; }` plus `body { overflow-x: clip; }` as a safety net for any clipped-edge enrichment that pushes past the viewport. Use `overflow-x: clip` (not `hidden`) — `clip` preserves `position: sticky` and `position: fixed` on descendants. (Cross-reference: [`layout-and-space.md` § Page-edge clipping](references/layout-and-space.md).)
+37. For every decorative effect on text — highlighter `<mark>` / `<em>` band / accent stroke / underline — did I visually confirm the position and size? A highlighter band must sit behind the x-height (`linear-gradient(180deg, transparent ~38%, accent ~38%, accent ~92%, transparent ~92%)`), **not** at the baseline (which reads as a fat underline). Underlines must be 1–2 px and offset 1–2 px from the baseline, never 5+ px. Decorative strokes must not exceed 5 % of the viewport (gate 25). The check is *visual*: imagine the rendered output and confirm the band lands in the right vertical zone.
+38. Are interactive bars (nav, toolbar, command bar, hero CTA row, footer link strip) explicitly vertically centered? Default flex layouts inherit `align-items: stretch`, which makes a button taller than its sibling text and breaks the visual baseline. Every flex row mixing height-different elements (button + text, icon + text, mark + body) must declare `align-items: center` and `line-height: 1` on the items with intrinsic height. Inheriting `line-height: 1.55` from `html` fights the row's vertical rhythm.
 
 If any answer is yes, fix it. Do not ship slop.
 
