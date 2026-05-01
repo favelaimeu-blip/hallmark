@@ -34,6 +34,59 @@ If the user types anything that does not clearly map to `audit`, `refine`, `rede
 
 ## Design flow (default)
 
+### 0. Pre-flight scan
+
+If the project already has code — a `package.json`, a `tailwind.config.*`, an `index.html`, any CSS — Hallmark should **read it before asking the user anything**. Stomping on an established palette or font stack is the difference between a skill the user keeps and a skill the user uninstalls.
+
+**Five signal sources, scanned in order:**
+
+1. **Font stack** — `package.json` for `next/font`, `@fontsource/*`, `expo-google-fonts`, `geist`; any `<link rel="stylesheet" href="...fonts.googleapis.com/...">` in HTML / layout files; `tailwind.config.{js,ts}` `theme.extend.fontFamily`; `@import url("fonts.googleapis.com/...")` in any stylesheet.
+2. **Palette** — OKLCH / HSL / hex values inside `:root` blocks; `tailwind.config` `theme.extend.colors`; any `tokens.json`, `design-tokens.{json,yaml}`, or DTCG-shaped file.
+3. **Microinteraction stance** — `package.json` dependencies for `framer-motion`, `gsap`, `motion`, `lenis`, `lottie-react`, `@react-spring/*`, `auto-animate`. Any one of those = "motion-on" project. None = "motion-cut" project.
+4. **Spacing scale** — Tailwind `theme.extend.spacing`; CSS `--space-*` custom-property pattern; presence of a 4-pt or 8-pt scale.
+5. **Framework** — Next.js (`next` in deps), Astro (`astro`), Vue (`vue`), Svelte / SvelteKit (`svelte` / `@sveltejs/kit`), Remix (`@remix-run/*`), or vanilla HTML.
+
+**Output format** — emit this block once, before Step 1, with file:line citations so the user can verify what you found:
+
+```
+Pre-flight findings:
+· Font stack: Geist + Geist Mono (next/font, package.json L23)
+· Palette: OKLCH custom properties (app/globals.css :root)
+· Motion: framer-motion 11 installed (package.json L41)
+· Spacing: Tailwind extend.spacing (4-pt scale, tailwind.config.ts L18)
+· Framework: Next.js 15 (app router)
+
+Hallmark will preserve: font stack, palette, spacing scale.
+Hallmark will introduce: macrostructure, microinteraction discipline,
+slop-test gates, hero enrichment recipe.
+
+If you want Hallmark to override any preserved item, say so.
+```
+
+**Persistence.** Write the findings to `.hallmark/preflight.json` once. On subsequent runs, *re-use* the cached findings unless either:
+- the user says "refresh pre-flight" (or "scan again", "re-scan"), or
+- `package.json` / `tailwind.config.*` mtimes are newer than `preflight.json`.
+
+If the cache is re-used, emit a one-line note instead of the full block: *"Pre-flight cached (last scan: 2026-04-30). Say 'refresh pre-flight' to re-scan."*
+
+**Edge cases:**
+
+- **No signals found** (vanilla HTML project, empty repo, scratch directory) → silent. One line only: *"No pre-flight signals — proceeding with full Hallmark stack."*
+- **Conflicting signals** (e.g. `framer-motion` installed but no `motion.div` usage anywhere; or `Geist` import in `package.json` but `font-family: Inter` hard-coded in CSS) → flag the conflict explicitly: *"Conflict: Geist imported via next/font but a hard-coded `font-family: Inter` in app/globals.css L4. I'll preserve next/font Geist; please confirm or remove the Inter declaration."*
+- **Empty project** (no `package.json`, no `index.html`) → silent.
+- **The user said "ignore the existing project"** → skip pre-flight entirely; emit *"Pre-flight skipped at user request."* and proceed to Step 1.
+
+**Two more sample outputs** for the model to imitate:
+
+*Vanilla HTML project, motion-cut:*
+> *Pre-flight findings: vanilla HTML, no framework detected. No motion library, no Tailwind, no design tokens. Hallmark will introduce: full token system, macrostructure, microinteraction discipline, slop-test gates. Nothing to preserve.*
+
+*Astro + Tailwind + DTCG tokens already present:*
+> *Pre-flight findings: Astro 5 (astro.config.mjs L1) · Tailwind v4 with @theme inline tokens (src/styles/global.css L3) · `tokens.json` at project root (DTCG format, 12 colour tokens, 6 font tokens). No motion library detected.*
+> *Hallmark will preserve: Tailwind tokens, the `tokens.json` file (won't overwrite). Hallmark will introduce: macrostructure, microinteraction discipline, slop-test gates. Motion stance: motion-cut (no framer-motion / motion / gsap detected).*
+
+The pre-flight block is the user's accountability line: *"here's what I noticed about your project before I touched anything."* Skipping it is the fastest way to lose the user's trust.
+
 ### 1. Design-context gate
 
 Hallmark works best when you know three things before writing code:
@@ -98,9 +151,25 @@ Use the **last 3–5 entries** to inform diversification:
 - Your theme pick must differ from the last on at least one axis (see the theme-diversification rule above).
 - Your enrichment pick should not be the same enrichment archetype as the last (`E1 clipped` twice in a row reads as templated, even with different content).
 
-If the file doesn't exist, this is the first Hallmark run for this project — no constraint, but **you'll create the file in Step 5**.
+If the file doesn't exist, this is the first Hallmark run for this project — no constraint, but **you'll create the file in Step 6**.
 
 If the project has a CSS stamp but no `log.json`, infer one entry from the stamp and proceed.
+
+**State the rotation in plain text before picking.** This is the user's accountability line for diversification — picking on the page (not in your head) is what keeps the skill from drifting back into Bento-Grid-by-default. The format:
+
+> *"Last 5 builds: Bento Grid (Tracejam) · Bento Grid (Foundry) · Long Document (Maple) · Manifesto (Meridian) · Quote-Led (Tide). Bento Grid used 2 of 5 — picking from {Marquee Hero, Stat-Led, Workbench, Letter} this time. I'll go with Marquee Hero."*
+
+Then the theme rotation, on the next line:
+
+> *"Last 3 themes: Pastel · Plain · Salon. Picking from {Newsprint, Atelier, Linen, Studio} — Newsprint differs on display style and accent hue."*
+
+**Three sample shapes** to imitate:
+
+- **First-time** (no `log.json`, fresh project): no rotation block at all — just the macrostructure pick. *"This is the first Hallmark run for this project. Picking Long Document — fits the Coffeebox brief's editorial tone."*
+- **Mature project** (5+ entries in `log.json`): the format above — frequency count, exclusion list, pick.
+- **User overrode last run** ("use Bento Grid again, I want the same shape"): *"Last build was Bento Grid (you requested it). You've asked for it again — I'll pick different knob values. Knob deltas: tiles=8 (was 6), accent=full-bleed (was corner-only), spans=irregular (was even). Same archetype, different fingerprint."*
+
+The rotation block keeps the user inside the discipline without making them read the rules. Skip it and the user starts thinking the diversification is theatre.
 
 ### 3. Load the visual ruleset
 
@@ -131,13 +200,78 @@ For most design work you need `macrostructures`, `component-cookbook`, `typograp
 
 Most pages don't need it. The strongest hero is often a typographic one. **Reach for [`hero-enrichment.md`](references/hero-enrichment.md) only when the brief points there** — a SaaS / dev-tool brief wants a demo video or mockup; a bakery / café / atelier brief wants a hand-built illustration; a manifesto wants nothing.
 
-Eyeball the brief or ask one short question. State the decision in one sentence (e.g., *"Enrichment: E1 Clipped-Edge Demo Video, Tier-A CSS-art mockup."* or *"Enrichment: none — typography only."*). The decision goes into the macrostructure stamp at Step 5.
+Eyeball the brief or ask one short question. State the decision in one sentence (e.g., *"Enrichment: E1 Clipped-Edge Demo Video, Tier-A CSS-art mockup."* or *"Enrichment: none — typography only."*). The decision goes into the macrostructure stamp at Step 6.
 
 **The enrichment hierarchy is non-negotiable.** Reach for the highest tier you can ship: typography only → Tier A pure CSS art → Tier B hand-built SVG → Tier C generated still (Nanobanana / Recraft) → Tier D library + customisation → **Tier E Lottie is last resort**, only for complex character motion that hand-build can't reach. Reaching for Lottie when CSS would have built it is the new tell.
 
 When an enrichment archetype requires construction, also load [`custom-craft.md`](references/custom-craft.md). When it requires an external asset, load [`assets.md`](references/assets.md).
 
-### 5. Build
+### 5. Preview
+
+Before emitting any code, output a tight summary of what you're about to ship. This is the user's TL;DR — they should be able to scan it in five seconds and tell you to redirect *before* you write 500 lines of CSS that don't match their intent.
+
+**Format** (Markdown bullets, not ASCII boxes — they render reliably across every chat client and terminal):
+
+```markdown
+**Hallmark · v0.6.0**
+
+- **Macrostructure** · Stat-Led
+- **Theme** · Plain (#fff paper · cool greys · ink-blue accent)
+- **Enrichment** · none (typography only)
+- **Sections** · Hero · Logos · Stats · Features · Testimonials · Pricing · FAQ · CTA · Footer
+- **Motion** · counter · pricing-lift · pulse-once
+- **Slop test** · 38 / 38 ✓ (run after Build)
+- **Diversification** · differs from Pastel on display style + accent hue
+```
+
+**Six required bullets, one optional:**
+
+1. **Macrostructure** — the named pick from [`macrostructures.md`](references/macrostructures.md).
+2. **Theme** — name + one-line palette summary (paper colour band · accent hue · display style).
+3. **Enrichment** — the chosen archetype + tier, or *none (typography only)*.
+4. **Sections** — section names separated by ` · `, in DOM order.
+5. **Motion** — microinteraction primitives separated by ` · `, or *none — typography only*. Always under three primitives per the [`microinteractions.md`](references/microinteractions.md) hard rules.
+6. **Slop test** — `38 / 38 ✓` if all gates pass, or `N / 38 — fails: <gate numbers>` if any are open. Run the slop test BEFORE writing this row; the slop test is Step 7.
+7. **Diversification** *(optional, only when `.hallmark/log.json` has prior entries)* — what axes differ vs the previous run.
+
+**Three more sample preview blocks** for the model to imitate, varied across macrostructure types:
+
+*Long Document (editorial, motion-cut):*
+> **Hallmark · v0.6.0**
+>
+> - **Macrostructure** · Long Document
+> - **Theme** · Linen (cool slate paper · steel-blue accent · geometric sans)
+> - **Enrichment** · Tier-B hand-built SVG (a 60-line coffee bean with `@property --rise` 6 s breathing-loop)
+> - **Sections** · Masthead · Letter · Three Notes · Visit · Colophon
+> - **Motion** · breathing-loop on bean only (respects `prefers-reduced-motion`)
+> - **Slop test** · 38 / 38 ✓
+> - **Diversification** · first run for this project
+
+*Bento Grid (SaaS, motion-on):*
+> **Hallmark · v0.6.0**
+>
+> - **Macrostructure** · Bento Grid
+> - **Theme** · Pastel (light cool paper · indigo accent · geometric Geist)
+> - **Enrichment** · E1 Clipped-Edge Demo Video, Tier-A CSS-art trace waterfall
+> - **Sections** · Hero · 6-tile Bento (stat · sparkline · quote · code · integrations · spotlight) · Index Footer
+> - **Motion** · counter · pricing-lift · CSS marquee on integrations strip
+> - **Slop test** · 38 / 38 ✓
+> - **Diversification** · differs from Plain on paper hue (light-cool vs pure-white) + accent (indigo vs ink-blue)
+
+*Manifesto (declarative, no enrichment):*
+> **Hallmark · v0.6.0**
+>
+> - **Macrostructure** · Manifesto
+> - **Theme** · Manifesto (dark · Inter Tight 900 · single red bleed)
+> - **Enrichment** · none (typography only — voice carries the brand)
+> - **Sections** · Masthead · Title · Five Declarations · Bleed Band · What We Refuse · Working Rules · Practice · Reading · Colophon
+> - **Motion** · none — typography only
+> - **Slop test** · 38 / 38 ✓
+> - **Diversification** · differs from Linen on paper band (dark vs light) + display style (display-heavy vs geometric-sans)
+
+If any slop-test gate fails when you reach Step 7, return to the relevant Build step, fix it, and **re-emit the preview block** with the corrected slop-test row. The preview is the durable summary; it's wrong to ship if it lies.
+
+### 6. Build
 
 Emit code that satisfies the tone and structural fingerprint. Match the complexity of the code to the ambition of the tone — a brutalist page needs raw, heavy CSS; an austere page needs restraint.
 
@@ -156,9 +290,9 @@ Always:
 - **Stamp the output.** The first non-empty line of the produced CSS file (or the top of `<style>` if inline) MUST be a comment of the form: `/* Hallmark · macrostructure: <name> · tone: <tone> · anchor hue: <hue> */`. This stamp is the durable record of what you chose. The next time Hallmark runs in this project, it reads the stamp and picks a *different* macrostructure.
 - **Append to project memory.** After you write the stamp, update (or create) `.hallmark/log.json` at the project root. Append a new entry at the **front** of the array: `{ "date": "<YYYY-MM-DD>", "macrostructure": "<name>", "theme": "<name>", "enrichment": "<E# name or 'none'>", "brief": "<one-line summary>" }`. Trim the file to the last 20 entries (rotate the oldest off). Create `.hallmark/` and the file if they don't exist; respect any existing `.gitignore` (the user may or may not want this committed). This file is what Step 2.5 reads on the next run.
 
-### 6. The slop test
+### 7. The slop test
 
-Before handing back, run the output through these thirty-eight questions. Every answer must be **no**.
+Before handing back, run the output through these thirty-eight questions. Every answer must be **no**. Run this BEFORE writing the Slop test row in the Step 5 preview block — that row reflects the actual outcome of this step.
 
 **Visual:**
 
