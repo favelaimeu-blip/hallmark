@@ -113,7 +113,7 @@ Each page is its own self-contained HTML + CSS — no shared theme, no shared la
 - **A 38-gate slop test** runs before every output. One yes fails the build. Recent additions: no horizontal scroll between 320–1920 px (gate 36), decorative effects on text must be visually verified to sit at x-height not baseline (gate 37), interactive bars must declare `align-items: center` (gate 38).
 - **Project memory.** A per-project `.hallmark/log.json` records each run's macrostructure + theme + enrichment + brief summary. The skill reads the last 3–5 entries before picking and writes a new entry after each build, so consecutive Hallmark outputs in the same project don't repeat shapes or themes.
 - **Theme-diversification rule.** Two consecutive themes must differ on at least one of three axes: paper band (dark / mid / light), display style (italic-serif / roman-serif / geometric-sans / mono / display-heavy / system-native), accent hue (warm / cool / neutral / chromatic-other).
-- **Voice fixtures over LLM defaults.** Each of the 21 macrostructures ships with 2–3 example opening lines from real designer-engineer sites (Pentagram, Klim, Linear, Are.na, Resend, Lynn Fisher, Rauno Freiberg…). "Built for the modern team" is in the banned-phrases list.
+- **Voice fixtures over LLM defaults.** Each of the 21 macrostructures ships with 2–3 example opening lines tuned to its tone. "Built for the modern team" is in the banned-phrases list.
 - **Hero enrichment is opt-in.** A typographic-only hero is always acceptable. When enrichment is right, the skill picks from a six-tier hierarchy: typography only → custom-built CSS art → hand-built SVG → generated illustration (Nanobanana / Recraft) → library → Lottie (last resort).
 - **Microinteractions default-on for SaaS-shaped archetypes.** Bento Grid, Stat-Led, Workbench, Marquee Hero pages ship with 2–3 purposeful microinteractions (number reveal, pricing lift, marquee, stagger) without the user having to ask. Editorial / Manifesto / Letter / Quote-Led pages stay still.
 - **SaaS page sequence.** Hero → social proof → features → testimonials → pricing → FAQ → CTA → footer. Real prices, not "contact sales for pricing." Specific testimonials with role + company.
@@ -139,27 +139,6 @@ cd site && python3 -m http.server 4173    # → http://localhost:4173
 Press `T` to cycle themes, the **shuffle button** (or `R`) to randomise, `?theme=studio` for a shareable link.
 
 Or visit the live deploy at **[hallmark-murex.vercel.app](https://hallmark-murex.vercel.app)**.
-
----
-
-## Credits
-
-Built on the open work of:
-
-- Paul Bakaus' [**impeccable**](https://github.com/pbakaus/impeccable) — the named-tells canon
-- tw93's [**kami**](https://github.com/tw93/kami) — the slop-test concept and 20-question scoring
-- Leonxlnx's [**taste-skill**](https://github.com/Leonxlnx/taste-skill) — taste vocabulary and the audit verb
-- Anthropic's [**frontend-design**](https://github.com/anthropics/skills) and [**canvas-design**](https://github.com/anthropics/skills) skills — the design-context-gate pattern
-- nexu-io's [**Open Design**](https://github.com/nexu-io/open-design) — the deterministic anti-AI-slop checklist; convergent inspiration for several gates
-- [**Dembrandt**](https://github.com/dembrandt/dembrandt) — DTCG token-export pattern (informed Tier-2 roadmap; not yet implemented in Hallmark)
-- Google Stitch's [**DESIGN.md**](https://getdesign.md) — single-source design docs
-- Marie Claire Dean's [**63 design skills for Claude**](https://marieclairedean.substack.com/p/i-built-63-design-skills-for-claude) — coverage map
-- Steve Barclay's [**PencilPlaybook**](https://github.com/stevembarclay/pencilplaybook) — the design-language playbook format
-- The [**Slopless**](https://slopless.design) tactile-rebellion canon — the 2026 anti-AI-perfect movement (informed Studio, Pastel, Riso)
-- [925studios' AI Slop Web Design Guide](https://www.925studios.co/blog/ai-slop-web-design-guide) — the canonical slop-tells vocabulary
-- Anthropic's [**Skill Engineering**](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) writeup — file budgets, load-on-demand patterns, frontmatter shape
-
-Where rules overlapped, Hallmark adopted. Where they diverged, Hallmark picked.
 
 ---
 

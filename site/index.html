@@ -108,77 +108,199 @@
     <!-- 01 · HERO SLOT — archetype swaps per theme -->
     <section class="slot slot--hero reveal" data-slot="hero" id="top" style="--i:0" aria-label="Opening"></section>
 
-    <!-- 02 · THE PROBLEM -->
-    <section class="section reveal" style="--i:1" aria-labelledby="s2">
+    <!-- 02 · EXAMPLES — full-bleed rail, the centerpiece -->
+    <section class="section section--bleed reveal" style="--i:1" id="examples" aria-labelledby="s2">
       <header class="section__head">
         <p class="section-label">
-          <span class="num">02</span><span class="divider">⁄</span><span>The problem</span>
+          <span class="num">02</span><span class="divider">⁄</span><span>Examples</span>
         </p>
         <h2 class="section__title" id="s2">
-          Every LLM was trained on the same templates. Without a firm hand, they all emit the same page.
+          Eight briefs. Eight different shapes.
+        </h2>
+      </header>
+
+      <p class="examples__intro">Each page is hand-built HTML and CSS — no shared theme, no shared layout. <span class="examples__hint">Click any card to open the full page →</span></p>
+
+      <div class="examples-rail" role="list" aria-label="Eight example landing pages">
+
+        <a class="ex-card" href="_tests/01-tide-podcast/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/01-tide.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">01</span>
+            <span class="ex-card__name">Tide</span>
+            <span class="ex-card__brief">Indie podcast · warm cream, mono masthead</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/02-streampipe-cli/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/02-streampipe.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">02</span>
+            <span class="ex-card__name">Streampipe</span>
+            <span class="ex-card__brief">Open-source CLI · prose-led docs, embedded terminal</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/03-maple-bakery/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/03-maple.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">03</span>
+            <span class="ex-card__name">Maple Street Bread</span>
+            <span class="ex-card__brief">Artisan bakery · market-board layout, hand-built SVG</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/04-meridian-manifesto/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/04-meridian.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">04</span>
+            <span class="ex-card__name">Meridian</span>
+            <span class="ex-card__brief">Studio manifesto · dark paper, yellow strike</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/05-tracejam-saas/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/05-tracejam.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">05</span>
+            <span class="ex-card__name">Tracejam</span>
+            <span class="ex-card__brief">Observability SaaS · dark paper, sticky trace panel</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/06-anya-portfolio/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/06-anya.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">06</span>
+            <span class="ex-card__name">Anya</span>
+            <span class="ex-card__brief">Software architect personal site · sticky TOC, pure white</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/07-foundry-compliance/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/07-foundry.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">07</span>
+            <span class="ex-card__name">Foundry</span>
+            <span class="ex-card__brief">SOC2 compliance SaaS · six-tile bento, deep-red accent</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+        <a class="ex-card" href="_tests/08-cohort-courses/index.html" target="_blank" rel="noopener" role="listitem">
+          <picture class="ex-card__thumb" aria-hidden="true">
+            <img src="_tests/_thumbs/08-cohort.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
+          </picture>
+          <div class="ex-card__meta">
+            <span class="ex-card__num">08</span>
+            <span class="ex-card__name">Cohort</span>
+            <span class="ex-card__brief">Cohort-based courses · stat-led, three supporting figures</span>
+            <span class="ex-card__open">Open ↗</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 03 · WITHOUT / WITH — same copy, two design languages -->
+    <section class="section reveal" style="--i:2" aria-labelledby="s3">
+      <header class="section__head">
+        <p class="section-label">
+          <span class="num">03</span><span class="divider">⁄</span><span>Without / with</span>
+        </p>
+        <h2 class="section__title" id="s3">
+          Same brief. Same words. Two very different pages.
         </h2>
       </header>
 
       <div class="vs">
         <div class="vs__col">
           <div class="vs__head"><span class="vs__label">Without Hallmark</span></div>
-          <div class="vs__demo">
-            <div class="viz-purple-hero"></div>
+          <div class="vs__panel" data-variant="slop">
+            <p class="vs__panel-eyebrow">✨ Introducing</p>
+            <h3 class="vs__panel-title">Notes that think with you.</h3>
+            <p class="vs__panel-sub">A writing tool that organizes your ideas as you draft.</p>
+            <span class="vs__panel-cta">Try free</span>
           </div>
           <p class="vs__caption">
-            Centred hero. Purple-to-pink gradient. Inter display. Startup-cliché tagline. Rounded-pill CTA. A view every
-            LLM has produced ten thousand times.
+            Centred everything. Purple-to-pink gradient on the headline. Inter top to bottom. A pill button with a gradient fill. A page every LLM has produced ten thousand times.
           </p>
         </div>
         <div class="vs__col">
           <div class="vs__head"><span class="vs__label">With Hallmark</span></div>
-          <div class="vs__demo vs__demo--good">
-            <span class="label">01 ⁄ Specimen</span>
-            <span class="title">A quiet <em>instrument.</em></span>
+          <div class="vs__panel" data-variant="hallmark">
+            <p class="vs__panel-eyebrow"><span class="vs__panel-mark" aria-hidden="true"></span>Introducing</p>
+            <h3 class="vs__panel-title">Notes that think <em>with you.</em></h3>
+            <p class="vs__panel-sub">A writing tool that organizes your ideas as you draft.</p>
+            <span class="vs__panel-cta">Try free →</span>
           </div>
           <p class="vs__caption">
-            Asymmetric, left-biased. One accent, barely visible. A distinctive display face paired with a serif for
-            emphasis. No gradient, no pill, no slop.
+            Left-aligned, asymmetric. A display face with character set against a clean body. One small accent on the eyebrow only. A square-edged button. Same words — a page that knows what it is.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- 03 · FOUNDATIONS -->
-    <section class="section reveal" style="--i:2" aria-labelledby="s3">
+    <!-- 04 · FOUNDATIONS — eight rules in plain English -->
+    <section class="section reveal" style="--i:3" aria-labelledby="s4">
       <header class="section__head">
         <p class="section-label">
-          <span class="num">03</span><span class="divider">⁄</span><span>Foundations</span>
+          <span class="num">04</span><span class="divider">⁄</span><span>Foundations</span>
         </p>
-        <h2 class="section__title" id="s3">
-          Eight dimensions. A short, opinionated rule on each.
+        <h2 class="section__title" id="s4">
+          Eight things Hallmark holds the line on — explained without the jargon.
         </h2>
       </header>
 
       <div class="foundations">
 
-        <article class="spec">
+        <article class="spec spec--feature">
           <header class="spec__head">
-            <span class="spec__name">Typography</span>
+            <span class="spec__name">Type</span>
             <span class="spec__num">F / 01</span>
           </header>
-          <p class="spec__rule">Banned defaults. Distinctive display paired with a refined body. Commit to weight
-            extremes.</p>
-          <div class="spec__body type-spec">
-            <span class="type-spec__display">Display face</span>
-            <span class="type-spec__body">paired with a <em>workhorse</em> body.</span>
+          <p class="spec__rule">Pick fonts on purpose. Skip Inter and Geist — the defaults every site uses. Pair a display face that has a personality with a clean body face, and lean into the extreme weights, light or heavy, not the safe middle.</p>
+          <div class="spec__body">
+            <div class="spec__viz spec__viz--type">
+              <div class="spec__viz-row spec__viz-row--display"><span>Hallmark</span><em class="spec__viz-tag">Fraunces · 900 italic</em></div>
+              <div class="spec__viz-row spec__viz-row--body"><span>Hallmark</span><em class="spec__viz-tag">Geist · 300</em></div>
+              <div class="spec__viz-row spec__viz-row--mono"><span>Hallmark</span><em class="spec__viz-tag">Mono · 500</em></div>
+            </div>
           </div>
         </article>
 
-        <article class="spec">
+        <article class="spec spec--feature">
           <header class="spec__head">
             <span class="spec__name">Colour</span>
             <span class="spec__num">F / 02</span>
           </header>
-          <p class="spec__rule">OKLCH only. One accent, under 3% of any view. No pure black. No pure white. No purple
-            gradients.</p>
+          <p class="spec__rule">One accent colour, used so sparingly you almost miss it — less than 3% of what's on screen. Skip pure black and pure white (they're harsher than they look). Avoid purple gradients.</p>
           <div class="spec__body">
-            <div class="swatch-row">
+            <div class="spec__viz spec__viz--colour" aria-hidden="true">
+              <span class="spec__viz-dot"></span>
+              <p class="spec__viz-caption">One accent. The whole field is paper. The dot is the accent.</p>
+            </div>
+            <div class="swatch-row spec__viz-swatches">
               <div class="swatch swatch--light" style="background: var(--color-paper);">Paper</div>
               <div class="swatch swatch--light" style="background: var(--color-paper-3);">Rule</div>
               <div class="swatch" style="background: var(--color-neutral);">Mute</div>
@@ -193,16 +315,21 @@
             <span class="spec__name">Space</span>
             <span class="spec__num">F / 03</span>
           </header>
-          <p class="spec__rule">4-point scale, named semantically. <code>gap</code> for siblings. Break the grid on
-            purpose, not by accident.</p>
-          <div class="spec__body" style="display:flex; align-items:end; gap:var(--space-2xs); height:3rem;">
-            <span style="width:4px;  height:25%; background:var(--color-ink);"></span>
-            <span style="width:4px;  height:35%; background:var(--color-ink);"></span>
-            <span style="width:4px;  height:45%; background:var(--color-ink);"></span>
-            <span style="width:4px;  height:60%; background:var(--color-ink);"></span>
-            <span style="width:4px;  height:78%; background:var(--color-ink);"></span>
-            <span style="width:4px;  height:100%; background:var(--color-ink);"></span>
-            <span class="label" style="margin-left:.75rem;">4 ⁄ 8 ⁄ 12 ⁄ 16 ⁄ 24 ⁄ 40</span>
+          <p class="spec__rule">Generous space, used unevenly. Pick one consistent scale so things feel related. Asymmetry on purpose, never by accident — centred-everything is a tell.</p>
+          <div class="spec__body">
+            <div class="spec__viz spec__viz--space" aria-hidden="true">
+              <div class="spec__viz-grid spec__viz-grid--bad">
+                <span class="vg-bar vg-bar--xl"></span>
+                <span class="vg-bar vg-bar--md"></span>
+                <span class="vg-bar vg-bar--sm"></span>
+              </div>
+              <div class="spec__viz-grid spec__viz-grid--good">
+                <span class="vg-bar vg-bar--xl"></span>
+                <span class="vg-bar vg-bar--md"></span>
+                <span class="vg-bar vg-bar--sm"></span>
+              </div>
+            </div>
+            <p class="spec__viz-pair"><span>Centred (a tell)</span><span>Asymmetric (designed)</span></p>
           </div>
         </article>
 
@@ -211,16 +338,17 @@
             <span class="spec__name">Motion</span>
             <span class="spec__num">F / 04</span>
           </header>
-          <p class="spec__rule">Animate <code>transform</code> and <code>opacity</code> only. One orchestrated entrance
-            beats ten micro-bounces.</p>
+          <p class="spec__rule">Keep motion quiet. One smooth entrance feels designed; ten little bounces feel busy. Animate fade and slide — never size, colour, or layout.</p>
           <div class="spec__body">
-            <svg class="curve" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M 0 80 C 32 80, 60 8, 200 0" fill="none" stroke="currentColor" stroke-width="1.2" />
-              <line x1="0" y1="80" x2="200" y2="80" stroke="var(--color-rule-2)" stroke-width="0.5" />
-              <line x1="0" y1="0" x2="200" y2="0" stroke="var(--color-rule-2)" stroke-width="0.5"
-                stroke-dasharray="2 2" />
-            </svg>
-            <span class="label">cubic-bezier(0.16, 1, 0.3, 1) &nbsp;·&nbsp; 420 ms</span>
+            <div class="spec__viz spec__viz--motion">
+              <button class="spec__viz-play" type="button" data-motion-demo aria-label="Play motion demo">
+                <span class="spec__viz-play-icon" aria-hidden="true"></span>
+                Play
+              </button>
+              <div class="spec__viz-stage" aria-hidden="true">
+                <span class="spec__viz-block" data-motion-block></span>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -229,17 +357,14 @@
             <span class="spec__name">States</span>
             <span class="spec__num">F / 05</span>
           </header>
-          <p class="spec__rule">Eight states, not two. <code>:focus-visible</code> ring. 44&nbsp;px hit target. Labels
-            above inputs.</p>
-          <div class="spec__body" style="display:flex; flex-wrap:wrap; gap:var(--space-xs) var(--space-md);">
-            <span class="label">default</span>
-            <span class="label">hover</span>
-            <span class="label">focus</span>
-            <span class="label">active</span>
-            <span class="label">disabled</span>
-            <span class="label">loading</span>
-            <span class="label">error</span>
-            <span class="label">success</span>
+          <p class="spec__rule">Buttons and inputs need real feedback for every state — hover, press, focus, loading, error, success — not just on and off. Hit targets big enough to actually tap.</p>
+          <div class="spec__body">
+            <div class="spec__viz spec__viz--states">
+              <button class="spec__viz-button" type="button" data-states-demo>
+                <span data-states-label>Hover, focus, click me</span>
+              </button>
+              <p class="spec__viz-state-readout" data-states-readout aria-live="polite">default</p>
+            </div>
           </div>
         </article>
 
@@ -248,10 +373,28 @@
             <span class="spec__name">Responsive</span>
             <span class="spec__num">F / 06</span>
           </header>
-          <p class="spec__rule">Mobile-first. Breakpoints where content breaks, not where a device sits.
-            <code>dvh</code>, not <code>vh</code>.</p>
+          <p class="spec__rule">Mobile first. Add breakpoints where the <em>content</em> starts to look wrong, not where some device used to sit.</p>
           <div class="spec__body">
-            <span class="dim">40 rem &nbsp; 60 rem &nbsp; 90 rem</span>
+            <div class="spec__viz spec__viz--responsive" aria-hidden="true">
+              <div class="vg-frame vg-frame--phone">
+                <span class="vg-line vg-line--head"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line vg-line--short"></span>
+              </div>
+              <div class="vg-frame vg-frame--tablet">
+                <span class="vg-line vg-line--head"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line vg-line--short"></span>
+              </div>
+              <div class="vg-frame vg-frame--laptop">
+                <span class="vg-line vg-line--head"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line"></span>
+                <span class="vg-line vg-line--short"></span>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -260,94 +403,46 @@
             <span class="spec__name">Copy</span>
             <span class="spec__num">F / 07</span>
           </header>
-          <p class="spec__rule">Specific verbs. Three-part errors. Link text that reads alone. Proper punctuation, not
-            straight quotes.</p>
+          <p class="spec__rule">Write like a person. Specific verbs over vague ones. Link text that makes sense out of context. Real apostrophes, not straight quotes.</p>
           <div class="spec__body">
-            <span class="serif-italic" style="font-size:var(--text-md); color:var(--color-ink-2);">
-              &ldquo;Save changes&rdquo; beats &ldquo;OK&rdquo;. &ldquo;View pricing plans&rdquo; beats &ldquo;Click
-              here&rdquo;.
-            </span>
+            <div class="spec__viz spec__viz--copy">
+              <div class="spec__viz-copy-col" data-variant="bad">
+                <p class="spec__viz-copy-label">Vague</p>
+                <p class="spec__viz-copy-line">Click here</p>
+                <p class="spec__viz-copy-line">Get started</p>
+                <p class="spec__viz-copy-line">Built for the modern team</p>
+              </div>
+              <div class="spec__viz-copy-col" data-variant="good">
+                <p class="spec__viz-copy-label">Specific</p>
+                <p class="spec__viz-copy-line">View pricing plans</p>
+                <p class="spec__viz-copy-line">Save changes</p>
+                <p class="spec__viz-copy-line">The email API for developers</p>
+              </div>
+            </div>
           </div>
         </article>
 
-        <article class="spec">
+        <article class="spec spec--strip">
           <header class="spec__head">
             <span class="spec__name">Anti-patterns</span>
             <span class="spec__num">F / 08</span>
           </header>
-          <p class="spec__rule">The named tells. Flagged by <code>hallmark audit</code>, erased by
-            <code>hallmark refine</code>.</p>
+          <p class="spec__rule">Twenty-one named tells the AI keeps reaching for. Run <code>hallmark audit</code> to find them, <code>hallmark refine</code> to fix them in place.</p>
           <div class="spec__body">
-            <span class="dim">21 tells catalogued</span>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- 04 · GALLERY OF TELLS -->
-    <section class="section reveal" style="--i:3" aria-labelledby="s4">
-      <header class="section__head">
-        <p class="section-label">
-          <span class="num">04</span><span class="divider">⁄</span><span>Gallery of tells</span>
-        </p>
-        <h2 class="section__title" id="s4">
-          The patterns every LLM reaches for by default. Hallmark catches each one by name.
-        </h2>
-      </header>
-
-      <div class="rail" role="list" aria-label="Named anti-patterns">
-        <article class="tell" role="listitem">
-          <div class="tell__viz">
-            <div class="viz-purple-hero"></div>
-          </div>
-          <div class="tell__meta">
-            <span class="tell__name">Purple-gradient hero</span>
-            <span class="tell__why">Diagonal gradient behind centred white display type. The most-recognised AI
-              aesthetic.</span>
-          </div>
-        </article>
-
-        <article class="tell" role="listitem">
-          <div class="tell__viz">
-            <div class="viz-gradient-text"></div>
-          </div>
-          <div class="tell__meta">
-            <span class="tell__name">Gradient headline</span>
-            <span class="tell__why">Headline with <code>background-clip: text</code> filled by a two-stop gradient.
-              Decorative; carries no meaning.</span>
-          </div>
-        </article>
-
-        <article class="tell" role="listitem">
-          <div class="tell__viz">
-            <div class="viz-icon-tile">
-              <div><span class="icon"></span><span class="h"></span><span class="t"></span><span class="t"></span></div>
-              <div><span class="icon"></span><span class="h"></span><span class="t"></span><span class="t"></span></div>
-              <div><span class="icon"></span><span class="h"></span><span class="t"></span><span class="t"></span></div>
+            <div class="spec__viz spec__viz--tells" aria-hidden="true">
+              <span class="vt vt--purple"></span>
+              <span class="vt vt--gradtext"></span>
+              <span class="vt vt--icontile"></span>
+              <span class="vt vt--centered"></span>
+              <span class="vt vt--glass"></span>
+              <span class="vt vt--pill"></span>
+              <span class="vt vt--bigfeat"></span>
+              <span class="vt vt--threecard"></span>
+              <span class="vt vt--moremore">+13</span>
             </div>
           </div>
-          <div class="tell__meta">
-            <span class="tell__name">Icon-tile feature grid</span>
-            <span class="tell__why">Three identical columns, icon-above-heading-above-two-lines. The universal LLM
-              feature section.</span>
-          </div>
         </article>
 
-        <article class="tell" role="listitem">
-          <div class="tell__viz">
-            <div class="viz-centered-hero">
-              <span class="h">Build what's next</span>
-              <span class="s">Unleash the power of seamless AI for your team.</span>
-              <span class="c">Get started</span>
-            </div>
-          </div>
-          <div class="tell__meta">
-            <span class="tell__name">Centred-everything hero</span>
-            <span class="tell__why">Hero, sub-head, CTA — all centred, all gradient-pilled. A template masquerading as a
-              page.</span>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -358,7 +453,7 @@
           <span class="num">05</span><span class="divider">⁄</span><span>How it works</span>
         </p>
         <h2 class="section__title" id="s5">
-          Install once. Describe what you need. Hallmark routes the rest.
+          Install once. Ask for what you need. Hallmark handles the rest.
         </h2>
       </header>
 
@@ -380,8 +475,7 @@
           <span class="step__num">II</span>
           <div>
             <h3 class="step__head">Ask for a UI</h3>
-            <p class="step__sub">In plain language. Hallmark refuses to design without a confirmed audience, use case,
-              and tone — so it asks first.</p>
+            <p class="step__sub">In plain language. Hallmark asks a few questions first — who's it for, what's it for, what tone — so the page actually fits the brief.</p>
           </div>
           <div class="step__body">
             <pre class="code code--block">&gt; build a landing page for a local bookshop's
@@ -395,9 +489,8 @@
           <div>
             <h3 class="step__head">Five verbs: build, audit, refine, redesign, study</h3>
             <p class="step__sub">The default verb builds. <code>hallmark audit</code> scores existing code against the
-              tells. <code>hallmark refine</code> polishes in place. <code>hallmark redesign</code> rethinks the
-              structure. <code>hallmark study</code> reads a screenshot you admire and extracts its <em>DNA</em> —
-              macrostructure, archetypes, type-pairing role, colour anchor — never the pixels.</p>
+              named tells. <code>hallmark refine</code> polishes in place. <code>hallmark redesign</code> rethinks the
+              structure. <code>hallmark study</code> reads a screenshot you admire and extracts what makes it work — the structure, the type pairing, the colour anchor — never the pixels.</p>
           </div>
           <div class="step__body">
             <pre class="code code--block">$ claude "hallmark study ./reference.png"
@@ -411,184 +504,89 @@
       </div>
     </section>
 
-    <!-- 06 · INSTALL -->
+    <!-- 06 · INSTALL — one command, every harness -->
     <section class="section reveal" style="--i:5" id="install" aria-labelledby="s6">
       <header class="section__head">
         <p class="section-label">
           <span class="num">06</span><span class="divider">⁄</span><span>Install</span>
         </p>
         <h2 class="section__title" id="s6">
-          Four ways in. Pick the one that matches your harness.
+          One command. Works in every harness.
         </h2>
       </header>
 
-      <div class="installs">
+      <div class="install-pane">
 
-        <div class="install">
-          <p class="install__head">npx &nbsp;·&nbsp; any harness</p>
-          <pre class="install__body"
-            data-copy-source><span data-copy-text>npx skills add hallmark</span><button class="code__copy code__copy--block" type="button" data-copy-btn aria-label="Copy install command"><span class="code__copy-default">Copy</span><span class="code__copy-done">Copied</span></button></pre>
+        <div class="install-pane__row install-pane__row--cmd">
+          <p class="install-pane__label"><span class="install-pane__step">I</span> Run</p>
+          <div class="install-pane__cmd" data-copy-source>
+            <span class="install-pane__prompt" aria-hidden="true">$</span>
+            <span class="install-pane__cmd-text" data-copy-text>npx skills add hallmark</span>
+            <button class="install-pane__copy" type="button" data-copy-btn aria-label="Copy install command">
+              <span class="install-pane__copy-default">Copy</span>
+              <span class="install-pane__copy-done">Copied</span>
+            </button>
+          </div>
         </div>
 
-        <div class="install">
-          <p class="install__head">Claude Code</p>
-          <pre class="install__body">~/.claude/skills/hallmark/
-  SKILL.md
-  references/*.md</pre>
+        <div class="install-pane__row">
+          <p class="install-pane__label"><span class="install-pane__step">II</span> In</p>
+          <ul class="install-pane__harnesses">
+            <li class="harness">
+              <span class="harness__name">Claude Code</span>
+              <code class="harness__path">~/.claude/skills/hallmark/</code>
+              <span class="harness__status harness__status--ok">auto-detected</span>
+            </li>
+            <li class="harness">
+              <span class="harness__name">Cursor</span>
+              <code class="harness__path">.cursor/rules/hallmark.mdc</code>
+              <span class="harness__status harness__status--ok">auto-detected</span>
+            </li>
+            <li class="harness">
+              <span class="harness__name">Codex &amp; others</span>
+              <code class="harness__path">git clone · copy skill/</code>
+              <span class="harness__status">manual</span>
+            </li>
+          </ul>
         </div>
 
-        <div class="install">
-          <p class="install__head">Cursor</p>
-          <pre class="install__body">.cursor/rules/hallmark.mdc
-  (body of SKILL.md,
-   no frontmatter)</pre>
-        </div>
-
-        <div class="install">
-          <p class="install__head">Manual</p>
-          <pre class="install__body">git clone &amp;&amp;
-  copy skill/ into
-  your agent config</pre>
+        <div class="install-pane__row">
+          <p class="install-pane__label"><span class="install-pane__step">III</span> Then</p>
+          <p class="install-pane__next">Ask your agent for a UI. <code>hallmark</code> attaches itself when the prompt mentions design, audit, refine, redesign, or study — so the rules apply without you naming them.</p>
         </div>
 
       </div>
     </section>
 
-    <!-- 07 · EXAMPLES -->
-    <section class="section reveal" style="--i:6" id="examples" aria-labelledby="s7">
-      <header class="section__head">
-        <p class="section-label">
-          <span class="num">07</span><span class="divider">⁄</span><span>Examples</span>
-        </p>
-        <h2 class="section__title" id="s7">
-          Eight pages, eight different shapes.
-        </h2>
-      </header>
-
-      <p class="examples__intro">Eight landing pages produced by exercising the skill across contrasting briefs. Each
-        page is its own self-contained HTML + CSS — no shared theme, no shared layout. Every one carries a
-        <code>/* Hallmark · macrostructure: … */</code> stamp at the top of its CSS. Hover any thumbnail to see the page
-        open in a new tab.</p>
-
-      <div class="gallery" role="list">
-
-        <a class="gallery__item" href="_tests/01-tide-podcast/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/01-tide.png" alt="" loading="lazy" decoding="async" width="1024" height="400" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">01</span>
-            <span class="gallery__name">Tide</span>
-            <span class="gallery__shape">Letter · Salon · no enrichment</span>
-            <span class="gallery__desc">Indie podcast. Context skipped. Letter-from-the-host on warm cream, mono masthead.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/02-streampipe-cli/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/02-streampipe.png" alt="" loading="lazy" decoding="async" width="1024"
-              height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">02</span>
-            <span class="gallery__name">Streampipe</span>
-            <span class="gallery__shape">Long Document · Terminal · Tier-A inline CSS-art</span>
-            <span class="gallery__desc">Open-source CLI. Theme requested. Prose-led docs with embedded phosphor-green terminal.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/03-maple-bakery/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/03-maple.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">03</span>
-            <span class="gallery__name">Maple Street Bread</span>
-            <span class="gallery__shape">Catalogue · Almanac · Tier-A hand-built SVG silhouettes</span>
-            <span class="gallery__desc">Artisan bakery. Market-board layout, eight breads, period-almanac display.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/04-meridian-manifesto/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/04-meridian.png" alt="" loading="lazy" decoding="async" width="1024"
-              height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">04</span>
-            <span class="gallery__name">Meridian</span>
-            <span class="gallery__shape">Quote-Led · Brutal · no enrichment</span>
-            <span class="gallery__desc">Studio manifesto. One-line polemic with a yellow strike, four principles, dark paper.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/05-tracejam-saas/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/05-tracejam.png" alt="" loading="lazy" decoding="async" width="1024"
-              height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">05</span>
-            <span class="gallery__name">Tracejam</span>
-            <span class="gallery__shape">Workbench · Midnight · Tier-A sticky trace panel</span>
-            <span class="gallery__desc">SaaS observability. Three-step walkthrough with a pinned phosphor-cyan trace on dark paper.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/06-anya-portfolio/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/06-anya.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">06</span>
-            <span class="gallery__name">Anya</span>
-            <span class="gallery__shape">Index-First · Plain · no enrichment</span>
-            <span class="gallery__desc">Software architect personal site. Sticky-numbered TOC + five sections, Inter Tight on pure white.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/07-foundry-compliance/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/07-foundry.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">07</span>
-            <span class="gallery__name">Foundry</span>
-            <span class="gallery__shape">Bento Grid · Newsprint · Tier-A logo grid</span>
-            <span class="gallery__desc">SOC2 compliance SaaS. Six-tile bento on warm-cream paper, big serif "847", deep-red accent.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-        <a class="gallery__item" href="_tests/08-cohort-courses/index.html" role="listitem">
-          <picture class="gallery__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/08-cohort.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
-          </picture>
-          <div class="gallery__body">
-            <span class="gallery__num">08</span>
-            <span class="gallery__name">Cohort</span>
-            <span class="gallery__shape">Stat-Led · Linen · no enrichment</span>
-            <span class="gallery__desc">Cohort-based courses platform. The brief's "30–500" set at 22 rem, three supporting stats.</span>
-            <span class="gallery__open">View ↗</span>
-          </div>
-        </a>
-
-      </div>
-
-      <p class="examples__outro">Findings + improvement list at <a href="_tests/" class="link">site/_tests/</a>.</p>
-    </section>
-
-    <!-- 08 · FOOTER SLOT — archetype swaps per theme -->
-    <footer class="slot slot--foot reveal" data-slot="footer" style="--i:7" role="contentinfo" aria-label="Colophon">
+    <!-- FOOTER SLOT — archetype swaps per theme -->
+    <footer class="slot slot--foot reveal" data-slot="footer" style="--i:6" role="contentinfo" aria-label="Colophon">
     </footer>
 
   </main>
+
+  <!-- ─── Easter egg ─── revealed when the user spams T —— -->
+  <aside class="easter" data-easter-egg hidden role="dialog" aria-modal="true" aria-label="A note from Hallmark">
+    <div class="easter__panel">
+      <ol class="easter__lines" aria-live="polite">
+        <li class="easter__line easter__line--cmd"><span class="easter__prompt">$</span> hallmark observe</li>
+        <li class="easter__line">
+          <span class="easter__arrow">&gt;</span>
+          you cycled the catalog <span class="easter__num" data-easter-cycles>1.0</span>×
+          in <span class="easter__num" data-easter-seconds>3.2</span>s.
+        </li>
+        <li class="easter__line"><span class="easter__arrow">&gt;</span> there are <span class="easter__num">16</span> themes.</li>
+        <li class="easter__line"><span class="easter__arrow">&gt;</span> there is no theme <span class="easter__num">17</span>.</li>
+        <li class="easter__line easter__line--punchline">
+          <span class="easter__arrow">&gt;</span> chill, designer.<span class="easter__cursor" aria-hidden="true"></span>
+        </li>
+      </ol>
+      <p class="easter__hint">
+        <span class="easter__hint-key">tap any key</span>
+        <span class="easter__hint-sep" aria-hidden="true">·</span>
+        <span>to return to the page</span>
+      </p>
+    </div>
+  </aside>
 
   <!-- ─────────── HERO ARCHETYPES ─────────── -->
 

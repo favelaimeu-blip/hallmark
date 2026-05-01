@@ -150,31 +150,79 @@
   border-top: var(--rule-hair) solid var(--color-rule);
 }
 
-/* — 02 · Problem (vs) ——————————————————————————————— */
+/* — 02 · Examples rail (full-bleed) ——————————————————— */
+/* The rail escapes the page gutter on both sides so tiles can flow
+   past the max-width. The header above stays inside the gutter. */
+.examples__intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-md);
+  line-height: var(--lh-snug);
+  color: var(--color-ink-2);
+  max-width: 60ch;
+  margin: 0;
+}
+
+.examples__intro .examples__hint {
+  font-style: normal;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: inline-block;
+  margin-inline-start: var(--space-md);
+  white-space: nowrap;
+}
+
+[data-theme="brutal"] .examples__intro,
+[data-theme="manifesto"] .examples__intro,
+[data-theme="terminal"] .examples__intro,
+[data-theme="sport"] .examples__intro,
+[data-theme="almanac"] .examples__intro {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+.examples-rail {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  /* Escape the page gutter so tiles can extend past the container edge */
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding-inline: var(--page-gutter);
+  padding-block: var(--space-md) var(--space-lg);
+  scroll-padding-inline-start: var(--page-gutter);
+  scrollbar-color: var(--color-rule-2) transparent;
+}
+
+.examples-rail::-webkit-scrollbar { height: 6px; }
+.examples-rail::-webkit-scrollbar-track { background: transparent; }
+.examples-rail::-webkit-scrollbar-thumb { background: var(--color-rule-2); border-radius: 0; }
+
+/* — 03 · Without / With (parity panels) ——————————————— */
 .vs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: var(--rule-hair) solid var(--color-rule-2);
+  gap: var(--space-lg);
 }
 
 @media (max-width: 50rem) {
   .vs { grid-template-columns: 1fr; }
-  .vs__col:first-child { border-right: 0; border-bottom: var(--rule-hair) solid var(--color-rule-2); }
 }
 
 .vs__col {
-  padding: var(--space-xl);
   display: grid;
+  grid-template-rows: auto 1fr auto;
   gap: var(--space-md);
 }
 
-.vs__col:first-child {
-  border-right: var(--rule-hair) solid var(--color-rule-2);
-  background: var(--color-paper-2);
+.vs__head {
+  padding-bottom: var(--space-sm);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
 }
-
-.vs__head { padding-bottom: var(--space-sm); border-bottom: var(--rule-hair) solid var(--color-rule); }
 
 .vs__label {
   font-family: var(--font-label);
@@ -188,69 +236,29 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   color: var(--color-neutral);
-  max-width: 44ch;
   line-height: var(--lh-normal);
 }
 
-.vs__demo {
-  min-height: 12rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.vs__demo--good {
-  display: grid;
-  place-content: start;
-  gap: 0.75rem;
-  padding: 1.25rem;
-  background: var(--color-paper);
-}
-
-.vs__demo--good .label { color: var(--color-muted); }
-
-.vs__demo--good .title {
-  font-family: var(--font-display);
-  font-weight: var(--display-weight, 400);
-  font-style: var(--display-style, normal);
-  font-size: 2rem;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--color-ink);
-  max-width: 10ch;
-  font-optical-sizing: auto;
-}
-
-.vs__demo--good .title em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-}
-
-/* — 03 · Foundations grid ——————————————————————————— */
+/* — 04 · Foundations mosaic ——————————————————————————
+   Auto-fit grid with feature cards (F/01 Type, F/02 Colour) and the
+   closing strip (F/08 Anti-patterns) spanning the full row for breathing
+   room on their richer illustrations. Other cards pack 2-3 per row
+   depending on viewport. */
 .foundations {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl) var(--space-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-xl) var(--space-2xl);
+}
+
+.spec--feature,
+.spec--strip {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 56rem) {
   .foundations { grid-template-columns: 1fr; gap: 0; }
+  .spec--feature, .spec--strip { grid-column: auto; }
 }
-
-/* — 04 · Gallery rail ——————————————————————————————— */
-.rail {
-  display: flex;
-  gap: var(--space-md);
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-sm);
-  scrollbar-color: var(--color-rule-2) transparent;
-}
-
-.rail::-webkit-scrollbar { height: 6px; }
-.rail::-webkit-scrollbar-track { background: transparent; }
-.rail::-webkit-scrollbar-thumb { background: var(--color-rule-2); border-radius: 0; }
 
 /* — 05 · How it works ——————————————————————————————— */
 .how { display: grid; gap: var(--space-xl); }
@@ -298,14 +306,39 @@
 
 .step__body { display: grid; gap: var(--space-sm); }
 
-/* — 06 · Install blocks ————————————————————————————— */
-.installs {
+/* — 06 · Install pane ——————————————————————————————
+   A single bordered "manual page" card with three numbered rows —
+   I · Run, II · In, III · Then. Replaces the old 4-card grid. The
+   pane uses theme tokens for colour/border/typography so it adapts
+   when T cycles themes. */
+.install-pane {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-xl);
+  border: var(--rule-card, 1px) solid var(--color-rule);
+  border-radius: var(--radius-card, 0);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-card, none);
+  overflow: hidden;
 }
 
-@media (max-width: 40rem) { .installs { grid-template-columns: 1fr; } }
+.install-pane__row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: var(--space-xl);
+  padding: var(--space-xl) var(--space-2xl);
+  align-items: start;
+}
+
+.install-pane__row + .install-pane__row {
+  border-block-start: var(--rule-hair) solid var(--color-rule);
+}
+
+@media (max-width: 50rem) {
+  .install-pane__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+  }
+}
 
 /* — 07 · Footer ————————————————————————————————————— */
 .foot {
