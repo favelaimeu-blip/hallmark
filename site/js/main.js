@@ -42,6 +42,11 @@ const THEMES = {
   riso: "Riso",
   quiet: "Quiet",
   bloom: "Bloom",
+  coral: "Coral",
+  violet: "Violet",
+  aurora: "Aurora",
+  halo: "Halo",
+  plume: "Plume",
 };
 const STORAGE_KEY = "hallmark-theme";
 
@@ -67,6 +72,11 @@ const ARCHETYPES = {
   riso: { hero: "quote-led", footer: "dense" },
   quiet: { hero: "split", footer: "masthead" },
   bloom: { hero: "marquee", footer: "masthead" },
+  coral: { hero: "split", footer: "masthead" },
+  violet: { hero: "split", footer: "masthead" },
+  aurora: { hero: "marquee", footer: "masthead" },
+  halo: { hero: "clipped", footer: "index" },
+  plume: { hero: "clipped", footer: "masthead" },
 };
 
 /* — Theme → genre map ——————————————————————————————————
@@ -87,20 +97,25 @@ const THEME_GENRES = {
   sport:     "editorial",
   brutal:    "editorial",
   manifesto: "editorial",
-  // modern-minimal — Stripe / Linear / ElevenLabs school
+  // modern-minimal — Stripe / Linear / ElevenLabs school (3 themes)
   quiet:     "modern-minimal",
-  // atmospheric — Suno / Runway / dark-AI-tool school
+  coral:     "modern-minimal",
+  violet:    "modern-minimal",
+  // atmospheric — Suno / Runway / dark-AI-tool school (5 themes)
   bloom:     "atmospheric",
   midnight:  "atmospheric",
   terminal:  "atmospheric",
-  // playful — post-Linear soft school
+  aurora:    "atmospheric",
+  halo:      "atmospheric",
+  // playful — post-Linear soft school (2 themes)
   pastel:    "playful",
+  plume:     "playful",
 };
 
 /* — Locked hero title —————————————————————————————————
    The H1 string is the same across every theme. Only the visual
    treatment swaps — italic vs roman, serif vs sans, all-caps vs not.
-   The page is the demo: one sentence, sixteen distinct designs. */
+   The page is the demo: one sentence, twenty-two distinct designs. */
 const HERO_TITLE = "A design skill that refuses to look AI-generated.";
 
 /* — Per-theme copy fixtures —————————————————————————————
@@ -451,6 +466,111 @@ const COPY = {
     captionA: "Bloom",
     captionB: "Late-night",
   },
+  coral: {
+    eyebrow: "Modern minimal · warm-grey",
+    title: HERO_TITLE,
+    lede: "For the polished SaaS that wants warmth without losing discipline. Warm-grey paper, Geist throughout, a single coral accent kept under three percent of the view.",
+    ctaLabel: "Get started",
+    proofLabel: "Decisions",
+    proofA: "Warm-grey paper, not pure white",
+    proofB: "Geist + General Sans, one weight",
+    proofC: "Single coral accent · pill CTAs",
+    cta: "Get started",
+    stat: "1",
+    qualifier: "warm minimal · pill CTAs.",
+    mockStat: "1",
+    quote: "Restraint with warmth is harder than restraint without it.",
+    attrib: "Coral note",
+    salutation: "Hello.",
+    letterBody: "The polished-SaaS school of restraint, but warmer. Warm-grey paper instead of pure white; coral accent on focus rings and small marks. Pill CTAs, two-column heroes, generous space.",
+    signoff: "Yours,",
+    captionA: "Coral",
+    captionB: "v0.9",
+  },
+  violet: {
+    eyebrow: "Modern minimal · quiet violet",
+    title: HERO_TITLE,
+    lede: "Restrained near-black on near-white. Tight Geist throughout. A single quiet violet accent on focus rings — the rest is type, space, and rhythm.",
+    ctaLabel: "Get started",
+    proofLabel: "Decisions",
+    proofA: "Near-white paper · near-black ink",
+    proofB: "Geist tight tracking, single weight",
+    proofC: "Quiet violet · focus rings + small marks",
+    cta: "Get started",
+    stat: "1",
+    qualifier: "the Linear voice, not the brand.",
+    mockStat: "1",
+    quote: "The work that looks effortless is the work where the choices were made.",
+    attrib: "Violet note",
+    salutation: "Hello.",
+    letterBody: "A modern minimal theme tuned for dev tools and platforms. Near-white paper, near-black ink, single quiet violet accent on focus rings. Tight Geist throughout — letterspacing pulled in, type-led hierarchy, no ornament.",
+    signoff: "Yours,",
+    captionA: "Violet",
+    captionB: "v0.9",
+  },
+  aurora: {
+    eyebrow: "Atmospheric · cool",
+    title: HERO_TITLE,
+    lede: "For the after-dark dev tool. Cool blue-green canvas, two atmospheric blooms behind the content, single cyan accent. Sentient body for warmth on the cool ground.",
+    ctaLabel: "Open it",
+    proofLabel: "Atmosphere",
+    proofA: "Dark cool canvas · two cool blooms",
+    proofB: "Geist display + Sentient body",
+    proofC: "Cyan accent, never gradient text",
+    cta: "Open it",
+    stat: "2",
+    qualifier: "atmospheric blooms · cool canvas.",
+    mockStat: "2",
+    quote: "The page should feel like the moment after a deploy goes green.",
+    attrib: "Aurora note",
+    salutation: "Online,",
+    letterBody: "A dark cool atmospheric theme — the dev-tool-after-dark register. Two cool blooms (cyan top-right, teal-green bottom-left). Geist display for confidence; Sentient body to keep the cool ground from feeling clinical.",
+    signoff: "— Aurora",
+    captionA: "Aurora",
+    captionB: "Late-shift",
+  },
+  halo: {
+    eyebrow: "Atmospheric · charcoal",
+    title: HERO_TITLE,
+    lede: "Less canvas, more content. Neutral charcoal page with a single warm-amber bloom around the hero — below that, the rest of the page is content-led on dark paper. The tool you actually work in.",
+    ctaLabel: "Get to work",
+    proofLabel: "Discipline",
+    proofA: "Charcoal canvas · one warm bloom up top",
+    proofB: "Geist throughout · single weight",
+    proofC: "Hero is the only atmospheric moment",
+    cta: "Get to work",
+    stat: "1",
+    qualifier: "moment of atmosphere · then content.",
+    mockStat: "1",
+    quote: "The atmosphere does its job at the top, then steps aside.",
+    attrib: "Halo note",
+    salutation: "Online,",
+    letterBody: "A dark theme for the working tool — the bloom lives only at the top of the page, around the hero. Below it the canvas is plain charcoal, content-led, no atmospheric distractions. Less Suno, more the IDE you actually open every day.",
+    signoff: "— Halo",
+    captionA: "Halo",
+    captionB: "Workshop",
+  },
+  plume: {
+    eyebrow: "Playful · warm cream",
+    title: HERO_TITLE,
+    lede: "Warm cream throughout. Alternating tinted bands on sections. Hover-lift on cards. A soft rose accent. Friendly without being twee — the page wants to feel approachable.",
+    ctaLabel: "Try it",
+    proofLabel: "Marks of the house",
+    proofA: "Warm cream paper · tinted bands on sections",
+    proofB: "Bricolage display + Geist body",
+    proofC: "Soft rose accent · hover-lift cards",
+    cta: "Try it",
+    stat: "1",
+    qualifier: "soft accent · friendly motion.",
+    mockStat: "1",
+    quote: "Soft is harder than serious; it has nowhere to hide.",
+    attrib: "Plume note",
+    salutation: "Hello,",
+    letterBody: "A playful theme that earns the word. Warm cream paper, alternating tinted bands so each section has its own register, soft drop shadows, hover-lift on cards. Friendly motion that responds to the user instead of performing for them.",
+    signoff: "Yours,",
+    captionA: "Plume",
+    captionB: "Late spring",
+  },
 };
 
 /* — Slot population ———————————————————————————————————— */
@@ -492,7 +612,7 @@ function buildDenseColophon(themeName) {
     `# hallmark · v0.8.0 · ${themeName.toLowerCase()}`,
     `# build: ${today} · MIT · powered by together ai`,
     `#`,
-    `# stats:  21 macrostructures · 32 archetypes · 17 themes · 45 gates`,
+    `# stats:  21 macrostructures · 32 archetypes · 22 themes · 45 gates`,
     `#         catalog (16 named) + custom (per-brand, opt-in)`,
     `#`,
     `# repo:   github.com/Luffixos/hallmark`,

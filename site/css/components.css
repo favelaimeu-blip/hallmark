@@ -2894,6 +2894,267 @@ html[data-theme="bloom"] body {
   animation-delay: calc(var(--i, 0) * 70ms);
 }
 
+/* ───────────── CORAL — modern-minimal · Stripe-not-Linear ─────────────
+   Inherits the Quiet "polished minimal" structure but with a warm-grey
+   paper and a coral accent on focus rings + small marks. */
+
+[data-theme="coral"] .reveal,
+[data-theme="coral"] .reveal.is-in,
+[data-theme="coral"] .slot[data-populating] > * {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+[data-theme="coral"] .hero__display,
+[data-theme="coral"] .hero__quote p,
+[data-theme="coral"] .hero__stat,
+[data-theme="coral"] .section__title,
+[data-theme="coral"] .foot__wordmark,
+[data-theme="coral"] .spec__name,
+[data-theme="coral"] .ex-card__name,
+[data-theme="coral"] .harness__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -0.025em;
+}
+
+[data-theme="coral"] .install-pane__copy {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+  border-radius: 999px;
+}
+
+/* ───────────── VIOLET — modern-minimal · Linear voice ─────────────
+   Tighter typographic feel than Coral. Near-white paper, near-black
+   ink, single quiet violet accent on focus + small marks. */
+
+[data-theme="violet"] .reveal,
+[data-theme="violet"] .reveal.is-in,
+[data-theme="violet"] .slot[data-populating] > * {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+[data-theme="violet"] .hero__display,
+[data-theme="violet"] .hero__quote p,
+[data-theme="violet"] .hero__stat,
+[data-theme="violet"] .section__title,
+[data-theme="violet"] .foot__wordmark,
+[data-theme="violet"] .spec__name,
+[data-theme="violet"] .ex-card__name,
+[data-theme="violet"] .harness__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -0.035em;
+}
+
+[data-theme="violet"] .install-pane__copy {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+  border-radius: 999px;
+}
+
+/* ───────────── AURORA — atmospheric · cool blue-green dark ─────────────
+   Two cool blooms behind the content (cyan top-right, teal-green
+   bottom-left). Sentient body for warmth. */
+
+html[data-theme="aurora"] {
+  background: var(--color-paper);
+}
+
+html[data-theme="aurora"] body {
+  background:
+    radial-gradient(ellipse 75% 55% at 92% 0%,
+                    color-mix(in oklch, var(--color-accent) 28%, transparent) 0%,
+                    transparent 55%),
+    radial-gradient(ellipse 70% 60% at 5% 100%,
+                    color-mix(in oklch, var(--color-accent-2) 30%, transparent) 0%,
+                    transparent 60%),
+    var(--color-paper);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+[data-theme="aurora"] .hero__display,
+[data-theme="aurora"] .hero__quote p,
+[data-theme="aurora"] .hero__stat,
+[data-theme="aurora"] .section__title,
+[data-theme="aurora"] .foot__wordmark,
+[data-theme="aurora"] .spec__name,
+[data-theme="aurora"] .ex-card__name,
+[data-theme="aurora"] .harness__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+[data-theme="aurora"] .hero__lede,
+[data-theme="aurora"] .install-pane__next,
+[data-theme="aurora"] .ex-card__brief {
+  font-family: var(--font-body);
+  font-style: normal;
+  color: var(--color-ink-2);
+}
+
+[data-theme="aurora"] .banner {
+  background: color-mix(in oklch, var(--color-paper) 68%, transparent);
+  border-block-end-color: var(--color-rule);
+}
+
+[data-theme="aurora"] .reveal { transform: none; }
+[data-theme="aurora"] .reveal.is-in {
+  animation: reveal-fade calc(var(--dur-long) * 1.2) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+[data-theme="aurora"] .ex-card,
+[data-theme="aurora"] .install-pane,
+[data-theme="aurora"] .vs__panel[data-variant="hallmark"] {
+  background: var(--color-paper-2);
+}
+
+[data-theme="aurora"] .install-pane__copy {
+  background: var(--color-accent);
+  color: var(--color-paper);
+  border-color: var(--color-accent);
+  border-radius: 999px;
+}
+
+/* ───────────── HALO — atmospheric · hero-only amber bloom ─────────────
+   The bloom is a single moment near the top. Below the hero the page
+   is content-led on charcoal — less Suno, more "tool you actually
+   work in." Implemented as a fixed-position pseudo-element clipped
+   to the top ~80vh. */
+
+html[data-theme="halo"] {
+  background: var(--color-paper);
+}
+
+html[data-theme="halo"] body {
+  position: relative;
+  background: var(--color-paper);
+  min-height: 100dvh;
+}
+
+html[data-theme="halo"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 80vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 0%,
+                    color-mix(in oklch, var(--color-accent) 22%, transparent) 0%,
+                    transparent 60%);
+  opacity: 1;
+}
+
+html[data-theme="halo"] .banner,
+html[data-theme="halo"] main,
+html[data-theme="halo"] .easter,
+html[data-theme="halo"] aside {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="halo"] .hero__display,
+[data-theme="halo"] .hero__quote p,
+[data-theme="halo"] .hero__stat,
+[data-theme="halo"] .section__title,
+[data-theme="halo"] .foot__wordmark,
+[data-theme="halo"] .spec__name,
+[data-theme="halo"] .ex-card__name,
+[data-theme="halo"] .harness__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+[data-theme="halo"] .banner {
+  background: color-mix(in oklch, var(--color-paper) 72%, transparent);
+  border-block-end-color: var(--color-rule);
+}
+
+[data-theme="halo"] .ex-card,
+[data-theme="halo"] .install-pane,
+[data-theme="halo"] .vs__panel[data-variant="hallmark"] {
+  background: var(--color-paper-2);
+}
+
+[data-theme="halo"] .reveal { transform: none; }
+[data-theme="halo"] .reveal.is-in {
+  animation: reveal-fade calc(var(--dur-long) * 1.1) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* ───────────── PLUME — playful · warm cream + tinted bands ─────────────
+   Alternating section backgrounds (paper vs paper-2), hover-lift on
+   cards, soft drop shadows, friendly motion. Closer to actual playful
+   than Pastel's post-Linear-soft. */
+
+[data-theme="plume"] .page > .section:nth-child(even) {
+  background: var(--color-paper-2);
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding-inline: var(--page-gutter);
+  padding-block: var(--space-2xl);
+  border-radius: 0;
+}
+
+[data-theme="plume"] .hero__display,
+[data-theme="plume"] .hero__quote p,
+[data-theme="plume"] .hero__stat,
+[data-theme="plume"] .section__title,
+[data-theme="plume"] .foot__wordmark,
+[data-theme="plume"] .spec__name,
+[data-theme="plume"] .ex-card__name,
+[data-theme="plume"] .harness__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+[data-theme="plume"] .hero__lede,
+[data-theme="plume"] .ex-card__brief,
+[data-theme="plume"] .install-pane__next,
+[data-theme="plume"] .spec__rule,
+[data-theme="plume"] .foot__tagline {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+[data-theme="plume"] .ex-card,
+[data-theme="plume"] .install-pane,
+[data-theme="plume"] .vs__panel[data-variant="hallmark"] {
+  background: var(--color-paper);
+  border-color: var(--color-rule-2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="plume"] .ex-card {
+    transition: transform 200ms var(--ease-out),
+                box-shadow 200ms var(--ease-out),
+                border-color 120ms var(--ease-out);
+  }
+  [data-theme="plume"] .ex-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px -14px oklch(45% 0.10 18 / 0.22);
+  }
+}
+
+[data-theme="plume"] .install-pane__copy {
+  background: var(--color-accent);
+  color: var(--color-paper);
+  border-color: var(--color-accent);
+  border-radius: 999px;
+}
+
 /* ───────────── EXAMPLES RAIL — TILES ─────────────
    Each tile in the horizontal scroll-snap rail. Cards inherit the
    active theme's --radius-card, --rule-card, and --shadow-card so
@@ -3063,6 +3324,7 @@ html[data-theme="bloom"] body {
   overflow: hidden;
 }
 
+.study-card__img,
 .study-card__video {
   display: block;
   width: 100%;
