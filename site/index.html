@@ -46,7 +46,7 @@
   <header class="banner" role="banner">
     <a class="banner__mark" href="#top" aria-label="Hallmark — top of page">
       <span class="banner__name">Hallmark</span>
-      <span class="banner__ver tnum">v0.9</span>
+      <span class="banner__ver tnum">v1.0</span>
     </a>
 
     <a class="banner__install" href="#install" aria-label="Jump to install section">Install</a>
@@ -309,64 +309,215 @@
       </div>
     </section>
 
-    <!-- 03 · STUDY — what `study` extracts from a design -->
-    <section class="section reveal" style="--i:2" id="study" aria-labelledby="s-study">
+    <!-- 03 · SKILLS — five things Hallmark does, one ruleset underneath -->
+    <section class="section reveal" style="--i:2" id="skills" aria-labelledby="s-skills">
       <header class="section__head">
         <p class="section-label">
-          <span class="num">03</span><span class="divider">⁄</span><span>Study</span>
+          <span class="num">03</span><span class="divider">⁄</span><span>Skills</span>
         </p>
-        <h2 class="section__title" id="s-study">
-          What Hallmark sees when it reads a design.
+        <h2 class="section__title" id="s-skills">
+          Five things Hallmark does. One ruleset underneath.
         </h2>
       </header>
 
-      <p class="study__intro">
-        <code>hallmark study</code> reads a design's structure, not its pixels. Screenshot left, structured DNA right.
+      <p class="skills__intro">
+        Hallmark has one default behaviour and four explicit verbs. Each reads a different input and returns a different shape — same opinions, different jobs.
       </p>
 
-      <div class="study-grid">
+      <ol class="skills-list">
 
-        <!-- Tile 01 — Tide -->
-        <article class="study-card">
-          <div class="study-card__media">
-            <img class="study-card__img" src="_tests/_thumbs/01-tide.png" alt="Tide — Letter macrostructure on warm cream paper" loading="lazy" decoding="async" />
-            <span class="study-card__badge">01 · Tide</span>
+        <!-- Row I — Build (default) -->
+        <li class="skill-row" data-verb="build">
+          <header class="skill-row__head">
+            <span class="skill-row__num num--roman" aria-hidden="true">I</span>
+            <div class="skill-row__head-body">
+              <h3 class="skill-row__title">Build</h3>
+              <p class="skill-row__lede">Ask for a page. Get a page that doesn't look generated. Hallmark picks a macrostructure first, then dresses it — and refuses to repeat the same shape twice.</p>
+            </div>
+          </header>
+
+          <div class="skill-row__body">
+            <figure class="skill-row__demo skill-row__demo--build">
+              <span class="brief-pill" aria-label="Example brief">"Build me a landing page for an indie podcast platform."</span>
+              <span class="brief-arrow" aria-hidden="true">↓</span>
+              <span class="fig-corners brief-output">
+                <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                <img src="_tests/_thumbs/hero-static-hour.jpg" alt="Static Hour — a Hallmark output for an indie-podcast brief" loading="lazy" decoding="async" width="1600" height="968" />
+              </span>
+            </figure>
+
+            <ol class="skill-row__list">
+              <li class="dna__row"><span class="dna__k">Invocation</span><span class="dna__v">(default) — just ask</span></li>
+              <li class="dna__row"><span class="dna__k">Reads</span><span class="dna__v">your brief, project tokens, framework</span></li>
+              <li class="dna__row"><span class="dna__k">Picks</span><span class="dna__v">macrostructure → theme → enrichment</span></li>
+              <li class="dna__row"><span class="dna__k">Returns</span><span class="dna__v">a working page, stamped, slop-tested</span></li>
+              <li class="dna__row"><span class="dna__k">Refuses</span><span class="dna__v">repeating the last 3 macrostructures</span></li>
+            </ol>
           </div>
-          <ol class="study-card__dna">
-            <li class="dna__row"><span class="dna__k">Macrostructure</span><span class="dna__v">Letter</span></li>
-            <li class="dna__row"><span class="dna__k">Hero archetype</span><span class="dna__v">H5 Letter · salutation + body + signoff</span></li>
-            <li class="dna__row"><span class="dna__k">Display role</span><span class="dna__v">italic editorial serif</span></li>
-            <li class="dna__row"><span class="dna__k">Body role</span><span class="dna__v">italic editorial serif (same family, smaller weight)</span></li>
-            <li class="dna__row"><span class="dna__k">Label role</span><span class="dna__v">small-caps grotesque</span></li>
-            <li class="dna__row"><span class="dna__k">Paper band</span><span class="dna__v">light · warm cream</span></li>
-            <li class="dna__row"><span class="dna__k">Accent hue</span><span class="dna__v">warm orange · ≤ 3% footprint</span></li>
-            <li class="dna__row"><span class="dna__k">Density</span><span class="dna__v">generous · single-column letter</span></li>
-            <li class="dna__row"><span class="dna__k">Pairing logic</span><span class="dna__v">single family carrying the page; mono labels for register</span></li>
-            <li class="dna__row"><span class="dna__k">Rhythm</span><span class="dna__v">left-biased · varied padding · letter-format intimacy</span></li>
-          </ol>
-        </article>
+        </li>
 
-        <!-- Tile 02 — Tracejam -->
-        <article class="study-card">
-          <div class="study-card__media">
-            <img class="study-card__img" src="_tests/_thumbs/05-tracejam.png" alt="Tracejam — Workbench macrostructure on dark charcoal" loading="lazy" decoding="async" />
-            <span class="study-card__badge">02 · Tracejam</span>
+        <!-- Row II — Study (preserves the existing DNA cards as THE demo) -->
+        <li class="skill-row" data-verb="study">
+          <header class="skill-row__head">
+            <span class="skill-row__num num--roman" aria-hidden="true">II</span>
+            <div class="skill-row__head-body">
+              <h3 class="skill-row__title">Study</h3>
+              <p class="skill-row__lede">Paste a design you admire. Hallmark reads its structure, not its pixels — and returns a 10-field DNA card you can build against. Never copies. Never claims to ID fonts.</p>
+            </div>
+          </header>
+
+          <div class="skill-row__body skill-row__body--study">
+            <div class="study-grid">
+              <article class="study-card">
+                <div class="study-card__media">
+                  <img class="study-card__img" src="_tests/_thumbs/01-tide.png" alt="Tide — Letter macrostructure on warm cream paper" loading="lazy" decoding="async" />
+                  <span class="study-card__badge">01 · Tide</span>
+                </div>
+                <ol class="study-card__dna">
+                  <li class="dna__row"><span class="dna__k">Macrostructure</span><span class="dna__v">Letter</span></li>
+                  <li class="dna__row"><span class="dna__k">Hero archetype</span><span class="dna__v">H5 Letter · salutation + body + signoff</span></li>
+                  <li class="dna__row"><span class="dna__k">Display role</span><span class="dna__v">italic editorial serif</span></li>
+                  <li class="dna__row"><span class="dna__k">Body role</span><span class="dna__v">italic editorial serif (same family, smaller weight)</span></li>
+                  <li class="dna__row"><span class="dna__k">Label role</span><span class="dna__v">small-caps grotesque</span></li>
+                  <li class="dna__row"><span class="dna__k">Paper band</span><span class="dna__v">light · warm cream</span></li>
+                  <li class="dna__row"><span class="dna__k">Accent hue</span><span class="dna__v">warm orange · ≤ 3% footprint</span></li>
+                  <li class="dna__row"><span class="dna__k">Density</span><span class="dna__v">generous · single-column letter</span></li>
+                  <li class="dna__row"><span class="dna__k">Pairing logic</span><span class="dna__v">single family carrying the page; mono labels for register</span></li>
+                  <li class="dna__row"><span class="dna__k">Rhythm</span><span class="dna__v">left-biased · varied padding · letter-format intimacy</span></li>
+                </ol>
+              </article>
+
+              <article class="study-card">
+                <div class="study-card__media">
+                  <img class="study-card__img" src="_tests/_thumbs/05-tracejam.png" alt="Tracejam — Workbench macrostructure on dark charcoal" loading="lazy" decoding="async" />
+                  <span class="study-card__badge">02 · Tracejam</span>
+                </div>
+                <ol class="study-card__dna">
+                  <li class="dna__row"><span class="dna__k">Macrostructure</span><span class="dna__v">Workbench</span></li>
+                  <li class="dna__row"><span class="dna__k">Hero archetype</span><span class="dna__v">H3 Stat-Led · trace number + sticky panel</span></li>
+                  <li class="dna__row"><span class="dna__k">Display role</span><span class="dna__v">soft geometric sans · 600</span></li>
+                  <li class="dna__row"><span class="dna__k">Body role</span><span class="dna__v">soft geometric sans · 400</span></li>
+                  <li class="dna__row"><span class="dna__k">Label role</span><span class="dna__v">monospace · uppercase</span></li>
+                  <li class="dna__row"><span class="dna__k">Paper band</span><span class="dna__v">dark · cool charcoal</span></li>
+                  <li class="dna__row"><span class="dna__k">Accent hue</span><span class="dna__v">cyan · phosphor-bright · 8% footprint</span></li>
+                  <li class="dna__row"><span class="dna__k">Density</span><span class="dna__v">medium · sticky-panel observability layout</span></li>
+                  <li class="dna__row"><span class="dna__k">Pairing logic</span><span class="dna__v">sans display + body, mono labels carry the technical register</span></li>
+                  <li class="dna__row"><span class="dna__k">Rhythm</span><span class="dna__v">three-step walkthrough · sticky right panel · medium padding</span></li>
+                </ol>
+              </article>
+            </div>
           </div>
-          <ol class="study-card__dna">
-            <li class="dna__row"><span class="dna__k">Macrostructure</span><span class="dna__v">Workbench</span></li>
-            <li class="dna__row"><span class="dna__k">Hero archetype</span><span class="dna__v">H3 Stat-Led · trace number + sticky panel</span></li>
-            <li class="dna__row"><span class="dna__k">Display role</span><span class="dna__v">soft geometric sans · 600</span></li>
-            <li class="dna__row"><span class="dna__k">Body role</span><span class="dna__v">soft geometric sans · 400</span></li>
-            <li class="dna__row"><span class="dna__k">Label role</span><span class="dna__v">monospace · uppercase</span></li>
-            <li class="dna__row"><span class="dna__k">Paper band</span><span class="dna__v">dark · cool charcoal</span></li>
-            <li class="dna__row"><span class="dna__k">Accent hue</span><span class="dna__v">cyan · phosphor-bright · 8% footprint</span></li>
-            <li class="dna__row"><span class="dna__k">Density</span><span class="dna__v">medium · sticky-panel observability layout</span></li>
-            <li class="dna__row"><span class="dna__k">Pairing logic</span><span class="dna__v">sans display + body, mono labels carry the technical register</span></li>
-            <li class="dna__row"><span class="dna__k">Rhythm</span><span class="dna__v">three-step walkthrough · sticky right panel · medium padding</span></li>
-          </ol>
-        </article>
+        </li>
 
-      </div>
+        <!-- Row III — Audit -->
+        <li class="skill-row" data-verb="audit">
+          <header class="skill-row__head">
+            <span class="skill-row__num num--roman" aria-hidden="true">III</span>
+            <div class="skill-row__head-body">
+              <h3 class="skill-row__title">Audit</h3>
+              <p class="skill-row__lede">Point Hallmark at a page. Get a ranked punch list of what's wrong — scored against the anti-pattern catalogue. <strong>No edits.</strong> Just the diagnosis.</p>
+            </div>
+          </header>
+
+          <div class="skill-row__body">
+            <figure class="skill-row__demo skill-row__demo--audit">
+              <span class="fig-corners">
+                <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                <img src="_tests/_thumbs/verb-audit.png" alt="Audited target page — generic AI-slop landing" loading="lazy" decoding="async" width="1024" height="640" />
+                <ol class="audit-flags" aria-label="Punch list overlaid on the target">
+                  <li class="audit-flag" style="--top:24%; --left:50%"><span class="audit-flag__num tnum">1</span></li>
+                  <li class="audit-flag" style="--top:51%; --left:48%"><span class="audit-flag__num tnum">2</span></li>
+                  <li class="audit-flag" style="--top:67%; --left:50%"><span class="audit-flag__num tnum">3</span></li>
+                </ol>
+              </span>
+            </figure>
+
+            <ol class="skill-row__list">
+              <li class="dna__row"><span class="dna__k">Invocation</span><span class="dna__v"><code>hallmark audit &lt;target&gt;</code></span></li>
+              <li class="dna__row"><span class="dna__k"><span class="tnum">1</span> · Display</span><span class="dna__v">Inter-as-display · the AI-default tell</span></li>
+              <li class="dna__row"><span class="dna__k"><span class="tnum">2</span> · Hierarchy</span><span class="dna__v">centred everything · no asymmetry</span></li>
+              <li class="dna__row"><span class="dna__k"><span class="tnum">3</span> · Accent</span><span class="dna__v">purple-to-blue gradient · over-applied</span></li>
+              <li class="dna__row"><span class="dna__k">Returns</span><span class="dna__v">ranked findings, not edits</span></li>
+            </ol>
+          </div>
+        </li>
+
+        <!-- Row IV — Refine -->
+        <li class="skill-row" data-verb="refine">
+          <header class="skill-row__head">
+            <span class="skill-row__num num--roman" aria-hidden="true">IV</span>
+            <div class="skill-row__head-body">
+              <h3 class="skill-row__title">Refine</h3>
+              <p class="skill-row__lede">Layout's fine. The details aren't. Hallmark polishes in place — smallest possible diff, layout preserved, no redesign.</p>
+            </div>
+          </header>
+
+          <div class="skill-row__body">
+            <figure class="skill-row__demo skill-row__demo--diptych">
+              <figure class="diptych__half" data-state="before">
+                <span class="fig-corners">
+                  <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                  <img src="_tests/_thumbs/verb-audit.png" alt="Same content before refinement — centered, generic" loading="lazy" decoding="async" width="1024" height="640" />
+                </span>
+                <figcaption class="diptych__cap">Before</figcaption>
+              </figure>
+              <figure class="diptych__half" data-state="after">
+                <span class="fig-corners">
+                  <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                  <img src="_tests/_thumbs/verb-refine.png" alt="Same content after Hallmark refine — left-biased, italic display, real proof quote" loading="lazy" decoding="async" width="1024" height="640" />
+                </span>
+                <figcaption class="diptych__cap">After refine</figcaption>
+              </figure>
+            </figure>
+
+            <ol class="skill-row__list">
+              <li class="dna__row"><span class="dna__k">Invocation</span><span class="dna__v"><code>hallmark refine &lt;target&gt;</code></span></li>
+              <li class="dna__row"><span class="dna__k">Preserves</span><span class="dna__v">layout · copy · brand</span></li>
+              <li class="dna__row"><span class="dna__k">Touches</span><span class="dna__v">type pairing · accent · spacing · proof</span></li>
+              <li class="dna__row"><span class="dna__k">Returns</span><span class="dna__v">smallest possible diff</span></li>
+            </ol>
+          </div>
+        </li>
+
+        <!-- Row V — Redesign -->
+        <li class="skill-row" data-verb="redesign">
+          <header class="skill-row__head">
+            <span class="skill-row__num num--roman" aria-hidden="true">V</span>
+            <div class="skill-row__head-body">
+              <h3 class="skill-row__title">Redesign</h3>
+              <p class="skill-row__lede">Same content. Same brand. Different bones. Hallmark throws out the structural fingerprint and rebuilds with a deliberately different one — new section rhythm, new heading placement, new component voice.</p>
+            </div>
+          </header>
+
+          <div class="skill-row__body">
+            <figure class="skill-row__demo skill-row__demo--diptych">
+              <figure class="diptych__half" data-state="before">
+                <span class="fig-corners">
+                  <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                  <img src="_tests/_thumbs/verb-refine.png" alt="A split-hero macrostructure" loading="lazy" decoding="async" width="1024" height="640" />
+                </span>
+                <figcaption class="diptych__cap">Split hero</figcaption>
+              </figure>
+              <figure class="diptych__half" data-state="after">
+                <span class="fig-corners">
+                  <span class="fig-corners__bl"></span><span class="fig-corners__br"></span>
+                  <img src="_tests/_thumbs/verb-redesign.png" alt="A long-document macrostructure with the same brand voice" loading="lazy" decoding="async" width="1024" height="640" />
+                </span>
+                <figcaption class="diptych__cap">Long document</figcaption>
+              </figure>
+            </figure>
+
+            <ol class="skill-row__list">
+              <li class="dna__row"><span class="dna__k">Invocation</span><span class="dna__v"><code>hallmark redesign &lt;target&gt;</code></span></li>
+              <li class="dna__row"><span class="dna__k">Preserves</span><span class="dna__v">copy · brand · information architecture</span></li>
+              <li class="dna__row"><span class="dna__k">Replaces</span><span class="dna__v">macrostructure · heading placement · rhythm</span></li>
+              <li class="dna__row"><span class="dna__k">Mood</span><span class="dna__v"><code>--mood &lt;name&gt;</code> optional override</span></li>
+              <li class="dna__row"><span class="dna__k">Returns</span><span class="dna__v">structurally different page from same brief</span></li>
+            </ol>
+          </div>
+        </li>
+
+      </ol>
     </section>
 
     <!-- 04 · WITHOUT / WITH — same copy, two design languages, four examples -->
@@ -664,59 +815,13 @@
       </div>
     </section>
 
-    <!-- 06 · FAQ — five typographic Q/A pairs -->
-    <section class="section reveal" style="--i:5" id="faq" aria-labelledby="s6">
+    <!-- 06 · INSTALL — one command, every harness -->
+    <section class="section reveal" style="--i:5" id="install" aria-labelledby="s6">
       <header class="section__head">
         <p class="section-label">
-          <span class="num">06</span><span class="divider">⁄</span><span>FAQ</span>
+          <span class="num">06</span><span class="divider">⁄</span><span>Install</span>
         </p>
         <h2 class="section__title" id="s6">
-          The questions people actually ask.
-        </h2>
-      </header>
-
-      <ol class="faq" role="list">
-
-        <li class="faq__row">
-          <p class="faq__q-mark"><span class="faq__qletter">Q</span> ⁄ 01</p>
-          <h3 class="faq__q">Does it work with Cursor and Codex?</h3>
-          <p class="faq__a">Yes. Drop the body of <code>SKILL.md</code> into <code>.cursor/rules/hallmark.mdc</code> for Cursor, or copy the <code>skill/</code> folder into your Codex agent config. Claude Code picks it up at <code>~/.claude/skills/hallmark/</code>.</p>
-        </li>
-
-        <li class="faq__row">
-          <p class="faq__q-mark"><span class="faq__qletter">Q</span> ⁄ 02</p>
-          <h3 class="faq__q">Can I disable a specific rule?</h3>
-          <p class="faq__a">Most rules are universal — typography discipline, accessibility, anti-purple-text-gradient. Genre-specific rules can be loosened by picking a different genre: <em>atmospheric</em> allows dark-canvas radial gradients that <em>editorial</em> bans; <em>modern-minimal</em> allows pure white that <em>editorial</em> bans.</p>
-        </li>
-
-        <li class="faq__row">
-          <p class="faq__q-mark"><span class="faq__qletter">Q</span> ⁄ 03</p>
-          <h3 class="faq__q">What if I want my brand colours, not the catalog?</h3>
-          <p class="faq__a">Mention them in the brief, or attach a brand colour. Hallmark's <strong>custom-theme</strong> route builds an OKLCH palette tuned to your anchor and pairs free fonts to it — full rules still apply, just on your colours.</p>
-        </li>
-
-        <li class="faq__row">
-          <p class="faq__q-mark"><span class="faq__qletter">Q</span> ⁄ 04</p>
-          <h3 class="faq__q">What does "AI-slop" mean exactly?</h3>
-          <p class="faq__a">Twenty-one named tells the LLM reaches for by default — purple-gradient hero, centred-everything, icon-tile feature row, glass card, gradient headline, pill button with gradient fill. Run <code>hallmark audit</code> on any page to see them flagged.</p>
-        </li>
-
-        <li class="faq__row">
-          <p class="faq__q-mark"><span class="faq__qletter">Q</span> ⁄ 05</p>
-          <h3 class="faq__q">Five verbs — what do they do?</h3>
-          <p class="faq__a"><code>hallmark</code> (default) builds. <code>hallmark audit</code> scores existing code. <code>hallmark refine</code> polishes in place. <code>hallmark redesign</code> rethinks structure — and on a whole project, writes a <code>design.md</code> first so every page shares the system. <code>hallmark study</code> reads a screenshot you admire and extracts its DNA, never the pixels.</p>
-        </li>
-
-      </ol>
-    </section>
-
-    <!-- 07 · INSTALL — one command, every harness -->
-    <section class="section reveal" style="--i:6" id="install" aria-labelledby="s7">
-      <header class="section__head">
-        <p class="section-label">
-          <span class="num">07</span><span class="divider">⁄</span><span>Install</span>
-        </p>
-        <h2 class="section__title" id="s7">
           One command. Works in every harness.
         </h2>
       </header>
@@ -761,7 +866,7 @@
       </div>
     </section>
     <!-- FOOTER SLOT — archetype swaps per theme -->
-    <footer class="slot slot--foot reveal" data-slot="footer" style="--i:7" role="contentinfo" aria-label="Colophon">
+    <footer class="slot slot--foot reveal" data-slot="footer" style="--i:6" role="contentinfo" aria-label="Colophon">
     </footer>
 
   </main>
@@ -853,9 +958,12 @@
     <div class="hero hero--photo">
       <div class="hero__photo" aria-hidden="true">
         <div class="hero__photo-grid">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
+          <span><img src="_tests/_thumbs/hero-static-hour.jpg" alt="" loading="lazy" decoding="async" width="1600" height="968" /></span>
+          <span><img src="_tests/_thumbs/hero-najm.jpg" alt="" loading="lazy" decoding="async" width="1600" height="853" /></span>
+          <span><img src="_tests/_thumbs/hero-tally-hero.jpg" alt="" loading="lazy" decoding="async" width="1600" height="867" /></span>
+          <span><img src="_tests/_thumbs/hero-nexus.jpg" alt="" loading="lazy" decoding="async" width="1600" height="862" /></span>
+          <span><img src="_tests/_thumbs/05-tracejam.png" alt="" loading="lazy" decoding="async" width="1024" height="640" /></span>
+          <span><img src="_tests/_thumbs/hero-tally-process.jpg" alt="" loading="lazy" decoding="async" width="1600" height="868" /></span>
         </div>
         <span class="hero__photo-caption">{{captionA}} · {{captionB}}</span>
       </div>
@@ -974,7 +1082,7 @@
         <ul>
           <li><span class="foot__powered-mark">Together AI</span></li>
           <li>MIT licensed</li>
-          <li>v0.9.0</li>
+          <li>v1.0.0</li>
         </ul>
       </div>
     </div>

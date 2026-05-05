@@ -182,11 +182,51 @@ Material Icons in the navbar, Heroicons in the feature cards, Lucide in the foot
 
 ### AI-illustration look
 
-Smooth-mesh-blob characters with no joint articulation, mid-2010s "modern flat" stock poses, unmistakably-Midjourney compositions with the symmetric default lighting.
+Smooth-mesh-blob characters with no joint articulation, mid-2010s "modern flat" stock poses, unmistakably-Midjourney compositions with the symmetric default lighting. Hand-drawn SVG humans (the "doodle person with one eye larger than the other") fall under this — corporate-doodle is the late-2010s Slack/Figma marketing template, and the audience reads it as AI immediately.
 
 **Why it fails.** It reads as AI in milliseconds. The 2026 audience pattern-matches this faster than any other tell.
 
 **Fix.** Hand-build the illustration in pure CSS or SVG (Tier A or B in [`hero-enrichment.md`](hero-enrichment.md)). If you must generate, use Nanobanana 2 or Recraft V4 with reference images, asymmetric crop, and grain post-processing — never raw output. See [`custom-craft.md`](custom-craft.md) Tier E.
+
+### Invented metrics
+
+A stat-led layout, comparison row, or proof bar carrying numbers the user never supplied — "10× faster", "saves 5 hours per week", "trusted by 50,000+ teams", "99.9 % uptime", "+47 % conversion". The model reached for a stat to fill a stat slot and made one up.
+
+**Why it fails.** Audiences read invented stats as fast as they read invented testimonials. A page that lies on its proof bar can't be trusted on its claims either, and the AI tell is unmistakable: every fabricated number reads "this was generated, not written".
+
+**Fix.** Three options, in order of preference: (1) replace the number with `—` and a labelled grey block ("metric to confirm" or "stat pending"); (2) ask the user for the real number and pause the run; (3) rebuild the section without the proof slot — a stat-led macrostructure with no real stats is the wrong macrostructure. The number-shaped hole is honest; the fabricated number is slop. *(Slop-test gate 56.)*
+
+### Generic emoji as feature icon
+
+A feature card, value prop, step number, or pricing tier with `✨` `🚀` `⚡` `🔥` `🎯` `✅` rendered as the primary icon. The "sparkle hero" badge with a `✨` glyph beside the eyebrow. Emoji standing in for an icon library because the model didn't pick one.
+
+**Why it fails.** Emoji are typography of a sort, but they are not part of the page's typographic system — they're rendered by the OS and look different on every device, they break the icon's stroke voice (you've now mixed a Phosphor-style line icon with a Twemoji blob), and the choice is recognisably the AI default. Sparkle-emoji-as-AI-shortcut is the cliché of the 2024–2025 era.
+
+**Fix.** Pick a single icon library and ship it ([assets.md](assets.md) names the canon). Or build a custom SVG mark. Or omit the icon entirely and lead with typography — most feature lists don't need icons. *(Slop-test gate 60.)*
+
+### Re-drawn UI chrome
+
+A fake browser bar (URL pill + traffic-light dots) wrapping a screenshot. A fake phone frame (rounded rectangle + notch + speaker slit) around a mobile mockup. A fake code-block window (mock title bar + close/minimise dots) wrapping a `<pre>`. A fake IDE chrome (file tabs + activity bar) around an editor screenshot. All hand-built in HTML/CSS or SVG.
+
+**Why it fails.** The user already has the chrome — their browser, their phone, their IDE all *are* chrome. Redrawing it in a page is like printing a photograph of a picture frame inside a real picture frame. The fakery is also bad: the URL is wrong, the dots aren't macOS dots, the notch is the wrong shape. Audiences pattern-match re-drawn chrome as "AI invented a UI that already exists" within a glance.
+
+**Fix.** Use a real screenshot wrapped in `<figure>` (with a hairline border at most). For phone mockups, use a transparent-PNG device frame from a vendor or a real product photograph — never a CSS-drawn one. For code blocks, use the system `<pre>` with a typographic frame (top rule + label + bottom rule), not a faked window-chrome. The page's job is to show content, not to imitate the OS. *(Slop-test gate 57.)*
+
+### Mid-render token improvisation
+
+A theme is selected at the top of the run, but the artifact contains inline colour values (`#5b6cff`, `oklch(74% 0.18 245)`, `rgb(...)`) or `font-family` declarations that aren't drawn from the token block. Or: the artifact ships with the theme's token set *plus* one extra hex tucked into a hover state, a focus ring, or a single border. The model picked the theme, then drifted.
+
+**Why it fails.** Token discipline is the difference between a system and a freestyle. Once a theme is locked, every colour and every font in the file must reference a named token (`var(--color-accent)`, `font-family: var(--font-display)`). Inline values are how cohesion erodes — by the third edit pass, the page has eight colours instead of three, and the editorial restraint that made the theme work is gone. Audiences don't see the inline value, but they feel the looseness.
+
+**Fix.** Every colour and every font in the artifact must come through `var(--token-name)`. If you need a value that doesn't exist as a token, add it to the token block first (`--color-accent-warm: oklch(...)`) and then reference it. Inline OKLCH or one-off hex values mid-render are not allowed. *(Slop-test gate 58. See also [SKILL.md § Locked tokens](../SKILL.md).)*
+
+### Wrap-to-two-lines clickable text
+
+A button label, nav link, footer link, breadcrumb, or CTA reads on two lines because the viewport got narrow and the label was long. Visually, the affordance now looks broken — readers can't tell whether the line break is intentional. Worst case: the second line is one word ("free", "more", "started"), which reads as a styling error.
+
+**Why it fails.** Clickable affordances are one-line objects. The reader scans the label, decides whether to click, moves on. A two-line label slows the scan, breaks the row's vertical rhythm (button height grows, sibling buttons stay the same), and signals "this page wasn't tested at this width". It's a responsive-discipline tell.
+
+**Fix.** In order of preference: (1) shorten the label — *"Get started free" → "Start free"*; *"Read the documentation" → "Read docs"*. Most CTA labels are too long. (2) Set `white-space: nowrap` on the affordance and let the parent flex container reflow. (3) Drop a non-essential nav item at narrow widths via `hidden=until-found` or `display: none`. (4) Collapse the nav into a sheet/menu under a threshold. *Never* let a primary CTA or nav link wrap. *(Slop-test gate 59. See [responsive.md § Clickable text — never wraps](responsive.md).)*
 
 ### Lottie shortcut
 

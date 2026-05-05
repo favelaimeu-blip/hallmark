@@ -514,135 +514,344 @@
   .study-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
 }
 
-/* — 06 · FAQ — typographic Q/A ——————————————————————————
-   Five numbered Q/A pairs in editorial format. Q in display face,
-   A in body serif. Tighter than a typical FAQ — meant to scan, not
-   loom. Re-typesets per-theme. */
-.faq {
-  display: grid;
-  gap: 0;
+/* — 03 · Skills — five things Hallmark does ——————————————————
+   Vertical editorial list, scroll-only. No tabs, no carousel, no JS
+   state. Each row: roman numeral marginalia → title + lede → demo +
+   structured list. Each demo is structurally different from the others
+   on purpose — the section practises what the skill preaches. */
+
+.skills__intro {
+  margin: 0 0 var(--space-2xl);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-md);
+  line-height: var(--lh-snug);
+  color: var(--color-ink-2);
+  max-width: 60ch;
+}
+
+[data-theme="brutal"] .skills__intro,
+[data-theme="manifesto"] .skills__intro,
+[data-theme="terminal"] .skills__intro,
+[data-theme="sport"] .skills__intro,
+[data-theme="almanac"] .skills__intro,
+[data-theme="quiet"] .skills__intro,
+[data-theme="bloom"] .skills__intro,
+[data-theme="riso"] .skills__intro {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+.skills-list {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.faq__row {
   display: grid;
-  grid-template-columns: 5rem 1fr;
-  gap: 0.4rem var(--space-xl);
-  align-items: baseline;
-  padding-block: var(--space-lg) var(--space-md);
-  padding-inline: 0;
-  border-block-start: var(--rule-hair) solid var(--color-rule);
+  gap: var(--space-3xl);
 }
 
-.faq__row:first-child { border-block-start: 0; padding-block-start: 0; }
+.skill-row {
+  display: grid;
+  gap: var(--space-lg);
+}
 
-@media (max-width: 50rem) {
-  .faq__row {
+.skill-row__head {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: var(--space-md);
+  align-items: start;
+  margin-block-end: var(--space-md);
+}
+
+@media (max-width: 60rem) {
+  .skill-row__head {
     grid-template-columns: 1fr;
-    gap: 0.4rem;
-    padding-block: var(--space-md);
+    gap: var(--space-xs);
   }
 }
 
-.faq__q-mark {
+.skill-row__num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  color: var(--color-rule-2);
+  letter-spacing: 0;
+  user-select: none;
+  padding-block-start: 0.15em;
+  font-feature-settings: "tnum";
+}
+
+@media (max-width: 60rem) {
+  .skill-row__num { display: none; }
+}
+
+[data-theme="brutal"] .skill-row__num,
+[data-theme="manifesto"] .skill-row__num,
+[data-theme="terminal"] .skill-row__num,
+[data-theme="sport"] .skill-row__num,
+[data-theme="almanac"] .skill-row__num,
+[data-theme="quiet"] .skill-row__num,
+[data-theme="bloom"] .skill-row__num,
+[data-theme="riso"] .skill-row__num {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--text-xl);
+}
+
+.skill-row__head-body {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: 64ch;
+}
+
+.skill-row__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw + 0.5rem, 3rem);
+  font-weight: 500;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
   margin: 0;
+}
+
+[data-theme="manifesto"] .skill-row__title,
+[data-theme="brutal"] .skill-row__title {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tight);
+}
+
+.skill-row__lede {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--lh-relaxed);
+  color: var(--color-ink-2);
+  margin: 0;
+  max-width: 60ch;
+}
+
+.skill-row__lede strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.skill-row__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+  padding-inline-start: 4rem;
+}
+
+@media (max-width: 60rem) {
+  .skill-row__body {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding-inline-start: 0;
+  }
+}
+
+.skill-row__body--study {
+  grid-template-columns: 1fr;
+}
+
+.skill-row__demo {
+  position: relative;
+  margin: 0;
+  display: block;
+}
+
+.skill-row__demo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--color-paper-2);
+}
+
+/* Structured list to the right of each demo (reuses .dna__row from
+   .study-card__dna). Editorial card-on-paper container. */
+.skill-row__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  display: grid;
+  gap: 0;
+  background: var(--color-paper);
+  border: var(--rule-card, 1px) solid var(--color-rule);
+  border-radius: var(--radius-card, 0);
+}
+
+[data-theme="atelier"] .skill-row__list,
+[data-theme="salon"] .skill-row__list {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  border-block-start: var(--rule-hair) solid var(--color-rule);
+  border-radius: 0;
+}
+
+[data-theme="brutal"] .skill-row__list,
+[data-theme="manifesto"] .skill-row__list { border-width: 2px; }
+
+.skill-row__list code {
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+  background: var(--color-paper-2);
+  padding: 0.05em 0.35em;
+  border: var(--rule-hair) solid var(--color-rule);
+  color: var(--color-ink);
+}
+
+/* Row I — Build demo: brief pill → arrow → output thumb stacked */
+.skill-row__demo--build {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+}
+
+.brief-pill {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  font-style: italic;
+  max-width: 100%;
+}
+
+[data-theme="brutal"] .brief-pill,
+[data-theme="manifesto"] .brief-pill,
+[data-theme="terminal"] .brief-pill,
+[data-theme="newsprint"] .brief-pill,
+[data-theme="atelier"] .brief-pill {
+  border-radius: 0;
+  font-style: normal;
+}
+
+.brief-arrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  color: var(--color-rule-2);
+  user-select: none;
+  padding-inline-start: var(--space-md);
+}
+
+.brief-output {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: var(--rule-card, 1px) solid var(--color-rule);
+}
+
+.brief-output img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+/* Row III — Audit demo: target image with overlay punch-list flags */
+.skill-row__demo--audit > .fig-corners {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: var(--rule-card, 1px) solid var(--color-rule);
+}
+
+.skill-row__demo--audit img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.audit-flags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.audit-flag {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  transform: translate(-50%, -50%);
+}
+
+.audit-flag__num {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 0 0 3px var(--color-paper), 0 1px 6px oklch(0% 0 0 / 0.18);
+}
+
+[data-theme="manifesto"] .audit-flag__num,
+[data-theme="brutal"] .audit-flag__num { border-radius: 0; }
+
+/* Rows IV & V — Diptych: before / after side-by-side thumbnails */
+.skill-row__demo--diptych {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.diptych__half {
+  margin: 0;
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.diptych__half > .fig-corners {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: var(--rule-hair) solid var(--color-rule);
+}
+
+.diptych__half img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.diptych__cap {
   font-family: var(--font-label);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--color-muted);
   font-feature-settings: "tnum";
-  align-self: baseline;
 }
 
-.faq__qletter {
-  font-family: var(--font-display);
-  font-style: var(--display-style, normal);
-  font-weight: var(--display-weight, 500);
-  font-size: 0.875rem;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--color-ink);
-  margin-inline-end: 0.2em;
+.diptych__half[data-state="after"] .diptych__cap {
+  color: var(--color-accent-ink, var(--color-accent));
 }
 
-[data-theme="riso"] .faq__qletter { text-transform: lowercase; }
-[data-theme="brutal"] .faq__qletter,
-[data-theme="manifesto"] .faq__qletter,
-[data-theme="sport"] .faq__qletter { text-transform: uppercase; }
-
-.faq__q {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: var(--display-weight, 500);
-  font-style: var(--display-style, normal);
-  font-size: clamp(1.125rem, 1vw + 0.75rem, 1.5rem);
-  line-height: var(--lh-snug);
-  letter-spacing: var(--tracking-tight);
-  color: var(--color-ink);
-  font-optical-sizing: auto;
-  grid-column: 2;
+@media (max-width: 40rem) {
+  .skill-row__demo--diptych {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
 }
-
-@media (max-width: 50rem) {
-  .faq__q { grid-column: 1; }
-}
-
-.faq__a {
-  margin: 0.4rem 0 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.9375rem;
-  line-height: var(--lh-normal);
-  color: var(--color-ink-2);
-  max-width: 64ch;
-  grid-column: 2;
-}
-
-@media (max-width: 50rem) {
-  .faq__a { grid-column: 1; }
-}
-
-.faq__a code {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-size: 0.875em;
-  background: var(--color-paper-2);
-  padding: 0.05em 0.35em;
-  border: 1px solid var(--color-rule);
-  border-radius: 2px;
-  color: var(--color-ink);
-}
-
-.faq__a strong {
-  font-weight: 600;
-  color: var(--color-ink);
-}
-
-.faq__a em {
-  font-style: italic;
-  font-weight: 500;
-  color: var(--color-ink);
-}
-
-[data-theme="brutal"] .faq__a,
-[data-theme="manifesto"] .faq__a,
-[data-theme="terminal"] .faq__a,
-[data-theme="sport"] .faq__a,
-[data-theme="almanac"] .faq__a,
-[data-theme="quiet"] .faq__a,
-[data-theme="bloom"] .faq__a {
-  font-family: var(--font-body);
-  font-style: normal;
-}
-
-[data-theme="manifesto"] .faq__q,
-[data-theme="brutal"] .faq__q,
-[data-theme="sport"] .faq__q { text-transform: uppercase; }
-
-[data-theme="riso"] .faq__q { text-transform: lowercase; }
 
 /* — 06 · Install pane ——————————————————————————————
    A single bordered "manual page" card with three numbered rows —

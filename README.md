@@ -1,25 +1,25 @@
 # Hallmark
 
-**A design skill that studies what you admire — and rebuilds your content with it.**
+**A design skill for Claude Code, Cursor, and Codex that refuses to look AI-generated.**
 
-→ Live demo: **[hallmark-murex.vercel.app](https://hallmark-murex.vercel.app)** · twenty-three themes, eight worked tests, press `T` to cycle.
-→ Current version: **v0.9.0** — adds the **Editorial** theme (open-design-inspired premium · warm cream + coral + Inter Tight × Playfair italic) and a small kit of open-design utilities any theme can reach for: Roman-numeral section heads, corner-bracket image annotations, dark-slab section reversal, pulse animation for live indicators, and a `.tnum` tabular-numerals utility.
-→ Previously in **v0.8**: genres (editorial · modern-minimal · atmospheric · playful), `design.md` for whole-project redesigns, the 2+1 font rule with 55-gate slop test, component-library exports, 9 nav archetypes (incl Floating pill), 8 footer archetypes, 4 hero polish patterns, contrast gates 46–50, nav/footer/hero structural gates 51–55.
+[Live demo →](https://hallmark-murex.vercel.app) &nbsp;·&nbsp; twenty-three themes &nbsp;·&nbsp; five verbs &nbsp;·&nbsp; press `T` to cycle.
+
+Powered by Together AI.
 
 <table>
   <tr>
-    <td><img src="docs/img/theme-specimen.png" alt="Specimen — warm cream, italic Fraunces, warm-orange accent" /></td>
-    <td><img src="docs/img/theme-studio.png" alt="Studio — cool grey paper, italic Fraunces, forest-green accent" /></td>
+    <td><img src="site/_tests/_thumbs/hero-static-hour.jpg" alt="Static Hour — atmospheric podcast platform on dark canvas, italic editorial serif" /></td>
+    <td><img src="site/_tests/_thumbs/hero-najm.jpg" alt="NAJM — Moroccan fashion brand, oversized condensed sans with bright accent" /></td>
   </tr>
   <tr>
-    <td><img src="docs/img/theme-brutal.png" alt="Brutal — stark white-and-black, Inter Tight 900, no chromatic accent" /></td>
-    <td><img src="docs/img/theme-newsprint.png" alt="Newsprint — warm cream, Playfair Display roman, deep-red accent" /></td>
+    <td><img src="site/_tests/_thumbs/hero-tally-hero.jpg" alt="Tally — modern-minimal billing platform, live invoice card and chart" /></td>
+    <td><img src="site/_tests/_thumbs/hero-nexus.jpg" alt="Nexus — developer tool, split hero with italic-emphasis sans" /></td>
   </tr>
 </table>
 
-Hallmark is the **anti-AI-slop** rule-set for Claude Code, Cursor, and Codex. It encodes the [tactile-rebellion](https://www.creativebloq.com/design/graphic-design/texture-warmth-and-tactile-rebellion-the-big-graphic-design-trends-for-2026) consensus — typography, colour, layout, motion, microinteractions, structural variety — into one opinionated skill that refuses to emit the on-distribution defaults every LLM was trained into.
+Hallmark encodes the anti-AI-slop consensus — typography, colour, layout, motion, microinteractions, structural variety — into one opinionated rule-set. It picks a macrostructure for the brief, dresses it in one of twenty-three themes, runs sixty slop-test gates plus a pre-emit self-critique before handing back, and refuses the on-distribution defaults every LLM was trained into.
 
-Powered by Together AI.
+> **v1.0.0** — pre-emit critique on six axes, honest-copy enforcement, locked-token discipline, re-drawn-chrome ban, and a no-wrap rule for clickable text. Five new slop-test gates (56–60). The full rule-set lives in [`skill/SKILL.md`](skill/SKILL.md) and [`skill/references/`](skill/references/).
 
 ---
 

@@ -1,8 +1,27 @@
-# Slop test — 55 gates
+# Slop test — 60 gates + pre-emit self-critique
 
 Run this list before handing back any output. Every answer must be **no**. Update the Step 5 preview block's `Slop test` row to reflect the actual outcome of this run.
 
 Some gates are **universal** (apply to every genre); some are **genre-scoped** (apply only when the active genre is editorial, atmospheric, modern-minimal, or playful). Genre overrides are noted inline. Where a gate has *no* genre note, treat it as universal.
+
+---
+
+## Pre-emit self-critique (six axes)
+
+Run this **before** the gate list, not after. Score the planned output 1–5 on each axis. Anything **< 3 on any axis triggers a revision pass** before the gate sweep — don't bring known weakness into a sixty-gate review.
+
+Two passes is normal. Three is a sign the brief is wrong, not the design — re-read the brief.
+
+| # | Axis | What you're scoring |
+|---|---|---|
+| **A** | **Philosophy** | Is there a clear *why* — a position the page is taking? Or is it just a layout? |
+| **B** | **Hierarchy** | Can a reader tell, in 2 seconds, what's primary, secondary, tertiary? Or is everything the same weight? |
+| **C** | **Execution** | Are the details (rule weight, accent footprint, text-wrap, focus rings, contrast) all in spec, or is there sloppiness even if the bones are right? |
+| **D** | **Specificity** | Does this look like *this brief* — or does it look like a generic "page that could be anyone"? |
+| **E** | **Restraint** | Have you removed everything that isn't earning its place? Decoration, redundancy, padding-for-padding's-sake? |
+| **F** | **Variety** | Does this output share a structural fingerprint with a previous Hallmark output in the project? Score by structural distance, not visual distance — colour-swaps don't count as variety. |
+
+Record the six scores in a one-line stamp comment at the top of the file: `/* Hallmark · pre-emit critique: P5 H4 E5 S4 R5 V5 */`. Future runs should be able to find this and avoid repeating the same weakness.
 
 ---
 
@@ -128,6 +147,34 @@ Universal — apply to every genre. These gates catch the most-recognised AI fin
 55. **Decorative-without-purpose.** Does the hero contain a decorative element (cursor, scanline, gradient blob, abstract shape, ornament, badge, sticker) that has no semantic anchor in the content? Fail. Decoration must be motivated: a cursor inside a typed command (signals "you'd type next"), a numeral that names an issue / year / version / chapter, a gradient that responds to interaction (HP3 cursor-spotlight), a stamp that names an authorship or date. Random ornaments — a "42" in the corner with no edition meaning, a cursor floating beside a hero, a Pantone chip with no colour rationale — are slop.
 
 The CSS stamp at Step 6 should record the result alongside contrast: `· nav: N# · footer: Ft# · slop: pass (51–55)`. If any of 51–55 fail, fix before shipping.
+
+## Honest copy · no fabricated content
+
+Universal — apply to every genre. The page must not invent facts about the user's product, team, or market.
+
+56. **Invented metric.** Does the page contain any quantitative claim — "10× faster", "saves 5 hours per week", "trusted by 50,000+ teams", "99.9 % uptime", "+47 % conversion" — that the user did not supply, that has no source, and that the model fabricated to fill a stat-led layout, comparison row, or proof bar? If yes, fail. The fix is one of: replace the number with `—` and a labelled grey block, replace it with a question to the user ("metric to confirm"), or rebuild the section without the proof slot. Stat-led macrostructures are slop the moment their stats become decorative. *(See [anti-patterns.md § Invented metrics](anti-patterns.md).)*
+
+## Re-drawn UI chrome
+
+Universal. Hallmark must reuse the user's existing chrome (browser, OS, IDE) instead of redrawing it.
+
+57. **Re-drawn chrome.** Did Hallmark hand-build a fake browser bar (URL pill + traffic-light dots), a fake phone frame (rounded rectangle + notch + speaker slit), a fake code-block frame (mock window-chrome around a `<pre>`), a fake terminal frame, or a fake IDE chrome (file tabs + activity bar + sidebar) using HTML/CSS or SVG? If yes, fail. Re-drawn chrome is one of the strongest "looks AI-generated" tells — the model invented a UI that already exists in the user's environment. The fix: use a `<picture>` or `<figure>` containing a real screenshot, or omit the chrome and let the content stand on its own. *(See [anti-patterns.md § Re-drawn UI chrome](anti-patterns.md).)*
+
+## Token discipline
+
+Universal. The theme picks the palette and font stack at the top of the run; the rest of the run consumes tokens, never invents them.
+
+58. **Mid-render token improvisation.** Did Hallmark introduce any colour value (`#hex`, `oklch(...)`, `rgb(...)`, `hsl(...)`) or `font-family` declaration *outside* the design tokens defined in `:root` / `[data-theme="..."]`? If yes, fail. Every colour and every font in the artifact must reference a named token (`var(--color-accent)`, `font-family: var(--font-display)`). Inline OKLCH or one-off hexes are mid-render improvisation — the model picked the theme, then forgot it and freestyled. The fix: lift the value into the token block as a new named variable, or replace it with an existing token. *(See [SKILL.md § Locked tokens](../SKILL.md) and [anti-patterns.md § Mid-render token improvisation](anti-patterns.md).)*
+
+## Responsive — clickable affordances
+
+Universal. Buttons, links, and nav items must remain readable as single-line affordances when the viewport shrinks.
+
+59. **Two-line clickable text.** Does any button label, primary nav link, footer link, tab label, breadcrumb, or CTA text wrap to two or more lines at any viewport between 320 px and 1920 px? If yes, fail. Clickable text reading on two lines looks broken — visitors read it as a styling error, not as intentional. The fix is one of: shorten the label (the best fix; "Get started free" → "Start free"), set `white-space: nowrap` on the affordance and let the parent reflow, drop a non-essential nav item at narrow widths via `hidden=until-found`, or collapse the nav into a sheet/menu. Never let a CTA or nav link wrap. *(See [responsive.md § Clickable text — never wraps](responsive.md).)*
+
+60. **Emoji-as-feature-icon.** Does any feature card, value prop, step number, or pricing tier carry an emoji glyph (✨ 🚀 ⚡ 🔥 🎯 ✅) as its primary icon? If yes, fail. Emoji-as-icon is one of the strongest "AI-default" tells — the model reached for a Unicode glyph instead of choosing an icon library, building a custom mark, or omitting the icon entirely. The fix: pick a single icon library (Lucide / Phosphor / Heroicons — see [assets.md](assets.md)), build a custom SVG, or drop the icon and lead with typography.
+
+The CSS stamp at Step 6 should record results: `· honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60)`. Any failure must be fixed before shipping.
 
 ---
 

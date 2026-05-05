@@ -42,6 +42,39 @@ h1 { font-size: clamp(2.5rem, 4vw + 1rem, 6rem); }
 
 Never build a mouse-hover interaction that has no touch equivalent.
 
+## Clickable text — never wraps
+
+Buttons, primary nav links, footer links, tab labels, breadcrumbs, and CTAs must read as **single-line affordances at every viewport between 320 px and 1920 px**. A button or nav link wrapping to two lines looks broken — visitors read it as a styling error, not as intentional. The shortest fix is almost always to shorten the label.
+
+```css
+/* Affordances are single-line — let the parent reflow, not the label. */
+.btn,
+.nav__link,
+.foot__link,
+.cta {
+  white-space: nowrap;
+}
+```
+
+```css
+/* When the row can't fit, collapse the row, not the labels. */
+@media (max-width: 40rem) {
+  .nav__rail { display: none; }      /* desktop nav hides */
+  .nav__sheet-toggle { display: grid; } /* mobile menu shows */
+}
+```
+
+**Order of fixes**, when something does wrap:
+
+1. **Shorten the label.** *"Get started free"* → *"Start free"*. *"Read the documentation"* → *"Read docs"*. *"Schedule a demo"* → *"Book demo"*. Most CTA labels are 30–40 % longer than they need to be.
+2. **`white-space: nowrap`** on the affordance, let the parent flex/grid reflow.
+3. **`hidden=until-found`** the lowest-priority nav item at narrow widths (it remains in DOM for find-in-page and SEO).
+4. **Collapse the nav** into a sheet / off-canvas / disclosure menu below a content-driven breakpoint.
+
+**Never:** let a primary CTA or top-level nav link wrap. Long footer-link labels can wrap *only* in a footer column where wrapping is part of the column's rhythm — not in the inline footer link strip (Ft2).
+
+This is gate **59** in [`slop-test.md`](slop-test.md). Audit any output that ships interactive affordances and confirm none wrap at the breakpoints listed above.
+
 ## Viewport units
 
 - Use `dvh` / `svh` / `lvh` instead of `vh` for heights that interact with mobile chrome.

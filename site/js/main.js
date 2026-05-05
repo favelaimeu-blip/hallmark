@@ -112,7 +112,7 @@ const THEME_GENRES = {
   // playful — post-Linear soft school (2 themes)
   pastel:    "playful",
   plume:     "playful",
-  // editorial — open-design-inspired premium (added v0.9.0)
+  // editorial — open-design-inspired premium (added v1.0.0)
   editorial: "editorial",
 };
 
@@ -368,7 +368,7 @@ const COPY = {
     captionB: "LAP 12",
   },
   studio: {
-    eyebrow: "Studio · 2026 selected work",
+    eyebrow: "Studio · 2026",
     title: HERO_TITLE,
     lede: "We design and build distinctive products for ambitious teams. Hallmark is our typography opinion, codified — fifteen themes, twenty-one shapes, no defaults.",
     ctaLabel: "Engage",
@@ -447,7 +447,7 @@ const COPY = {
     letterBody: "A theme for the modern enterprise page — the Stripe / Linear / ElevenLabs school of restraint. Clean white, confident typography, pill CTAs. Minimalism with conviction, not absence.",
     signoff: "Yours,",
     captionA: "Quiet",
-    captionB: "v0.9",
+    captionB: "v1.0",
   },
   bloom: {
     eyebrow: "Atmospheric · 2026",
@@ -489,7 +489,7 @@ const COPY = {
     letterBody: "The polished-SaaS school of restraint, but warmer. Warm-grey paper instead of pure white; coral accent on focus rings and small marks. Pill CTAs, two-column heroes, generous space.",
     signoff: "Yours,",
     captionA: "Coral",
-    captionB: "v0.9",
+    captionB: "v1.0",
   },
   violet: {
     eyebrow: "Modern minimal · quiet violet",
@@ -510,7 +510,7 @@ const COPY = {
     letterBody: "A modern minimal theme tuned for dev tools and platforms. Near-white paper, near-black ink, single quiet violet accent on focus rings. Tight Geist throughout — letterspacing pulled in, type-led hierarchy, no ornament.",
     signoff: "Yours,",
     captionA: "Violet",
-    captionB: "v0.9",
+    captionB: "v1.0",
   },
   aurora: {
     eyebrow: "Atmospheric · cool",
@@ -634,7 +634,7 @@ function buildDenseColophon(themeName) {
   // template-string'd so it stays monospace-aligned.
   const today = "2026-05-01";
   return [
-    `# hallmark · v0.9.0 · ${themeName.toLowerCase()}`,
+    `# hallmark · v1.0.0 · ${themeName.toLowerCase()}`,
     `# build: ${today} · MIT · powered by together ai`,
     `#`,
     `# stats:  21 macros · 40 archetypes · 9 navs · 8 footers · 23 themes · 55 gates`,

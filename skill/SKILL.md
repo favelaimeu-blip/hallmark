@@ -1,7 +1,7 @@
 ---
 name: hallmark
 description: Use this skill when the user asks to design, build, redesign, audit, refine, or study a UI, web page, landing page, dashboard, component, or interface — or when they ask to make something "feel less AI-generated." Hallmark forces intentional design decisions (typography, color, layout, motion, interaction, structure) and refuses to default to the generic AI-UI template. Trigger phrases include "design a", "build a landing page", "make a dashboard", "redesign this site", "redesign the page", "refine this UI", "audit this design", "this looks AI-generated", "fix the design", "polish this", "give this a different look", and any request that will produce HTML / CSS / JSX / Tailwind output. **Also trigger when the user attaches a screenshot of a design they admire** — that is the `hallmark study` verb (extracts design DNA, never pixel-clones).
-version: 0.9.0
+version: 1.0.0
 ---
 
 # Hallmark
@@ -31,6 +31,22 @@ Hallmark has one default behaviour and four explicit verbs.
 If the user types anything that does not clearly map to `audit`, `refine`, `redesign`, or `study`, treat it as default. If the user attaches an image without a verb prefix, ask: *"Should I `study` this (extract the DNA), or should I treat it as a reference for a fresh build?"*
 
 The default Design flow always picks a theme. By default it picks one of the **23 named themes** — the *catalog* — and rotates among them per the diversification rule. There is also a quiet *custom* branch that constructs a one-off OKLCH palette + free-font pairing for the brief; the custom route fires **only when the brief carries a creative-intent signal** (the user names a brand colour, names a multi-attribute vibe the catalog can't carry, or explicitly asks for a custom theme). For vanilla briefs, the user never sees the words "catalog" or "custom" — the catalog runs silently. See Step 1 (signal detection) and Step 2.6 (dispatch); the protocol lives in [`references/custom-theme.md`](references/custom-theme.md).
+
+---
+
+## Disciplines that hold across every verb
+
+These four disciplines are **not** verb-specific. They apply to default Design, `audit`, `refine`, `redesign`, `study`, and component-scope alike. They sit alongside the slop test, not inside one branch of it.
+
+1. **Pre-emit self-critique.** Before handing back any output, score it 1–5 on six axes — Philosophy, Hierarchy, Execution, Specificity, Restraint, Variety. Anything **< 3** triggers a revision pass. Stamp the six scores at the top of the artifact (`/* Hallmark · pre-emit critique: P5 H4 E5 S4 R5 V5 */`). See [`references/slop-test.md`](references/slop-test.md) § Pre-emit self-critique.
+
+2. **Honest copy — no fabricated content.** If the user did not supply a metric, do not invent one. Stat-led layouts, comparison rows, and proof bars must use real numbers, a placeholder (`—` plus a labelled grey block, "metric to confirm"), or a different macrostructure. *"+47 % conversion"*, *"trusted by 50,000+ teams"*, and *"10× faster"* are slop the moment they're invented. Same rule for testimonials, logos, and case-study counts. See [`references/anti-patterns.md` § Invented metrics](references/anti-patterns.md) and slop-test gate **56**.
+
+3. **Locked tokens — no mid-render improvisation.** Once a theme is selected at Step 2.6, every colour and every `font-family` declaration in the artifact must reference a named token (`var(--color-accent)`, `font-family: var(--font-display)`). Inline OKLCH / hex / `rgb()` values, or a `font-family: "Some Font"` declaration that bypasses the token block, are not allowed. If a value is needed that doesn't exist as a token, lift it into the token block as a new named variable, then reference it. See [`references/anti-patterns.md` § Mid-render token improvisation](references/anti-patterns.md) and slop-test gate **58**.
+
+4. **Re-drawn chrome forbidden.** Hallmark must not hand-build fake browser bars (URL pill + traffic-light dots), fake phone frames, fake code-block windows (mock title bar + dots wrapping a `<pre>`), or fake IDE chrome — the user's environment already supplies real chrome. Use real screenshots wrapped in a `<figure>` (with at most a hairline border), or omit the chrome and let the content stand on its own. See [`references/anti-patterns.md` § Re-drawn UI chrome](references/anti-patterns.md) and slop-test gate **57**.
+
+5. **Clickable text never wraps.** Buttons, primary nav links, footer links, breadcrumbs, and CTAs must read on a single line at every viewport between 320 px and 1920 px. The fix is, in order: shorten the label (most CTA labels are 30–40 % too long), `white-space: nowrap` and let the parent reflow, hide low-priority items at narrow widths, or collapse the nav into a sheet. See [`references/responsive.md` § Clickable text — never wraps](references/responsive.md) and slop-test gate **59**.
 
 ---
 
@@ -358,7 +374,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 **Format** (Markdown bullets, not ASCII boxes — they render reliably across every chat client and terminal):
 
 ```markdown
-**Hallmark · v0.9.0**
+**Hallmark · v1.0.0**
 
 - **Macrostructure** · Stat-Led
 - **Theme** · Plain (#fff paper · cool greys · ink-blue accent)
@@ -382,7 +398,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 **Three more sample preview blocks** for the model to imitate, varied across macrostructure types:
 
 *Long Document (editorial, motion-cut):*
-> **Hallmark · v0.9.0**
+> **Hallmark · v1.0.0**
 >
 > - **Macrostructure** · Long Document
 > - **Theme** · Linen (cool slate paper · steel-blue accent · geometric sans)
@@ -393,7 +409,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 > - **Diversification** · first run for this project
 
 *Bento Grid (SaaS, motion-on):*
-> **Hallmark · v0.9.0**
+> **Hallmark · v1.0.0**
 >
 > - **Macrostructure** · Bento Grid
 > - **Theme** · Pastel (light cool paper · indigo accent · geometric Geist)
@@ -404,7 +420,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 > - **Diversification** · differs from Plain on paper hue (light-cool vs pure-white) + accent (indigo vs ink-blue)
 
 *Manifesto (declarative, no enrichment):*
-> **Hallmark · v0.9.0**
+> **Hallmark · v1.0.0**
 >
 > - **Macrostructure** · Manifesto
 > - **Theme** · Manifesto (dark · Inter Tight 900 · single red bleed)
@@ -415,7 +431,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 > - **Diversification** · differs from Linen on paper band (dark vs light) + display style (display-heavy vs geometric-sans)
 
 *Custom (Coffeebox archival café):*
-> **Hallmark · v0.9.0**
+> **Hallmark · v1.0.0**
 >
 > - **Macrostructure** · Long Document
 > - **Theme** · custom (vibe: "archival warmth, hand-set, no varnish" · paper oklch(94% 0.020 65) · accent oklch(58% 0.16 35) terracotta · Fraunces italic display + Source Serif 4 body)
