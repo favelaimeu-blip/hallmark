@@ -2,7 +2,34 @@
 
 This file is loaded when an enrichment archetype actually needs an external asset (load-on-demand). It catalogues the *3–5 canonical sources per category*, the licence terms, the import patterns, the rules for using them, and the sources to avoid.
 
-**The reflex.** Before reaching here, ask: can this be built? See [`custom-craft.md`](custom-craft.md). The assets in this file are for the moments when hand-building isn't economical or when the brief explicitly calls for stock material. Treat this file as the back-pocket catalogue, not the first move.
+**The reflex.** Before reaching here, ask two questions in order: (1) Does the brief actually need imagery at all? See [`hero-enrichment.md` § Image-need detection](hero-enrichment.md). (2) If yes, can it be hand-built? See [`custom-craft.md`](custom-craft.md). The assets in this file are for the moments when both answers send you here.
+
+---
+
+## Placeholder strategy
+
+When imagery is needed *and* the user hasn't supplied real assets, pick from this canon — in order. Skipping tiers is the slop move.
+
+| # | Source | When |
+| --- | --- | --- |
+| 1 | **Hallmark imagery kit** ([`imagery-kit.md`](imagery-kit.md)) | Brief allows non-photographic imagery: SaaS landings, manifestos, agency / studio splash, type-led portfolio, editorial-led marketing. **Always preferred** when the kit's register fits. |
+| 2 | **Hand-built SVG composition** (Tier B from custom-craft.md) | Editorial-typographic brief where "imagery" can be a stamp / wordmark / colour-blocked composition. Use when the kit doesn't carry the register. |
+| 3 | **Picsum** — `https://picsum.photos/seed/<seed>/<w>/<h>` | Generic photo slot, keyword anchoring not critical. Use a deterministic seed (brand-name + slot-name) so the same render produces the same image. |
+| 4 | **Unsplash Source** — `https://source.unsplash.com/<w>x<h>/?<keywords>` | Keyword-anchored photo slot — food, travel, portrait, real product. Pass 1–2 specific keywords, never zero. |
+| 5 | **Local `public/placeholder-<type>.{jpg,svg}`** | Self-contained projects with no third-party deps. Single neutral grey-block SVG checked into the repo. |
+
+**Swappability — non-negotiable:**
+
+- Every placeholder image carries an HTML comment immediately above it: `<!-- TODO: Replace with real <thing>, target size: <WxH> -->`.
+- All placeholder URLs reference a single constant — a `--placeholder-base` CSS variable or `PLACEHOLDER_BASE` config constant. User edits one place to swap the entire site.
+- Alt text describes the **intended** subject ("Hand-thrown ceramic mug, top-down on linen") not the placeholder ("Picsum image"). When the user swaps in the real photo, alt is already correct.
+
+**Anti-patterns:**
+
+- Never inline base64 placeholder images (bloats CSS).
+- Never call random Unsplash without keywords (returns un-curated stock-photo-ish results).
+- Never use kittens / lorempixel / "tiger.jpg" / cute-default services. The placeholder must read as an obvious slot, not as content.
+- Never ship a kit image where the brief actually calls for a real product photo (e.g. abstract bottle for an actual coffee-shop hero). The kit is for atmosphere; photos are for subject.
 
 ---
 

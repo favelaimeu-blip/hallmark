@@ -176,6 +176,22 @@ Universal. Buttons, links, and nav items must remain readable as single-line aff
 
 The CSS stamp at Step 6 should record results: `· honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60)`. Any failure must be fixed before shipping.
 
+## Mobile-responsiveness — the non-negotiables
+
+Universal. Every emitted page must render flawlessly at 320 px, 375 px, 414 px, and 768 px CSS-pixel widths. Gates 36 (no horizontal scroll) and 59 (no two-line clickable text) already cover the headline cases; 61–65 below codify the patterns the marketing-site responsiveness pass uncovered. Eyeball each viewport before marking the output complete.
+
+61. **Image-bearing grid track without `minmax(0, 1fr)`.** Does any `grid-template-columns` (or `grid-template-rows`) containing a `1fr` track render an `<img>` / `<picture>` / image-bearing element inside one of those tracks? If yes, the track must be `minmax(0, 1fr)` instead. Plain `1fr` resolves to `minmax(auto, 1fr)`, where `auto` minimum is the largest content's intrinsic width — for a 1024 + px native image, that's 1024 + px minimum, which pushes the layout past viewport on phones. The fix is one character per track: `1fr` → `minmax(0, 1fr)`.
+
+62. **Root missing `overflow-x: clip`.** Does the artifact lack `overflow-x: clip` on both `html` and `body`? If yes, fail. `clip` (not `hidden`) prevents horizontal scroll without creating a scroll context, so `position: sticky` descendants keep working. Hard requirement on every emitted page. Add to the base reset: `html, body { overflow-x: clip; }`.
+
+63. **Display headers without long-word wrap.** Does any element rendering display-size text (`h1`, `.hero__display`, `.section__title`, `.skill-row__title`, hero-equivalent classes) lack `overflow-wrap: anywhere; min-width: 0`? If yes, fail. Long hyphenated words ("AI-generated", uppercase compound brand names) overflow viewport because the only break opportunity is at the hyphen — `overflow-wrap: anywhere` lets the engine break inside the word as a last resort.
+
+64. **Per-theme section-head override without mobile collapse.** When a theme or variant overrides `.section__head { grid-template-columns: ... }` to anything other than `1fr`, does it also include the mobile-collapse rule, OR does a global `[data-theme] .section__head { grid-template-columns: 1fr }` exist at `@media (max-width: 48rem)` with matching specificity? If neither, fail. Theme-specific 2-column heads keep their template on mobile, the title wraps onto the section label, and the page reads broken (most visible on Sport: italic Anton title overlapping "02 / EXAMPLES").
+
+65. **CSS-only radio tab pattern that scroll-jumps.** When implementing tab toggles via `<input type="radio">` siblings + `:checked` selectors, does the artifact either (a) keep the radios in normal document flow with zero size + opacity 0 (no `position: absolute; top: 0`), OR (b) ship a JS handler that intercepts label clicks, calls `e.preventDefault()`, manually sets `radio.checked = true`, dispatches `change`, and focuses with `{ preventScroll: true }`? If the radios are at `position: absolute; top: 0` with no JS guard, fail. Default-position radios cause the page to jump to the section's top on every tab click — visible on every viewport but most disruptive on mobile.
+
+The CSS stamp at Step 6 records mobile pass alongside contrast: `· mobile: pass (36, 59, 61–65)`.
+
 ---
 
 If any answer is **yes**, fix it. Do not ship slop.

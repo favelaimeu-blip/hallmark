@@ -8,6 +8,34 @@ This file is loaded after the macrostructure pick (Step 3 in the design flow), w
 
 ---
 
+## Image-need detection — does this brief need imagery at all?
+
+Before picking an enrichment tier, decide whether the brief actually wants imagery. The default is **typography-only**. Match the brief against this table; act on the *first* row that fires:
+
+| Brief signal (any of these words / intents) | Image strategy |
+| --- | --- |
+| e-commerce, shop, store, product catalogue, brand, fashion, lookbook | Real product photos required — placeholder until user provides |
+| photography, portfolio, gallery, artist | Imagery *is* the page — placeholder until user provides |
+| food, restaurant, menu, dish, coffee, wine, recipe | Hero photo + product crops — placeholder until user provides |
+| team, staff, "about us", portraits, hiring, careers | Portrait crops — placeholder until user provides |
+| travel, hotel, destination, real estate, listing, property | Cover photo + tile photos — placeholder until user provides |
+| news, blog, magazine, journal, publication | Feature image per post — placeholder until user provides |
+| SaaS landing, manifesto, agency, studio, atmospheric, slow-and-editorial | **Kit-led.** Use Hallmark imagery kit (washes, transparent abstracts, ornaments) — see [`assets.md` § Placeholder strategy](assets.md) and [`imagery-kit.md`](imagery-kit.md). |
+| API, docs, changelog, CLI, library, dev-tool, SDK, package | **No imagery.** Typography-only. Code blocks if needed. |
+| editorial, essay, letter, foundry, type-specimen, broadside | **No imagery.** Display typography is the design. |
+| (all other / vague / unspecified) | **Default: typography-only.** When in doubt, no images. |
+
+Rules:
+
+- When the user has attached an image asset (or `.hallmark/preflight.json` cached one), use it. Never overwrite with a placeholder.
+- When the brief is genuinely ambiguous between a "needs photos" row and a "no imagery" row, ask one short question: *"Will you have product photos, or should I leave swappable placeholders?"*
+- A placeholder must look like a placeholder, not like a confident decision. The skill refuses to invent stock photos as if they were the final design.
+- Imagery rows above don't override genre overlays. Modern-minimal genre still suppresses decorative kit imagery (gate in `imagery-kit.md` anti-patterns).
+
+The hierarchy below picks the tier *after* this gate decides imagery is needed at all. Skipping this gate is what produces "blob illustration on every page" outputs — exactly the AI-default Hallmark refuses.
+
+---
+
 ## The enrichment hierarchy
 
 Reach for the highest tier the brief lets you ship in the time you have. Skipping tiers is the new tell.

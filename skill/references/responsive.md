@@ -2,6 +2,20 @@
 
 Mobile-first. Content-driven breakpoints. No desktop-only interactions.
 
+## Mobile — non-negotiable
+
+Every Hallmark output must render flawlessly at **320 px, 375 px, 414 px, and 768 px** CSS-pixel widths. Eyeball each viewport before marking the output complete:
+
+- No horizontal scroll (slop-test gate 36)
+- No clickable text wrapping to two lines (gate 59)
+- No image-bearing grid pushing the layout past viewport — use `minmax(0, 1fr)`, never bare `1fr`, on tracks containing images (gate 61)
+- Root carries `overflow-x: clip` on both `html` and `body` — never `hidden` (gate 62)
+- Display headers wrap inside long words via `overflow-wrap: anywhere; min-width: 0` (gate 63)
+- Section heads collapse to one column on mobile across every theme variant — per-theme overrides need a matching mobile rule (gate 64)
+- No scroll-jump on radio-tab clicks — radios in normal flow OR JS guard with `focus({ preventScroll: true })` (gate 65)
+
+This is a hard floor, not a wish list. A page that fails any of these on any of those four widths is not done. The slop-test gates listed run automatically — keep this checklist near the screen while building.
+
 ## Principles
 
 - Base styles are for the smallest viewport. `min-width` media queries add as you go up. Never `max-width` as the primary direction.

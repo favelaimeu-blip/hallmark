@@ -46,7 +46,7 @@ These four disciplines are **not** verb-specific. They apply to default Design, 
 
 4. **Re-drawn chrome forbidden.** Hallmark must not hand-build fake browser bars (URL pill + traffic-light dots), fake phone frames, fake code-block windows (mock title bar + dots wrapping a `<pre>`), or fake IDE chrome — the user's environment already supplies real chrome. Use real screenshots wrapped in a `<figure>` (with at most a hairline border), or omit the chrome and let the content stand on its own. See [`references/anti-patterns.md` § Re-drawn UI chrome](references/anti-patterns.md) and slop-test gate **57**.
 
-5. **Clickable text never wraps.** Buttons, primary nav links, footer links, breadcrumbs, and CTAs must read on a single line at every viewport between 320 px and 1920 px. The fix is, in order: shorten the label (most CTA labels are 30–40 % too long), `white-space: nowrap` and let the parent reflow, hide low-priority items at narrow widths, or collapse the nav into a sheet. See [`references/responsive.md` § Clickable text — never wraps](references/responsive.md) and slop-test gate **59**.
+5. **Mobile responsiveness — every emit verified at 320 / 375 / 414 / 768 px.** Hallmark's output must render flawlessly at all four widths. The non-negotiables: no horizontal scroll (gate 36), no two-line clickable text — buttons, primary nav links, footer links, breadcrumbs, CTAs (gate 59); image-bearing grid tracks use `minmax(0, 1fr)`, never bare `1fr` (gate 61); root has `overflow-x: clip` on both `html` and `body` — never `hidden` (gate 62); display headers wrap inside long words via `overflow-wrap: anywhere; min-width: 0` (gate 63); section heads collapse to one column on mobile across every theme variant (gate 64); radio-tab patterns don't scroll-jump (gate 65). See [`references/responsive.md` § Mobile — non-negotiable](references/responsive.md). This is a hard floor, not a wish list.
 
 ---
 
@@ -360,6 +360,8 @@ The non-negotiables live in [`references/`](references/). **Be precise about wha
 ### 4. Decide on hero enrichment
 
 Most pages don't need it. The strongest hero is often a typographic one. **Reach for [`hero-enrichment.md`](references/hero-enrichment.md) only when the brief points there** — a SaaS / dev-tool brief wants a demo video or mockup; a bakery / café / atelier brief wants a hand-built illustration; a manifesto wants nothing.
+
+**First — does the brief need imagery at all?** Run the image-need table at [`hero-enrichment.md` § Image-need detection](references/hero-enrichment.md). Default is typography-only. If the brief signals "needs photographic content" (e-commerce, team, food, travel) AND the user hasn't supplied real assets, use the placeholder strategy in [`assets.md` § Placeholder strategy](references/assets.md). If the brief allows non-photographic imagery (SaaS landing, manifesto, agency splash, editorial-led), prefer the [`imagery-kit.md`](references/imagery-kit.md) over photo placeholders. **Never ship invented stock photos as if they were the final design.**
 
 Eyeball the brief or ask one short question. State the decision in one sentence (e.g., *"Enrichment: E1 Clipped-Edge Demo Video, Tier-A CSS-art mockup."* or *"Enrichment: none — typography only."*). The decision goes into the macrostructure stamp at Step 6.
 
