@@ -352,6 +352,115 @@
   font-family: var(--font-mono);
 }
 
+/* — Banner pill per-theme shape + voice ————————————————————————
+   The banner is the only fixed surface that crosses every theme. If
+   it stays the same shape on all 23 themes, the "switching themes
+   rebuilds the page" claim leaks. Per-theme shape (border-radius) and
+   font choice push the banner into the theme's register too. */
+
+/* HARD EDGES — square pill, no radius. Brutalist / manifesto / print register. */
+[data-theme="brutal"] .banner__install,
+[data-theme="brutal"] .banner__star,
+[data-theme="manifesto"] .banner__install,
+[data-theme="manifesto"] .banner__star,
+[data-theme="newsprint"] .banner__install,
+[data-theme="newsprint"] .banner__star,
+[data-theme="terminal"] .banner__install,
+[data-theme="terminal"] .banner__star,
+[data-theme="editorial"] .banner__install,
+[data-theme="editorial"] .banner__star {
+  border-radius: 0;
+}
+
+/* Brutal / Manifesto — heavier border, display font, uppercase. */
+[data-theme="brutal"] .banner__install,
+[data-theme="manifesto"] .banner__install {
+  border-width: 2px;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* Terminal — mono for everything in the banner. */
+[data-theme="terminal"] .banner__install,
+[data-theme="terminal"] .banner__star {
+  font-family: var(--font-mono);
+}
+[data-theme="terminal"] .banner__install {
+  border-color: var(--color-accent);
+}
+
+/* SLIGHT RADIUS — sport / almanac (record card register). */
+[data-theme="sport"] .banner__install,
+[data-theme="sport"] .banner__star,
+[data-theme="almanac"] .banner__install,
+[data-theme="almanac"] .banner__star {
+  border-radius: 4px;
+}
+[data-theme="sport"] .banner__install,
+[data-theme="sport"] .banner__star {
+  font-family: var(--font-mono);
+  font-style: italic;
+}
+
+/* SOFT-CARD RADIUS — garden / halo / violet / studio. */
+[data-theme="garden"] .banner__install,
+[data-theme="garden"] .banner__star,
+[data-theme="halo"] .banner__install,
+[data-theme="halo"] .banner__star,
+[data-theme="violet"] .banner__install,
+[data-theme="violet"] .banner__star,
+[data-theme="studio"] .banner__install,
+[data-theme="studio"] .banner__star {
+  border-radius: 6px;
+}
+[data-theme="halo"] .banner__install {
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-accent) 35%, transparent);
+}
+[data-theme="studio"] .banner__install,
+[data-theme="studio"] .banner__star {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* OFF-REGISTER STAMP — riso. 2px radius + duotone offset shadow. */
+[data-theme="riso"] .banner__install,
+[data-theme="riso"] .banner__star {
+  border-radius: 2px;
+  box-shadow: 1px 1px 0 var(--color-accent-2, var(--color-accent));
+}
+
+/* ATELIER / SALON — italic serif label, hairline only (atelier). */
+[data-theme="atelier"] .banner__install {
+  border-color: var(--color-rule);
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+[data-theme="salon"] .banner__install {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Pastel — softer shadow on the install pill. */
+[data-theme="pastel"] .banner__install {
+  box-shadow: 0 1px 0 0 color-mix(in oklch, var(--color-rule) 60%, transparent);
+}
+
+/* Theme-indicator extra cases — extend the existing uppercase group. */
+[data-theme="almanac"] .banner__theme-indicator,
+[data-theme="newsprint"] .banner__theme-indicator,
+[data-theme="editorial"] .banner__theme-indicator {
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+[data-theme="atelier"] .banner__theme-indicator,
+[data-theme="salon"] .banner__theme-indicator {
+  font-style: italic;
+}
+
 /* Dropdown panel — appears under the indicator. Hidden by default. */
 .theme-dropdown {
   position: absolute;
@@ -526,10 +635,15 @@
 .section-label .num { color: var(--color-ink); font-weight: 500; }
 .section-label .divider { color: var(--color-rule-2); font-weight: 300; }
 
+/* Terminal — vary the prompt prefix per section so the "//" gag doesn't get old.
+   Cycles through > , //, # , -- across the run of sections. */
 [data-theme="terminal"] .section-label::before {
   content: "> ";
   color: var(--color-accent);
 }
+[data-theme="terminal"] .section:nth-of-type(4n+2) .section-label::before { content: "// "; }
+[data-theme="terminal"] .section:nth-of-type(4n+3) .section-label::before { content: "# "; }
+[data-theme="terminal"] .section:nth-of-type(4n+4) .section-label::before { content: "-- "; }
 
 [data-theme="manifesto"] .section-label .num {
   color: var(--color-accent);

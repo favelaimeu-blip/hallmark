@@ -1382,13 +1382,27 @@
 
 /* ── LINEN — hanging headings, two-column asymmetric, woven texture ─── */
 [data-theme="linen"] .opening { grid-template-columns: 7fr 5fr; gap: var(--space-3xl); }
+/* Section heads hang the label in a left gutter, title in the body column.
+   Reads like a printed manuscript margin note + heading. */
 [data-theme="linen"] .section__head {
-  grid-template-columns: 1fr;
+  grid-template-columns: 12rem 1fr;
+  gap: var(--space-md);
+  align-items: baseline;
   border-bottom: 0;
   padding-bottom: 0;
 }
 [data-theme="linen"] .section__title { margin-bottom: var(--space-2xl); }
-[data-theme="linen"] .section-label { margin-bottom: var(--space-md); }
+[data-theme="linen"] .section-label {
+  margin-bottom: 0;
+  align-self: baseline;
+}
+@media (max-width: 56rem) {
+  [data-theme="linen"] .section__head {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  [data-theme="linen"] .section-label { margin-bottom: var(--space-sm); }
+}
 [data-theme="linen"] .foundations {
   grid-template-columns: 5fr 7fr;
   gap: var(--space-xl) var(--space-2xl);
@@ -1424,6 +1438,12 @@ html[data-theme="almanac"] body {
   grid-template-columns: 8rem 1fr;
 }
 [data-theme="almanac"] .section__title { font-size: var(--text-xl); }
+/* Almanac calls itself indexed — push the §-number into every section label. */
+[data-theme="almanac"] .section-label::before {
+  content: "§ ";
+  color: var(--color-accent);
+  font-feature-settings: "tnum";
+}
 [data-theme="almanac"] .foundations {
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
