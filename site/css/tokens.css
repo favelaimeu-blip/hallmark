@@ -892,7 +892,7 @@
   --color-rule-2:     oklch(72%   0.010 50);
   --color-muted:      oklch(52%   0.012 50);
   --color-neutral:    oklch(38%   0.012 45);
-  --color-ink-2:      oklch(28%   0.012 40);
+  --color-ink-2:      oklch(26%   0.012 40);
   --color-ink:        oklch(20%   0.010 35);
   --color-accent:     oklch(64%   0.165 28);    /* warm coral */
   --color-accent-ink: oklch(98%   0.005 50);

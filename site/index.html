@@ -13,14 +13,23 @@
   <meta property="og:description"
     content="A design skill for AI coding assistants. Encodes the anti-slop consensus into one ruleset. Powered by Together AI." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="OG-hallmark.png" />
+  <meta property="og:image:alt" content="Hallmark — A design skill that refuses to look AI-generated" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hallmark — A design skill that refuses to look AI-generated" />
+  <meta name="twitter:description"
+    content="A design skill for AI coding assistants. Encodes the anti-slop consensus into one ruleset. Powered by Together AI." />
+  <meta name="twitter:image" content="OG-hallmark.png" />
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="favicon-light.svg" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="favicon-light.svg" />
 
   <!-- Google Fonts — Anton, Albert Sans, Fraunces, Geist, Geist Mono, Hanken Grotesk, Inter, Inter Tight, Newsreader, Playfair Display, Public Sans. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Public+Sans:wght@400;500;600;700&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Public+Sans:wght@400;500;600;700&display=swap" />
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -43,7 +52,7 @@
   <!-- BANNER — sticky top, thin, holds the theme picker -->
   <header class="banner" role="banner">
     <a class="banner__mark" href="#top" aria-label="Hallmark — top of page">
-      <span class="banner__name">Hallmark</span>
+      <span class="brand-mark" aria-hidden="true"><span class="brand-mark__slash">/</span><span class="brand-mark__name">hallmark</span></span>
       <span class="banner__ver tnum">v1.0</span>
     </a>
 
@@ -184,7 +193,7 @@
 
       <p class="examples__intro">One-shotted. No shared theme. No shared layout.</p>
 
-      <div class="examples-rail" role="list" aria-label="Eight example landing pages">
+      <div class="examples-rail" role="list" aria-label="Example landing pages">
 
         <div class="ex-card" role="listitem">
           <div class="ex-card__thumb ex-card__thumb--video" aria-hidden="true">
@@ -215,13 +224,6 @@
         </div>
 
         <div class="ex-card" role="listitem">
-          <picture class="ex-card__thumb" aria-hidden="true">
-            <img src="_tests/_thumbs/05-tracejam.png" alt="" loading="lazy" decoding="async" width="1024" height="640" />
-          </picture>
-          <p class="ex-card__prompt"><span class="ex-card__prompt-mark">$</span> /hallmark build an observability dashboard, dark</p>
-        </div>
-
-        <div class="ex-card" role="listitem">
           <div class="ex-card__thumb ex-card__thumb--video" aria-hidden="true">
             <video data-hover-play src="_tests/_thumbs/anya-loop.mp4" autoplay loop muted playsinline preload="metadata" width="1784" height="1080"></video>
           </div>
@@ -240,6 +242,13 @@
             <video data-hover-play src="_tests/_thumbs/Soroe-loop.mp4" autoplay loop muted playsinline preload="metadata" width="1804" height="1080"></video>
           </div>
           <p class="ex-card__prompt"><span class="ex-card__prompt-mark">$</span> /hallmark build a small ceramics studio site</p>
+        </div>
+
+        <div class="ex-card" role="listitem">
+          <div class="ex-card__thumb ex-card__thumb--video" aria-hidden="true">
+            <video data-hover-play src="_tests/_thumbs/Hyperlane-example.mp4" autoplay loop muted playsinline preload="metadata" width="1784" height="1080"></video>
+          </div>
+          <p class="ex-card__prompt"><span class="ex-card__prompt-mark">$</span> /hallmark build a developer infrastructure landing page</p>
         </div>
 
       </div>
@@ -941,7 +950,7 @@
     <div class="foot foot--colophon">
 
       <div class="foot__masthead">
-        <span class="foot__wordmark">Hallmark</span>
+        <span class="foot__wordmark" aria-label="Hallmark"><span class="brand-mark brand-mark--lg" aria-hidden="true"><span class="brand-mark__slash">/</span><span class="brand-mark__name">hallmark</span></span></span>
         <span class="foot__version tnum">v1.0 · MMXXVI</span>
       </div>
 

@@ -779,8 +779,8 @@ function applyTheme(theme) {
   if (!THEMES[theme]) return;
   const apply = () => {
     root.dataset.theme = theme;
-    setPressed(theme);
     swapArchetypes(theme);
+    setPressed(theme);
     try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) { }
   };
   if (!reduced && document.startViewTransition) {
@@ -801,9 +801,11 @@ const initial = THEMES[queried] ? queried
     : (root.dataset.theme || "specimen");
 
 // First paint — populate slots without a transition (no flash).
+// Run swapArchetypes BEFORE setPressed so the footer template is materialised
+// before setPressed writes the current-theme name into it.
 root.dataset.theme = initial;
-setPressed(initial);
 swapArchetypes(initial);
+setPressed(initial);
 try { localStorage.setItem(STORAGE_KEY, initial); } catch (e) { }
 
 dots.forEach((btn) => {
