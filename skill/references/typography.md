@@ -183,9 +183,11 @@ Pick a ratio. The default for Hallmark work is **1.25** (major third). Build the
   --text-2xl:  2.4414rem;
   --text-3xl:  3.0518rem;
   --text-4xl:  3.8147rem;
-  --text-display: clamp(3rem, 8vw + 1rem, 8rem);
+  --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
 }
 ```
+
+**Display max — keep it ≤ 5.5rem (88 px).** Above that, hero headlines crowd themselves on 1280–1440 px viewports and require multi-line wrapping that almost always reads as drama, not gravity. Even on Manifesto / Brutal display-heavy themes, cap at 6rem (96 px). The exception is a single-line, single-word display (e.g. a stat) that occupies ≤ 12 ch — it can grow to 7rem. **Default emit format is `clamp(2.75rem, 5vw + 1rem, 5.25rem)`.**
 
 Use no more than five sizes on a single page. If you need more hierarchy, use weight and colour, not another size.
 

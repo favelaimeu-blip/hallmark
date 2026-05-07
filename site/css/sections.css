@@ -28,9 +28,13 @@
    that forced the section label ("ANTI-PATTERNS") to wrap on
    themes that needed wider title columns. Section titles can grow
    bigger now since they have full width. */
-.section__head {
+/* Single-column always — label sits ABOVE title across every theme.
+   No theme override should put the label in a left gutter (caused
+   uncomfortable wrapping + alignment drift between sections). */
+.section__head,
+[data-theme] .section__head {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
   gap: var(--space-sm);
   padding-bottom: var(--section-head-gap);
   border-bottom: var(--rule-hair) solid var(--color-rule-2);
@@ -874,26 +878,6 @@
   box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-paper) 25%, transparent);
 }
 
-/* Per-theme captions on editorial-register themes — small italic-mono
-   note above the demo, like a foundry plate label. */
-[data-theme="atelier"] .skill-row__demo--build::before,
-[data-theme="salon"] .skill-row__demo--build::before,
-[data-theme="almanac"] .skill-row__demo--build::before,
-[data-theme="studio"] .skill-row__demo--build::before,
-[data-theme="sport"] .skill-row__demo--build::before {
-  display: block;
-  margin: 0 0 var(--space-xs) 0;
-  font-family: var(--font-label);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-[data-theme="atelier"] .skill-row__demo--build::before { content: "Plate I"; }
-[data-theme="salon"] .skill-row__demo--build::before { content: "Specimen — i"; font-style: italic; text-transform: none; letter-spacing: 0; font-family: var(--font-serif); }
-[data-theme="almanac"] .skill-row__demo--build::before { content: "Fig. 01 — 2026 ed."; }
-[data-theme="studio"] .skill-row__demo--build::before { content: "Frame 01"; }
-[data-theme="sport"] .skill-row__demo--build::before { content: "Lap 1"; }
 
 /* Row III — Audit demo: a CSS-only inline slop hero. Built deliberately
    to LOOK like every default AI hero — purple-pink gradient, centered,
@@ -1171,6 +1155,109 @@
   }
 }
 
+/* — Before / After Hallmark ————————————————————————————
+   Two screenshots side by side — the same prompt, run two ways. The
+   "before" panel is what Sonnet 4.6 alone produces; the "after" is
+   the same model with Hallmark loaded. The shared prompt sits above. */
+.ba__prompt {
+  margin: 0 0 var(--space-2xl);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  line-height: 1.4;
+  font-feature-settings: "tnum";
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: var(--radius-input, 0);
+  max-width: 100%;
+}
+.ba__prompt-mark {
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-inline-end: 0.5em;
+}
+
+.ba {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+
+@media (max-width: 56rem) {
+  .ba { grid-template-columns: 1fr; gap: var(--space-2xl); }
+}
+
+.ba__panel {
+  margin: 0;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.ba__panel-label {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.ba__panel-tag {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-radius: 999px;
+  background: var(--color-paper);
+  color: var(--color-ink-2);
+  letter-spacing: var(--tracking-label);
+}
+
+.ba__panel-tag--accent {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+
+.ba__frame {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: var(--rule-hair) solid var(--color-rule);
+  background: var(--color-paper-2);
+  border-radius: var(--radius-card, 0);
+}
+
+.ba__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
+.ba__panel-cap {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+  line-height: var(--lh-snug);
+  color: var(--color-ink-2);
+  max-width: 48ch;
+}
+
+[data-theme="brutal"] .ba__panel-cap,
+[data-theme="manifesto"] .ba__panel-cap,
+[data-theme="terminal"] .ba__panel-cap,
+[data-theme="sport"] .ba__panel-cap,
+[data-theme="almanac"] .ba__panel-cap,
+[data-theme="quiet"] .ba__panel-cap,
+[data-theme="bloom"] .ba__panel-cap {
+  font-family: var(--font-body);
+}
+
 /* — 07 · Footer ————————————————————————————————————— */
 /* The "Powered by" accent dot — used by the editorial colophon. */
 .foot__powered-mark {
@@ -1232,9 +1319,6 @@
 /* Negative space carries the rhythm — no rules between sections. */
 [data-theme="atelier"] .section + .section {
   padding-block-start: var(--space-3xl);
-}
-[data-theme="atelier"] .section__pull {
-  border-block-start: 0;
 }
 [data-theme="atelier"] .section__title {
   max-width: 22ch;
@@ -1479,24 +1563,13 @@
 /* Section heads hang the label in a left gutter, title in the body column.
    Reads like a printed manuscript margin note + heading. */
 [data-theme="linen"] .section__head {
-  grid-template-columns: 12rem 1fr;
-  gap: var(--space-md);
-  align-items: baseline;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
   border-bottom: 0;
   padding-bottom: 0;
 }
 [data-theme="linen"] .section__title { margin-bottom: var(--space-2xl); }
-[data-theme="linen"] .section-label {
-  margin-bottom: 0;
-  align-self: baseline;
-}
-@media (max-width: 56rem) {
-  [data-theme="linen"] .section__head {
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
-  [data-theme="linen"] .section-label { margin-bottom: var(--space-sm); }
-}
+[data-theme="linen"] .section-label { margin-bottom: var(--space-sm); }
 [data-theme="linen"] .foundations {
   grid-template-columns: 5fr 7fr;
   gap: var(--space-xl) var(--space-2xl);
@@ -1529,7 +1602,8 @@ html[data-theme="almanac"] body {
   background: var(--color-paper);
   padding-block: var(--space-sm);
   border-bottom: 1px solid var(--color-ink);
-  grid-template-columns: 8rem 1fr;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
 }
 [data-theme="almanac"] .section__title { font-size: var(--text-xl); }
 /* Almanac calls itself indexed — push the §-number into every section label. */
@@ -1906,76 +1980,6 @@ html[data-theme="almanac"] body {
    Italic serif label + arrow, biased left or right per section
    for rhythm. Hover nudges the arrow forward. Pulls the eye into
    the next section instead of stopping cold. */
-.section__pull {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.5em;
-  margin-block-start: var(--space-xl);
-  padding-block: var(--space-sm);
-  font-family: var(--font-serif);
-  font-size: var(--text-md);
-  line-height: 1.2;
-  color: var(--color-ink-2);
-  text-decoration: none;
-  border-block-start: var(--rule-hair) solid var(--color-rule);
-  width: fit-content;
-  transition: color var(--dur-micro) var(--ease-out);
-}
-
-.section__pull--right {
-  margin-inline-start: auto;
-  text-align: end;
-}
-
-/* Specimen — keep all section pulls flush to the left content edge so
-   they match the page's other CTAs ("Install", section labels, etc.). */
-[data-theme="specimen"] .section__pull--right {
-  margin-inline-start: 0;
-  text-align: start;
-}
-
-.section__pull-arrow {
-  font-style: normal;
-  font-weight: 400;
-  color: var(--color-rule-2);
-  font-feature-settings: "tnum";
-  transition: transform var(--dur-short) var(--ease-out),
-              color var(--dur-micro) var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .section__pull:hover { color: var(--color-ink); }
-  .section__pull:hover .section__pull-arrow {
-    transform: translateX(4px);
-    color: var(--color-accent);
-  }
-}
-
-.section__pull:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 4px;
-  color: var(--color-ink);
-}
-
-[data-theme="brutal"] .section__pull,
-[data-theme="manifesto"] .section__pull,
-[data-theme="terminal"] .section__pull,
-[data-theme="sport"] .section__pull,
-[data-theme="almanac"] .section__pull,
-[data-theme="quiet"] .section__pull,
-[data-theme="bloom"] .section__pull {
-  font-family: var(--font-body);
-  font-style: normal;
-  text-transform: uppercase;
-  font-size: var(--text-sm);
-  letter-spacing: 0.04em;
-}
-
-[data-theme="terminal"] .section__pull-arrow::before {
-  content: ">";
-  margin-inline-end: 0.4em;
-  color: var(--color-accent);
-}
 
 /* — Interlude — full-bleed typographic moment between sections —
    One declarative phrase set in the active theme's display face,
