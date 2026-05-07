@@ -165,7 +165,6 @@ For reference. Everything below is in current `0.4.0`.
 - ✓ Custom-craft canon: pure CSS art, hand-built SVG, declarative animation, View Transitions, Three.js when justified
 - ✓ Asset-source catalogue: Lucide / Phosphor / Heroicons (icons), Simple Icons / SVGL (logos), Nanobanana 2 / Recraft V4 (generated illustration), Storyset / Humaaans (library), Mixkit / Coverr (video), Unsplash / Nappy (photography)
 - ✓ Working install path: `cp skill/* ~/.claude/skills/hallmark/`
-- ✓ Two test specimens: bakery (`site/_example-bakery/`) and command palette (`site/_example-cmdk/`)
 - ✓ Slop test 33 questions: visual (8), structural (2), microinteractions (10), variety (3), implementation (6), hero enrichment (4)
 - ✓ View Transitions on theme switch, with reduced-motion fallback
 - ✓ Copy-to-clipboard with silent success on install code blocks
