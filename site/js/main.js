@@ -140,7 +140,7 @@ const HERO_TITLE = "A design skill that refuses to look AI-generated.";
    eyebrow, lede, quote, stat, salutation, etc. still vary. */
 const COPY = {
   specimen: {
-    eyebrow: "A design skill · Powered by Together AI",
+    eyebrow: "A design skill",
     title: HERO_TITLE,
     lede: "Hallmark is a skill for Claude Code, Cursor, and Codex. It encodes the anti-slop consensus — typography, colour, layout, motion, interaction — into one holistic ruleset your AI assistant will actually follow.",
     ctaLabel: "01 ⁄ Install",

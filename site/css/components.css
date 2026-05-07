@@ -97,6 +97,11 @@
 
 @media (max-width: 50rem) {
   .banner__install { display: none; }
+  /* Without the Install button to pair with, the star's negative
+     start margin (sized for the install/star pair) pulls it too
+     close to the wordmark. Loosen by +8px so the two CTAs read as
+     bookends, not crowded. */
+  .banner__star { margin-inline-start: -0.25rem; }
 }
 
 /* GitHub star button — sits next to Install in the banner, shows
@@ -796,6 +801,28 @@
 
 .code__copy[data-state="copied"] .code__copy-default { display: none; }
 .code__copy[data-state="copied"] .code__copy-done { display: inline; }
+
+/* Mobile · stack the copy button beneath the command instead of
+   absolute-positioning over it. On coarse-pointer devices the button
+   is always visible (no hover state); overlaying the right edge of a
+   long command makes the text unreadable. Pattern from GitHub /
+   Vercel / npmjs / MDN — command on its own line with horizontal
+   scroll, copy button as a full-width tap target underneath. */
+@media (max-width: 45rem) {
+  .code {
+    display: block;
+    padding-block: var(--space-sm) var(--space-sm);
+  }
+  .code .prompt { margin-inline-end: var(--space-2xs); }
+  .code__copy {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-block-start: var(--space-sm);
+    justify-content: center;
+    min-height: 32px;
+  }
+}
 
 [data-theme="terminal"] .code__copy {
   background: var(--color-paper-2);
@@ -3028,7 +3055,10 @@ body:not(.easter-open) > footer {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3xl);
-  padding-block: var(--space-3xl) var(--space-2xl);
+  /* Bottom padding capped at ~16 px — the credit line should never
+     sit more than ~20 px from the viewport edge regardless of the
+     theme. The page-wrapper no longer adds bottom padding either. */
+  padding-block: var(--space-3xl) var(--space-md);
   border-block-start: var(--rule-hair) solid var(--color-rule);
   border-top-width: var(--rule-hair);
   margin: 0;
@@ -3229,9 +3259,11 @@ body:not(.easter-open) > footer {
   width: 100%;
 }
 
-/* Mobile collapse — single column, generous gaps. */
+/* Mobile collapse — single column, generous gaps. Bottom padding
+   stays capped at --space-md so the credit line hugs the viewport
+   bottom on phones too. */
 @media (max-width: 60rem) {
-  .foot--colophon { gap: var(--space-2xl); padding-block: var(--space-2xl) var(--space-xl); }
+  .foot--colophon { gap: var(--space-2xl); padding-block: var(--space-2xl) var(--space-md); }
   .foot__masthead { flex-direction: column; align-items: flex-start; gap: var(--space-sm); padding-block-end: var(--space-lg); }
   .foot__grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
 }
