@@ -1,6 +1,6 @@
 ---
 name: hallmark
-description: Use this skill ONLY when the user explicitly wants Hallmark's anti-AI-slop discipline applied. Triggers are narrow on purpose — (1) the user names one of Hallmark's three explicit verbs (`audit`, `redesign`, `study`, e.g. "audit this UI", "redesign this page", "study this screenshot"); (2) the user says a UI "feels AI-generated", "looks templated", "looks like every other AI page", or asks to "make it less AI-generated"; (3) the user attaches a screenshot of a design they admire and wants the DNA extracted (the `study` verb); (4) the user invokes the skill by name ("use Hallmark", "/hallmark"). DO NOT trigger on generic UI requests — "design a button", "build me a form", "make a dashboard", "build a landing page", "add a navbar". Those are handled by frontend-design or other UI skills. Hallmark is the opinionated anti-slop ruleset; it should only run when the user explicitly wants that specific discipline, not as a default UI builder.
+description: Use this skill ONLY when the user explicitly wants Hallmark's anti-AI-slop discipline applied. Triggers are narrow on purpose — (1) the user names one of Hallmark's three explicit verbs (`audit`, `redesign`, `study`, e.g. "audit this UI", "redesign this page", "study this screenshot", "study this URL"); (2) the user says a UI "feels AI-generated", "looks templated", "looks like every other AI page", or asks to "make it less AI-generated"; (3) the user attaches a screenshot OR pastes a URL of a design they admire and wants the DNA extracted (the `study` verb); (4) the user invokes the skill by name ("use Hallmark", "/hallmark"). DO NOT trigger on generic UI requests — "design a button", "build me a form", "make a dashboard", "build a landing page", "add a navbar". Those are handled by frontend-design or other UI skills. Hallmark is the opinionated anti-slop ruleset; it should only run when the user explicitly wants that specific discipline, not as a default UI builder.
 version: 1.0.0
 ---
 
@@ -25,9 +25,9 @@ Hallmark has one default behaviour and three explicit verbs.
 | *(default)* | The user asked you to design or build something new. Follow the **Design flow** below. |
 | `hallmark audit <target>` | Read the target, score it against the anti-pattern list, return a ranked punch list. **Do not edit.** |
 | `hallmark redesign <target> [--mood <name>]` | Take the target's content and intent, throw out the structure, and **rebuild it from scratch with a deliberately different structural fingerprint.** New section rhythm, new heading placement, new component voice. Preserve copy, brand, and information architecture; replace everything else. |
-| `hallmark study <screenshot>` | The user pasted or attached an image of a design they admire. Extract the **DNA** — macrostructure, archetypes, type-pairing role, colour anchor — and produce a diagnosis report, then optionally rebuild the user's content using the extracted DNA. **Never copies pixels. Never claims to identify exact fonts. Refuses obvious template-marketplace or competitor-page screenshots.** Load [`references/study.md`](references/study.md) before this verb runs. |
+| `hallmark study <screenshot \| URL>` | The user pasted or attached an image of a design they admire, **or** pasted a URL to a live page. Extract the **DNA** — macrostructure, archetypes, type-pairing, colour anchor — and produce a diagnosis report, then optionally rebuild the user's content using the extracted DNA. Detection is automatic: a URL (`http://` / `https://` prefix) routes to URL mode; anything else routes to image mode. **URL mode** reads the page's HTML and CSS via WebFetch — it can name exact fonts and exact colour values, but can't judge rhythm. **Never copies pixels. Refuses template-marketplace URLs and competitor pages. Falls back to asking for a screenshot if the URL is auth-walled, a JS-only SPA shell, or otherwise un-readable.** Load [`references/study.md`](references/study.md) before this verb runs. |
 
-If the user types anything that does not clearly map to `audit`, `redesign`, or `study`, treat it as default. If the user attaches an image without a verb prefix, ask: *"Should I `study` this (extract the DNA), or should I treat it as a reference for a fresh build?"*
+If the user types anything that does not clearly map to `audit`, `redesign`, or `study`, treat it as default. If the user attaches an image or pastes a URL without a verb prefix, ask: *"Should I `study` this (extract the DNA), or should I treat it as a reference for a fresh build?"*
 
 The default Design flow always picks a theme. By default it picks one of the **22 named themes** — the *catalog* — and rotates among them per the diversification rule. There is also a quiet *custom* branch that constructs a one-off OKLCH palette + free-font pairing for the brief; the custom route fires **only when the brief carries a creative-intent signal** (the user names a brand colour, names a multi-attribute vibe the catalog can't carry, or explicitly asks for a custom theme). For vanilla briefs, the user never sees the words "catalog" or "custom" — the catalog runs silently. See Step 1 (signal detection) and Step 2.6 (dispatch); the protocol lives in [`references/custom-theme.md`](references/custom-theme.md).
 
@@ -514,45 +514,64 @@ Load [`references/verbs/redesign.md`](references/verbs/redesign.md) and follow i
 
 ## `hallmark study`
 
-The user has attached or pasted a screenshot of a design they admire. They want to learn from it — its shape, its type, its rhythm — and apply that *DNA* to their own content. They do not want a pixel-faithful copy.
+The user has supplied a reference — either an attached screenshot or a URL to a live page — of a design they admire. They want to learn from it — its shape, its type, its rhythm — and apply that *DNA* to their own content. They do not want a pixel-faithful copy.
 
-**Critical position:** `study` extracts structure, not pixels. It names the macrostructure, the archetypes, the type-pairing role, the colour anchor, the rhythm. It produces a *diagnosis report* before any code, then offers to rebuild the user's content using the extracted DNA. Pixel-cloning is not a feature.
+**Critical position:** `study` extracts structure, not pixels. It names the macrostructure, the archetypes, the type-pairing, the colour anchor, and (in image mode) the rhythm. It produces a *diagnosis report* before any code, then offers to rebuild the user's content using the extracted DNA. Pixel-cloning is not a feature.
 
-**Always read [`references/study.md`](references/study.md) before invoking this verb.** That file contains the vision-extraction protocol, the structured-fields schema, the refusal heuristics, and the type-role vocabulary. Do not work from intuition.
+**Always read [`references/study.md`](references/study.md) before invoking this verb.** That file contains the source-mode detection rules, the extraction protocol (vision-pass for image mode, HTML/CSS-pass for URL mode), the structured-fields schema, the refusal heuristics (both image-mode and URL-mode refuse lists), the junk-or-blocked detection for URLs, and the type-role vocabulary. Do not work from intuition.
+
+### Source-mode detection
+
+If the user's input starts with `http://` or `https://` → **URL mode**. Otherwise → **image mode**. Same verb, same diagnosis output, different signal sources. The two modes share the schema and the diagnosis shape; they differ on what each extraction step can know — see `study.md` § Source mode.
 
 ### Pipeline
 
-1. **Refuse-or-proceed check.** Before extracting anything, run the refusal heuristics from `study.md`. If the screenshot is clearly a paid template marketplace listing, a competitor's live marketing page, or someone's published portfolio, ask: *"Is this your own work, a public reference for inspiration, or someone else's live site?"* Educational use of public references is fine; copying a competitor's live page is not.
+1. **Refuse-or-proceed check.** Before extracting anything (and in URL mode, **before WebFetch fires**), run the refusal heuristics in `study.md`. Image mode checks the image's content; URL mode runs the URL refuse list (themeforest, framer.com/templates, webflow.com/templates, gumroad UI-kit listings, dribbble shots, behance galleries, disclosed competitors). Ambiguous sources get one short question: *"Is this your own work, a public reference for inspiration, or someone else's live site?"*
 
-2. **Vision pass.** Read the image into the structured-fields schema in `study.md`. Output ten fields: macrostructure name, hero archetype + variation knobs, pitch archetype + knobs, footer archetype, display family role (never a guessed font name), body family role, surface lightness band (paper L%), accent hue band + chroma, density verdict, type-pairing role.
+2. **Extraction pass.**
+   - **Image mode:** vision-pass on the attached capture per `study.md` § Five-step protocol.
+   - **URL mode:** WebFetch the URL, then parse the returned HTML and any linked stylesheets. If the response trips any junk-or-blocked signal (auth wall, SPA shell, non-2xx response, no styling signal, < 1 KB body), **fall back** — emit the screenshot-fallback message from `study.md` § Junk-or-blocked detection and stop. Do not silently degrade.
+   
+   Output the structured-fields schema in `study.md` § The structured fields. URL mode fills the mode-conditional fields (`display_face`, `body_face`, `paper_value`, `accent_value`, `motion_library`) with exact values; image mode leaves those null.
 
-3. **Diagnosis report.** Return a one-page "this is what you're looking at": names the macrostructure, names the archetypes, points at the type pairing, identifies one or two anti-patterns the screenshot has that the user should *not* carry over. The diagnosis is the deliverable for users who only want to learn.
+3. **Diagnosis report.** Return a one-page "this is what you're looking at" using the matching template (image-mode template or URL-mode template) from `study.md` § The diagnosis report. Names the macrostructure, names the archetypes, points at the type pairing (with exact font names in URL mode), identifies anti-patterns the user should *not* carry over. URL-mode diagnoses must also call out the rhythm blind spot.
 
 4. **Confirmation question.** Ask: *"Adopt this DNA wholesale, or change one axis? For example, I could keep the macrostructure but pick a theme that better matches your tone."* Wait for the user's answer before building.
 
-5. **Build.** Pick the closest matching theme from the catalog. Stamp the comment with the inferred macrostructure + archetypes + theme. The user's content goes in; the screenshot's content does not.
+5. **Build.** Pick the closest matching theme from the catalog. Stamp the comment with the inferred macrostructure + archetypes + theme + source mode. The user's content goes in; the source's content does not.
 
 ### Output contract for `study`
 
-When `study` produces code, the macrostructure stamp must include a `studied: yes` flag and the theme picked, e.g.:
+When `study` produces code, the macrostructure stamp must include a `studied: yes` flag, the theme picked, and the source mode. Image mode example:
 
 ```css
 /* Hallmark · macrostructure: Marquee Hero · H1 hero knobs: size=xxl, alignment=left-bias
- * theme: Studio · accent: forest-green ~3% · studied: yes · DNA-source: user reference
+ * theme: Studio · accent: forest-green ~3% · studied: yes · DNA-source: image (user reference)
  */
 ```
 
-The stamp signals to future Hallmark runs that this page's structure was extracted, not invented. That matters for the audit verb: a `studied: yes` page should be audited *more* leniently for "Specimen fall-through" (the user explicitly chose this DNA) but *more* strictly for "did you actually use the extracted DNA, or did you drift back to defaults?"
+URL mode example — additionally records the URL and any exact-fonts / exact-colours that informed the build:
+
+```css
+/* Hallmark · macrostructure: Marquee Hero · H1 hero knobs: size=xxl, alignment=left-bias
+ * theme: Studio · accent: forest-green ~3% · studied: yes · DNA-source: url
+ * source-url: https://example.com/  ·  observed-fonts: Inter Tight + Inter
+ * observed-accent: oklch(58% 0.16 35)  ·  rhythm: unknown (URL mode)
+ */
+```
+
+The stamp signals to future Hallmark runs that this page's structure was extracted, not invented. That matters for the audit verb: a `studied: yes` page is audited *more* leniently for "Specimen fall-through" (the user explicitly chose this DNA) but *more* strictly for "did you actually use the extracted DNA, or did you drift back to defaults?"
 
 ### Limits to spell out to the user
 
 When you return the diagnosis, name the limits explicitly:
 
-- **Fonts:** the skill names a *role* (e.g., "italic editorial serif", "heavy condensed sans", "monospace dev"), not a font ID. It proposes one or two real candidates from the canon and asks the user to confirm. Visual font identification is unreliable; do not pretend otherwise.
-- **Imagery:** the skill never copies the screenshot's photography. It generates structurally-equivalent placeholders or asks for the user's own assets.
-- **Theme drift is allowed.** If the screenshot is a Specimen and the user's content is a SaaS landing page, the skill picks a different theme. The DNA is the macrostructure + archetype + colour-anchor + type-pairing — not the dress.
+- **Fonts:** in image mode, the skill names a *role* and proposes one or two real candidates from the canon — visual font ID is unreliable. In URL mode, the skill names the *exact* fonts the page loads (via `@font-face`, Google Fonts, `next/font`). The role still drives the rebuild — Hallmark may pick a different specific face for the user's content.
+- **Imagery:** the skill never copies the source's photography. It generates structurally-equivalent placeholders or asks for the user's own assets.
+- **Theme drift is allowed.** If the source is a Specimen and the user's content is a SaaS landing page, the skill picks a different theme. The DNA is the macrostructure + archetype + colour-anchor + type-pairing — not the dress.
+- **Rhythm is the URL-mode blind spot.** HTML alone can't tell you whether the visual rhythm reads generous or templated. URL-mode diagnoses always state this and offer a screenshot fallback if it matters.
 
-If `references/study.md` cannot be loaded for any reason, refuse the verb politely and direct the user to `hallmark redesign` with a written description of what they want from the screenshot.
+If `references/study.md` cannot be loaded for any reason, refuse the verb politely and direct the user to `hallmark redesign` with a written description of what they want from the source.
 
 ---
 

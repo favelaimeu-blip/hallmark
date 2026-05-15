@@ -18,8 +18,6 @@ A forward-looking plan for what to build next, drawn from the gaps the latest re
 
 **Status now.** Hallmark produces code. It does not produce a portable design spec.
 
-**Context from research.** [VoltAgent's `awesome-design-md`](https://github.com/VoltAgent/awesome-design-md) hit 35K stars in 10 days — fastest growing "awesome" list in GitHub history. DESIGN.md is becoming the lingua franca between humans and AI agents for design systems.
-
 **Build.** When Hallmark generates new work, also emit a `DESIGN.md` in the project root containing: chosen tone, palette tokens (with OKLCH values), type stack, spacing scale, structural fingerprint, motion tokens, and the named anti-patterns the page must continue to avoid. Other AI tools (Cursor, v0, Bolt) can read this file directly to keep iterating on the same design language.
 
 **Why it matters.** Closes the loop between Hallmark and the rest of the agent ecosystem. The skill stops being a one-shot generator and becomes a system that hands its decisions forward.
@@ -134,7 +132,7 @@ A list of tempting directions that would make Hallmark worse, not better. Forcin
 - **Don't ship a UI library.** Hallmark is a *taste* skill, not a component kit. shadcn/ui and Geist exist; refer users to them. Building components inside Hallmark dilutes the focus.
 - **Don't add A/B testing or analytics** to the skill. It's not a SaaS product.
 - **Don't build a Figma plugin.** The skill works in code; that's a feature, not a limit. Designers who want Figma have other tools.
-- **Don't add prompts to "match a brand"** by URL scraping. That's SkillUI's job — point users there.
+- **Don't add prompts to "match a brand"** by URL scraping on the *default* verb. That's SkillUI's job — point users there. **Exception:** `hallmark study` accepts URLs as a source for DNA extraction (read-only; never to clone the surface). The same refusal heuristics that govern image-mode `study` apply — marketplaces, template demos, and disclosed competitors are auto-refused before WebFetch fires.
 - **Don't add image generation.** Out of scope; AI imagery is its own problem space, and the right answer is usually "use real photos" or "no image."
 
 ---
