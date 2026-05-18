@@ -267,8 +267,11 @@ Anti-patterns I'd skip: [list anything from anti-patterns.md visible in
 the screenshot — bouncy hovers, transition-all, three-feature grid, etc.
 If there are none, say so.]
 
-If you adopt this DNA, the closest theme in the catalog is [theme name].
-That's a candidate, not a requirement — your content might point elsewhere.
+If you say **build it**, I'll use the extracted DNA as the system — the
+paper, accent, type roles, macrostructure, and nav/footer above become
+the build's tokens. Catalog themes are suspended for that build. If
+you'd rather pivot to a catalog cousin afterwards, the closest is
+[theme name] — just say *"use [theme name] instead"*.
 
 Want me to build with this DNA, or change one axis first?
 
@@ -299,8 +302,11 @@ transition-all on .card, hover-scale on buttons — or "none"].
 Rhythm — density and asymmetry — I can't judge from the HTML alone. If
 those matter, send a screenshot as well and I'll add a rhythm pass.
 
-If you adopt this DNA, the closest theme in the catalog is [theme name].
-That's a candidate, not a requirement — your content might point elsewhere.
+If you say **build it**, I'll use the extracted DNA as the system — the
+paper, accent, type roles, macrostructure, and nav/footer above become
+the build's tokens. Catalog themes are suspended for that build. If
+you'd rather pivot to a catalog cousin afterwards, the closest is
+[theme name] — just say *"use [theme name] instead"*.
 
 Want me to build with this DNA, or change one axis first?
 
@@ -365,18 +371,22 @@ The "Want me to build" line is the **confirmation question** for code generation
 >
 > Anti-patterns I'd skip: nothing from this screenshot stands out as carry-over risk. The reference is clean.
 >
-> If you adopt this DNA, the closest theme in the catalog is **Studio** (Instrument Serif italic display + Geist body + forest-green accent). Note: the screenshot's accent is neutral; Studio uses a small green mark — if you want neutral, I can desaturate the accent in the build.
+> If you say **build it**, I'll use this DNA as the system — warm cream paper, neutral ink-on-paper accent, italic editorial serif + neutral grotesque + monospace, Split Studio macrostructure, H2 hero + Ft3 footer. Catalog themes are suspended for the build. If you'd rather pivot to a catalog cousin after, the closest is **Studio** (Instrument Serif + Geist + small green accent) — just say *"use Studio instead"*.
 >
 > Want me to build with this DNA, or change one axis first?
 
-**If the user says "build it":** the skill picks **Studio**, picks **H2-Split** for the hero, fills the pitch with content from the user's brief (a feature/proof block — F4 Step sequence, say), keeps the Ft3 footer, stamps:
+**If the user says "build it":** the skill builds with the **studied DNA as the system, not a catalog theme**. Paper, accent, type roles, macrostructure, and archetypes from the diagnosis become the tokens directly. Catalog rotation is suspended for this build (see SKILL.md § 2.6 Condition 0). The stamp records `theme: studied-DNA` with the source URL or image tag plus the actual OKLCH/font values inline:
 
 ```css
 /* Hallmark · macrostructure: Split Studio · H2 hero knobs: ratio=6/6, right=proof, divider=negative-space
- * Ft3 footer knobs: cols=4, heading=mono · theme: Studio · accent: neutral (override from default green)
+ * Ft3 footer knobs: cols=4, heading=mono
+ * theme: studied-DNA (source: image) · paper oklch(95% 0.012 80) · accent neutral (ink-on-paper)
+ * display: italic editorial serif (Instrument Serif candidate) · body: neutral grotesque (Geist candidate) · label: mono (Geist Mono)
  * studied: yes · DNA-source: user reference (described as own work)
  */
 ```
+
+**If the user instead says "build it with Studio":** the DNA hands the macrostructure + archetypes to the build but the catalog theme **Studio** supplies the tokens (Instrument Serif + Geist + forest-green accent). This is the pivot path — explicit only.
 
 **If the user says "change the macrostructure":** offer two alternatives from the same family — say, Bento Grid (modular feature-led) or Long Document (prose-led). Whichever the user picks becomes the new macrostructure; the rest of the DNA carries.
 
