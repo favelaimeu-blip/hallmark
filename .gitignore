@@ -31,3 +31,10 @@ build/
 
 # Generation pipeline artifacts (raw outputs before commit)
 .image-cache/
+
+# Runtime state from Hallmark's own runs (per-project log, never publish)
+.hallmark/
+
+# Launch-day Hallmark vs Impeccable vs no-skills comparison — one-off artifact,
+# not referenced from the marketing site or README. Kept locally if useful.
+site/_launch-comparison/
