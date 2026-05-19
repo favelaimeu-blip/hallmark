@@ -3,7 +3,7 @@
 A small set of pre-generated abstract / decorative imagery that any Hallmark output can pull from when a brief allows non-photographic imagery. The kit lives at:
 
 ```
-https://hallmark-murex.vercel.app/imagery/<category>/<file>
+https://www.usehallmark.com/imagery/<category>/<file>
 ```
 
 The skill doesn't ship the binaries — it ships the manifest. References are absolute URLs. If the asset is missing (404), the skill falls back to source canon #2 in [`assets.md` § Placeholder strategy](assets.md) (hand-built SVG) without erroring.
@@ -87,7 +87,7 @@ A watercolor file as a full-bleed section accent. One section per page, never gl
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://hallmark-murex.vercel.app/imagery/watercolor/watercolor-warm-01.webp") center / cover no-repeat;
+  background: url("https://www.usehallmark.com/imagery/watercolor/watercolor-warm-01.webp") center / cover no-repeat;
   opacity: 0.6;
   z-index: -1;
   pointer-events: none;

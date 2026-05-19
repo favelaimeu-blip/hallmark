@@ -13,10 +13,10 @@
   <meta property="og:description"
     content="A design skill for AI coding assistants. Encodes the anti-slop consensus into one ruleset. Powered by Together AI." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hallmark-murex.vercel.app/" />
+  <meta property="og:url" content="https://www.usehallmark.com/" />
   <meta property="og:site_name" content="Hallmark" />
-  <meta property="og:image" content="https://hallmark-murex.vercel.app/OG-hallmark.png" />
-  <meta property="og:image:secure_url" content="https://hallmark-murex.vercel.app/OG-hallmark.png" />
+  <meta property="og:image" content="https://www.usehallmark.com/OG-hallmark.png" />
+  <meta property="og:image:secure_url" content="https://www.usehallmark.com/OG-hallmark.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="4800" />
   <meta property="og:image:height" content="2520" />
@@ -25,12 +25,30 @@
   <meta name="twitter:title" content="Hallmark — A design skill that refuses to look AI-generated" />
   <meta name="twitter:description"
     content="A design skill for AI coding assistants. Encodes the anti-slop consensus into one ruleset. Powered by Together AI." />
-  <meta name="twitter:image" content="https://hallmark-murex.vercel.app/OG-hallmark.png" />
+  <meta name="twitter:image" content="https://www.usehallmark.com/OG-hallmark.png" />
   <meta name="twitter:image:alt" content="Hallmark — A design skill that refuses to look AI-generated" />
 
   <link rel="icon" type="image/svg+xml" href="favicon-light.svg" media="(prefers-color-scheme: light)" />
   <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/svg+xml" href="favicon-light.svg" />
+
+  <!-- Entrance gate. Hides body until web fonts resolve so the page doesn't
+       flash system fonts then snap to the real faces. Fires once on first
+       load only — the matching script in the pre-paint block at the bottom
+       of <head> sets data-fonts-ready on <html> when document.fonts.ready
+       resolves (or after a 1200 ms safety timeout). Theme switches modify
+       [data-theme], not [data-fonts-ready], so the fade never re-runs. -->
+  <style>
+    html:not([data-fonts-ready]) body { opacity: 0; }
+    body {
+      opacity: 1;
+      transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html:not([data-fonts-ready]) body { opacity: 1; }
+      body { transition: none; }
+    }
+  </style>
 
   <!-- Google Fonts — Anton, Albert Sans, Fraunces, Geist, Geist Mono, Hanken Grotesk, Inter, Inter Tight, Newsreader, Playfair Display, Public Sans. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,6 +69,25 @@
       const t = q || localStorage.getItem("hallmark-theme");
       if (t) document.documentElement.dataset.theme = t;
     } catch (e) { }
+
+    // Mark fonts-ready when document.fonts resolves; safety timeout at 1200 ms.
+    // Pairs with the entrance-fade <style> above. Fires once on first load —
+    // theme switches don't reset the attribute, so the fade never re-runs.
+    (function () {
+      var html = document.documentElement;
+      var fired = false;
+      function ready() {
+        if (fired) return;
+        fired = true;
+        html.setAttribute("data-fonts-ready", "");
+      }
+      if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === "function") {
+        document.fonts.ready.then(ready);
+      } else {
+        ready();
+      }
+      setTimeout(ready, 1200);
+    })();
   </script>
 </head>
 
