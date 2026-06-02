@@ -499,7 +499,7 @@ const COPY = {
   },
   hum: {
     eyebrow: "A design skill",
-    title: HERO_TITLE,
+    title: "Make your AI agent a designer.",
     lede: "The anti-slop design skill for Claude Code, Cursor, and Codex. Twenty themes with real structural variety, and a 70-gate check before anything ships.",
     ctaLabel: "Install",
     proofLabel: "What's inside",
