@@ -1,7 +1,7 @@
 ---
 name: hallmark
 description: "Anti-AI-slop design skill for greenfield pages, audits, redesigns, and design extraction from URLs or screenshots. Use when the user asks to build a new app or landing page, wants to redesign something, invokes Hallmark by name, or uses audit/redesign/study."
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Hallmark
@@ -409,7 +409,7 @@ Before emitting any code, output a tight summary of what you're about to ship. T
 **Format** (Markdown bullets, not ASCII boxes — they render reliably across every chat client and terminal):
 
 ```markdown
-**Hallmark · v1.0.0**
+**Hallmark · v1.1.0**
 
 - **Macrostructure** · Stat-Led
 - **Theme** · Plain (#fff paper · cool greys · ink-blue accent)

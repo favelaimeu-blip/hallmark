@@ -3802,11 +3802,14 @@ html[data-theme="aurora"] body {
    decode. Touch devices and reduced-motion get a static top crop. Only the
    <img> cards scroll; the original <video> cards keep their hover-play. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .ex-card__thumb img { transition: object-position 600ms ease; }
+  .ex-card__thumb img { transition: object-position 400ms ease; }
   .ex-card:hover .ex-card__thumb img,
   .ex-card:focus-visible .ex-card__thumb img {
     object-position: left bottom;
-    transition: object-position 5s ease-in-out;
+    /* steady, even scroll through the whole page; per-card duration is set
+       inline (--scroll-dur) proportional to page height so every card scrolls
+       at the same brisk speed. */
+    transition: object-position var(--scroll-dur, 2.4s) linear;
   }
 }
 

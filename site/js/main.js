@@ -413,7 +413,7 @@ const COPY = {
     letterBody: "The polished-SaaS school of restraint, but warmer. Warm-grey paper instead of pure white; coral accent on focus rings and small marks. Pill CTAs, two-column heroes, generous space.",
     signoff: "Yours,",
     captionA: "Coral",
-    captionB: "v1.0",
+    captionB: "v1.1",
   },
   aurora: {
     eyebrow: "Atmospheric · cool",
@@ -536,7 +536,7 @@ const COPY = {
     letterBody: "The dev-tool register, executed with restraint: a cool near-white canvas, hairlines doing the structural work, one electric cobalt accent reserved for the signal — a live request, a 200, a focused field. Space Grotesk for headings, Inter for prose, JetBrains Mono for the code.",
     signoff: "Ship it,",
     captionA: "Cobalt",
-    captionB: "v1.0",
+    captionB: "v1.1",
   },
 };
 
