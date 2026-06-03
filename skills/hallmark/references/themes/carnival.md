@@ -42,11 +42,11 @@ Loud + neon. 90s zine, summer, electric. Lime against magenta — the hardest co
 - `--color-ink: oklch(20% 0.07 145)` — deep forest
 - `--color-ink-2: oklch(32% 0.05 140)`
 - `--color-muted: oklch(48% 0.04 130)`
-- `--color-rule: oklch(48% 0.24 350)` — magenta rules
+- `--color-rule: oklch(28% 0.28 350)` — deep magenta rules
 - `--color-accent: oklch(82% 0.20 130)` — chartreuse-lime
-- `--color-accent-2: oklch(50% 0.24 350)` — magenta
+- `--color-accent-2: oklch(28% 0.28 350)` — deep magenta (reads AA on paper, and as text)
 - `--color-accent-ink: oklch(20% 0.07 145)`
-- `--color-focus: oklch(50% 0.24 350)`
+- `--color-focus: oklch(28% 0.28 350)`
 
 **When to pick:** zine collectives · summer drops · skate / DIY culture · briefs that want LOUD without referencing music.
 
@@ -78,11 +78,11 @@ Cool + cool. Dusk warmth, cyan + plum. Late-night booth, blue hour, podcast stud
 - `--color-ink: oklch(20% 0.05 270)` — deep navy-black
 - `--color-ink-2: oklch(32% 0.045 265)`
 - `--color-muted: oklch(48% 0.04 260)`
-- `--color-rule: oklch(42% 0.16 320)` — plum rules
+- `--color-rule: oklch(24% 0.18 320)` — deep plum rules
 - `--color-accent: oklch(78% 0.18 220)` — cyan
-- `--color-accent-2: oklch(42% 0.16 320)` — plum
+- `--color-accent-2: oklch(24% 0.18 320)` — deep plum (reads AA on paper, and as text)
 - `--color-accent-ink: oklch(20% 0.05 270)`
-- `--color-focus: oklch(42% 0.16 320)`
+- `--color-focus: oklch(24% 0.18 320)`
 
 **When to pick:** late-night radio · podcasts about anything · music + atmosphere · briefs mentioning "late", "after dark", "blue hour", "moonlight".
 
@@ -96,11 +96,11 @@ Cool + warm. Turquoise against coral. Summer pool, motel sign, vacation.
 - `--color-ink: oklch(20% 0.06 200)` — deep teal
 - `--color-ink-2: oklch(32% 0.05 198)`
 - `--color-muted: oklch(48% 0.04 195)`
-- `--color-rule: oklch(60% 0.20 35)` — coral rules
+- `--color-rule: oklch(36% 0.24 35)` — deep coral rules
 - `--color-accent: oklch(72% 0.16 195)` — turquoise
-- `--color-accent-2: oklch(60% 0.20 35)` — coral
+- `--color-accent-2: oklch(36% 0.24 35)` — deep coral (reads AA on paper, and as text)
 - `--color-accent-ink: oklch(20% 0.06 200)`
-- `--color-focus: oklch(60% 0.20 35)`
+- `--color-focus: oklch(36% 0.24 35)`
 
 **When to pick:** summer brands · vacation / hospitality · skate / surf / pool · briefs mentioning summer, beach, motel, sun.
 
@@ -125,6 +125,19 @@ Warm + cool. Amber-gold against slate-blue. 1950s journalism, print shop, broads
 ### Drop rotation rule
 
 The diversification log (`/.hallmark/log.json`) records the drop alongside the theme: `"theme": "carnival", "drop": "studio-night"`. **A new Carnival build picks a drop that hasn't appeared in the last 3 entries.** If only Cold Snap is in the log, any of the other five is valid. If the brief contains a strong drop signal (see "when to pick" above), honour the signal even if it tightens diversification.
+
+### Pick the drop by domain first
+
+Match the brief's **domain** before reaching for the loudest palette:
+
+- food / drink / hospitality / street market → **Diner Sign** (or Cold Snap)
+- independent music / labels / EPs → **Cold Snap** (or Pressroom)
+- late-night / radio / podcast / after-dark → **Studio Night**
+- summer / pool / beach / vacation → **Aqua Park**
+- zine / skate / DIY / deliberately chaotic → **Citrus Riot**
+- journalism / newsletter / editorial → **Pressroom**
+
+Citrus Riot and Aqua Park are the highest-chroma drops — reach for them when the brief genuinely *wants* maximum loudness, not as a default. A food market reads better in Diner Sign than in lime-on-magenta.
 
 ### When to construct a custom drop instead
 
@@ -162,7 +175,7 @@ The theme's seven tics. A Carnival build should exhibit at least five of them.
 
 4. **Hard-offset drop shadow.** Every card, CTA, and image gets `box-shadow: 4px 4px 0 var(--color-ink)`. No soft shadows ever. The shadow is **flat ink, offset**. This is the single most-recognisable Carnival move.
 
-5. **All-caps headlines with Big Shoulders variable-width** pulled wide. `font-variation-settings: "wdth" 110, "wght" 800;` for hero headlines. Tracking 0.04em. Looks like a marquee poster.
+5. **All-caps headlines with Big Shoulders variable-width, tightly tracked.** `font-variation-settings: "wdth" 110, "wght" 800;`. Track them **tight**, not loose: `letter-spacing: -0.005em` on the hero word, `0.02em` on section heads. The loose `0.04em` look reads as AI-spread and is reserved **only** for the marquee banner (where horizontal spread is the point). Keep line-height tight too: `0.82` for single hero words, `0.92` for multi-line heads. The effect is a marquee poster set by a typographer, not a stretched default.
 
 6. **Halftone pattern fills** in placeholder image regions. Pure CSS, no images:
 
@@ -195,6 +208,10 @@ Carnival's dense visual language has known traps. Read this list **before** writ
 4. **Marquee scroll that doesn't repeat its content → gap at end of loop.** The marquee must contain the same scrolling text repeated at least twice (or use `aria-hidden` siblings) so the scroll animation reads as continuous, not as a single string sliding off.
 
 5. **Big Shoulders width axis used without `font-variation-settings` → no width variation.** Setting `font-stretch` on Google's Big Shoulders Display does not work — only `font-variation-settings: "wdth" 110` does. If you see a hero that's supposed to be width-110 but renders at width-100, this is the bug.
+
+6. **Section head detached from, or mis-centred over, its body.** The section head (heading + any lede) sits **tight above** the content it names — about `1.25rem` (`--section-head-gap`) — and **shares that content's alignment**. Don't cap the head at a narrow `max-width` / `ch` and then `margin-inline: auto` it: that strands a centred head over a full-width, left-flush grid (the classic accidental mismatch). Left-flush grid → left-flush head. (See the alignment-coherence note in `layout-and-space.md`.)
+
+7. **Newsletter / CTA button not aligned with the input beside it.** When a button sits next to a form input in one row, they must share the **same height, vertical padding, and border width**, and the row must use `align-items: center` — otherwise the button floats above the input's baseline. If a label is stacked above the input it makes that column taller; centre the row on the *control*, not the column (give the field `align-items: center` or pull the label out of the flex row).
 
 ## Macrostructure affinity
 
@@ -273,7 +290,7 @@ When emitting a Carnival page, the first 12 lines of CSS should establish the fo
 
 ```css
 body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); }
-h1, h2 { font-family: var(--font-display); font-weight: 800; font-variation-settings: "wdth" 110; letter-spacing: 0.04em; text-transform: uppercase; }
+h1, h2 { font-family: var(--font-display); font-weight: 800; font-variation-settings: "wdth" 110; letter-spacing: 0.02em; line-height: 0.92; text-transform: uppercase; } /* hero word goes tighter: letter-spacing: -0.005em; line-height: 0.82 */
 .card, .cta { box-shadow: 4px 4px 0 var(--color-ink); border: 2px solid var(--color-ink); }
 .section:nth-of-type(odd)  { background: var(--color-accent);   color: var(--color-accent-ink); }
 .section:nth-of-type(even) { background: var(--color-accent-2); color: var(--color-paper); }

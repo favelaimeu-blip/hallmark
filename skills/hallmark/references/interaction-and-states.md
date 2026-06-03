@@ -130,6 +130,7 @@ The outline starts transparent at 2 px so when the focus ring appears, the box g
 ## Modals and overlays
 
 - Use the native `<dialog>` element. It handles focus trap, escape to close, and `::backdrop` styling for free.
+- **Centre it explicitly.** A `<dialog>` opened with `showModal()` centres on its own — but the moment you add custom positioning (a `margin-top`, a `top`, a stray `transform`) it can snap to the viewport's top-left corner. Pin it: `position: fixed; inset: 0; margin: auto; height: fit-content; max-height: min(80vh, 40rem);`. A non-`<dialog>` overlay centres via its container instead: `position: fixed; inset: 0; display: grid; place-items: center;`. Never ship a modal or command palette stuck in the corner.
 - Set `inert` on the page content behind a modal so tab order doesn't leak.
 - Close on: escape key, backdrop click, explicit close button.
 - First focus goes to the first interactive element, not the close button.

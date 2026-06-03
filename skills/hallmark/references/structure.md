@@ -23,6 +23,8 @@ Where does a section's title live in space? Pick one per page.
 | **Numbered display** | ⚠️ **Opt-in only — never default.** "01." with a rule line and the heading right beside it. Procedural, sequenced. Banned for default SaaS / consumer / dev-tool pages by slop-test gate 54 (the tag-beside-heading pattern is a templated tell). Permitted only when the user explicitly asks for ordinal / chaptered numbering AND the macrostructure is Long Document, Manifesto, or Catalogue numbered. Even then, prefer the stacked variant: number on its own line above the heading. | Rauno Freiberg's portfolio — when the user explicitly invokes that voice. |
 | **Inline with body** | No section break — the heading emerges from the paragraph flow. Conversational. | Medium articles; long-form essays. |
 
+**Coherence, not a fixed side.** Any of these placements is fair game — the head's alignment just has to *cohere* with the body it introduces rather than mismatch it by accident. A narrow centred head stranded over full-width, left-flush content (often a `margin-inline:auto` head above a wide grid) is the tell — not centring or left-flushing as such. See [`layout-and-space.md`](layout-and-space.md) § Asymmetry techniques.
+
 ### 2. Body composition
 
 How does long-form content lay out beyond "single column at 65ch"?

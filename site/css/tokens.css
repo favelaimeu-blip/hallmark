@@ -934,13 +934,14 @@
   --font-label:   "JetBrains Mono", ui-monospace, monospace;
   --font-mono:    "JetBrains Mono", ui-monospace, monospace;
 
-  --display-weight:  800;
+  --display-weight:  700;                  /* lightened from 800 — 800 + loose tracking read too heavy */
   --display-style:   normal;
 
   --text-display:   clamp(3.25rem, 6.5vw + 1rem, 6.5rem);
   --text-display-s: clamp(2.25rem, 4vw + 0.75rem, 3.5rem);
 
-  --tracking-display: 0.04em;              /* all-caps, slightly tracked */
+  --tracking-display: 0.02em;              /* tight, professional (was 0.04em, which read as AI-spread) */
+  --tracking-display-loose: 0.04em;        /* spread look — marquee banners only */
   --tracking-tight:   -0.005em;
   --tracking-label:   0.18em;              /* mono all-caps labels */
 

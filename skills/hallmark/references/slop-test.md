@@ -143,7 +143,7 @@ The CSS stamp at Step 6 should record the result alongside contrast: `· nav: N#
 
 Universal — apply to every genre. The page must not invent facts about the user's product, team, or market.
 
-46. **Invented metric.** Does the page contain any quantitative claim — "10× faster", "saves 5 hours per week", "trusted by 50,000+ teams", "99.9 % uptime", "+47 % conversion" — that the user did not supply, that has no source, and that the model fabricated to fill a stat-led layout, comparison row, or proof bar? If yes, fail. The fix is one of: replace the number with `—` and a labelled grey block, replace it with a question to the user ("metric to confirm"), or rebuild the section without the proof slot. Stat-led macrostructures are slop the moment their stats become decorative. *(See [anti-patterns.md § Invented metrics](anti-patterns.md).)*
+46. **Invented metric.** Does the page contain any quantitative claim — "10× faster", "saves 5 hours per week", "trusted by 50,000+ teams", "99.9 % uptime", "+47 % conversion" — that the user did not supply, that has no source, and that the model fabricated to fill a stat-led layout, comparison row, or proof bar? If yes, fail. The fix is one of: replace the number with `—` and a labelled grey block, replace it with a question to the user ("metric to confirm"), or rebuild the section without the proof slot. Stat-led macrostructures are slop the moment their stats become decorative. **A stat is also never the hero's *sole* headline** — a lead figure carries the hero only alongside a worded headline; a giant number with no words as the dominant hero text is a bare-number tell, so pair it with a line that says what it means. *(See [anti-patterns.md § Invented metrics](anti-patterns.md).)*
 
 ## Re-drawn UI chrome
 
