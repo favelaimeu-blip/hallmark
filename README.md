@@ -97,11 +97,20 @@ It stays a quiet branch; vanilla briefs never see it. The protocol lives in [`cu
 npx skills add nutlope/hallmark
 ```
 
-Re-run any time to update. Or copy [`SKILL.md`](skills/hallmark/SKILL.md) + [`references/`](skills/hallmark/references/) into:
+Re-run any time to update. For a manual install, copy the complete
+[`skills/hallmark/`](skills/hallmark/) directory so `SKILL.md` and every file in
+[`references/`](skills/hallmark/references/) stay together:
 
 - **Claude Code**: `~/.claude/skills/hallmark/`
-- **Cursor**: `.cursor/rules/hallmark.mdc` (body of `SKILL.md`, no frontmatter)
+- **Cursor (project, cross-agent)**: `.agents/skills/hallmark/`
+- **Cursor (project, Cursor-only)**: `.cursor/skills/hallmark/`
+- **Cursor (global)**: `~/.cursor/skills/hallmark/` on macOS/Linux or `%USERPROFILE%\.cursor\skills\hallmark\` on Windows
 - **Codex**: `~/.codex/skills/hallmark/` (personal) or `.codex/skills/hallmark/` (project-scoped)
+
+Do not flatten Hallmark into a single `.cursor/rules/*.mdc` file: that drops the
+frontmatter and reference files the skill relies on. If you only use Hallmark
+occasionally, keep the directory outside an auto-discovered skills location and
+attach the folder to the specific design prompt instead.
 
 The rule-set lives in [`SKILL.md`](skills/hallmark/SKILL.md) and [`references/`](skills/hallmark/references/). Worked examples in [`docs/recipes.md`](docs/recipes.md) and [`docs/study-examples.md`](docs/study-examples.md).
 
