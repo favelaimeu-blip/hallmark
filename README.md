@@ -1,5 +1,13 @@
 # Hallmark
 
+> [!NOTE]
+> **Enhanced fork maintained by [@favelaimeu-blip](https://github.com/favelaimeu-blip).**
+> Cursor installation now preserves the complete Agent Skill and its reference
+> files instead of flattening it into a rule file, addressing
+> [upstream issue #22](https://github.com/Nutlope/hallmark/issues/22).
+> [Focused fix branch](https://github.com/favelaimeu-blip/hallmark/tree/docs/cursor-skill-install) ·
+> [Star this fork](https://github.com/favelaimeu-blip/hallmark/stargazers)
+
 **A design skill for Claude Code, Cursor, and Codex that refuses to look AI-generated.**
 
 [Live demo →](https://www.usehallmark.com) &nbsp;·&nbsp; twenty themes &nbsp;·&nbsp; four verbs &nbsp;·&nbsp; press `T` to cycle.
